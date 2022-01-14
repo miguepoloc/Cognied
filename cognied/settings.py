@@ -10,14 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-import os
+import django_heroku
 import dj_database_url
-
+import cloudinary
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Cloudinary para configuración de fotos
+cloudinary.config(
+    cloud_name="djw2ks8ek",
+    api_key="245669729881259",
+    api_secret="FUcSyfHSnr39Rv8zSiQ2VzEUOyo",
+    secure=True
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -42,8 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "drf_yasg",
+    "api",
     "corsheaders",
-    "api"
 ]
 
 MIDDLEWARE = [
@@ -89,8 +97,12 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cognied',
+        'USER': 'admin',
+        'PASSWORD': 'Contrasena1!',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -149,3 +161,6 @@ LOGIN_REDIRECT_URL = '/'
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
