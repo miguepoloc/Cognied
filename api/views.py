@@ -1,23 +1,32 @@
-from django.shortcuts import render
-from rest_framework import generics, response, status
 from .models import *
 from .serializers import *
+from rest_framework import viewsets
 
 
-class PersonalListAPIView(generics.ListAPIView):
+class PersonalView(viewsets.ModelViewSet):
+    queryset = Personal.objects.all().order_by('id')
     serializer_class = PersonalSerializer
 
-    def get_queryset(self):
-        return Personal.objects.all()
+class UsuarioView(viewsets.ModelViewSet):
+    queryset = Usuario.objects.all().order_by('id')
+    serializer_class = UsuarioSerializer
 
 
-class PersonalDetailAPIView(generics.GenericAPIView):
-    serializer_class = PersonalSerializer
+class SexoView(viewsets.ModelViewSet):
+    queryset = Sexo.objects.all().order_by('id')
+    serializer_class = SexoSerializer
 
-    def get(self, request, slug):
-        query_set = Personal.objects.filter(slug=slug).first()
 
-        if query_set:
-            return response.Response(self.serializer_class(query_set).data)
+class Estado_CivilView(viewsets.ModelViewSet):
+    queryset = Estado_Civil.objects.all().order_by('id')
+    serializer_class = Estado_CivilSerializer
 
-        return response.Response('Not found', status=status.HTTP_404_NOT_FOUND)
+
+class EscolaridadView(viewsets.ModelViewSet):
+    queryset = Escolaridad.objects.all().order_by('id')
+    serializer_class = EscolaridadSerializer
+
+
+class DatosView(viewsets.ModelViewSet):
+    queryset = Datos.objects.all().order_by('id')
+    serializer_class = DatosSerializer

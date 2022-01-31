@@ -9,3 +9,8 @@ class PersonalModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Personal, PersonalModelAdmin)
+admin.site.register(Usuario)
+admin.site.register(Sexo)
+admin.site.register(Estado_Civil)
+admin.site.register(Escolaridad)
+admin.site.register(Datos)

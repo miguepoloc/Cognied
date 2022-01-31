@@ -21,12 +21,12 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Snippets API",
+        title="DigitalMente API",
         default_version='v1',
-        description="Test description",
+        description="Test",
         terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="contact@snippets.local"),
-        license=openapi.License(name="BSD License"),
+        contact=openapi.Contact(email="miguelpoloac@unimagdalena.edu.co"),
+        license=openapi.License(name="Cognied"),
     ),
     public=True,
     permission_classes=(permissions.AllowAny,),
