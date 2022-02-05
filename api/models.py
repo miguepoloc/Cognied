@@ -56,7 +56,7 @@ class Escolaridad(models.Model):
 
 
 class Datos(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.BigIntegerField(primary_key=True)
     nombre = models.CharField(max_length=200, null=True, blank=True)
     tipo_documento = models.CharField(
         max_length=2,
@@ -65,8 +65,8 @@ class Datos(models.Model):
         null=True, blank=True
     )
     documento = models.BigIntegerField(null=True, blank=True)
-    usuario = models.ForeignKey(
-        'Usuario', on_delete=models.SET_NULL, null=True, blank=True)
+    # usuario = models.ForeignKey(
+    #     'Usuario', on_delete=models.SET_NULL, null=True, blank=True)
     sexo = models.ForeignKey(
         'Sexo', on_delete=models.SET_NULL, null=True, blank=True)
     lugar_nacimiento = models.TextField(max_length=200, null=True, blank=True)
@@ -78,6 +78,8 @@ class Datos(models.Model):
     ciudad_residencia = models.TextField(max_length=200, null=True, blank=True)
     correo = models.EmailField(null=True, blank=True)
     estrato = models.IntegerField(null=True, blank=True)
+    creado = models.DateTimeField(auto_now_add=True)
+    actualizado = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '%s (%s)' % (self.nombre, self.documento)
