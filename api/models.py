@@ -1,6 +1,8 @@
+from enum import unique
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.utils.text import slugify
+import hashlib
 
 
 class Personal(models.Model):
@@ -16,19 +18,6 @@ class Personal(models.Model):
 
     def __str__(self):
         return self.nombre
-
-
-TIPO_DE_DOCUMENTO = [
-    ("PA", 'PA'),
-    ("CE", 'CE'),
-    ("CC", 'CÉDULA DE CIUDADANÍA'),
-    ("TI", 'TI'),
-    ("RC", 'RC'),
-]
-
-
-class Usuario(models.Model):
-    id = models.BigIntegerField(primary_key=True)
 
 
 class Sexo(models.Model):
@@ -55,31 +44,3 @@ class Escolaridad(models.Model):
         return self.escolaridad
 
 
-class Datos(models.Model):
-    id = models.BigIntegerField(primary_key=True)
-    nombre = models.CharField(max_length=200, null=True, blank=True)
-    tipo_documento = models.CharField(
-        max_length=2,
-        choices=TIPO_DE_DOCUMENTO,
-        default="CC",
-        null=True, blank=True
-    )
-    documento = models.BigIntegerField(null=True, blank=True)
-    # usuario = models.ForeignKey(
-    #     'Usuario', on_delete=models.SET_NULL, null=True, blank=True)
-    sexo = models.ForeignKey(
-        'Sexo', on_delete=models.SET_NULL, null=True, blank=True)
-    lugar_nacimiento = models.TextField(max_length=200, null=True, blank=True)
-    estado_civil = models.ForeignKey(
-        'Estado_Civil', on_delete=models.SET_NULL, null=True, blank=True)
-    ocupacion = models.TextField(max_length=200, null=True, blank=True)
-    escolaridad = models.ForeignKey(
-        'Escolaridad', on_delete=models.SET_NULL, null=True, blank=True)
-    ciudad_residencia = models.TextField(max_length=200, null=True, blank=True)
-    correo = models.EmailField(null=True, blank=True)
-    estrato = models.IntegerField(null=True, blank=True)
-    creado = models.DateTimeField(auto_now_add=True)
-    actualizado = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return '%s (%s)' % (self.nombre, self.documento)

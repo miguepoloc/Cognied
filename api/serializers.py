@@ -8,12 +8,6 @@ class PersonalSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UsuarioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Usuario
-        fields = "__all__"
-
-
 class SexoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sexo
@@ -29,10 +23,4 @@ class Estado_CivilSerializer(serializers.ModelSerializer):
 class EscolaridadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Escolaridad
-        fields = "__all__"
-
-
-class DatosSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Datos
         fields = "__all__"

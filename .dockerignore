@@ -1,0 +1,11 @@
+*.pyc
+*~
+__pycache__
+myvenv
+venv
+db.sqlite3
+/static
+/templates
+.DS_Store
+.vscode/settings.json
+sqlnet.log

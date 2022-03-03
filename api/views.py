@@ -1,15 +1,11 @@
 from .models import *
 from .serializers import *
-from rest_framework import viewsets
-
+from .utils import *
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 class PersonalView(viewsets.ModelViewSet):
     queryset = Personal.objects.all().order_by('id')
     serializer_class = PersonalSerializer
-
-class UsuarioView(viewsets.ModelViewSet):
-    queryset = Usuario.objects.all().order_by('id')
-    serializer_class = UsuarioSerializer
 
 
 class SexoView(viewsets.ModelViewSet):
@@ -25,8 +21,3 @@ class Estado_CivilView(viewsets.ModelViewSet):
 class EscolaridadView(viewsets.ModelViewSet):
     queryset = Escolaridad.objects.all().order_by('id')
     serializer_class = EscolaridadSerializer
-
-
-class DatosView(viewsets.ModelViewSet):
-    queryset = Datos.objects.all().order_by('id')
-    serializer_class = DatosSerializer

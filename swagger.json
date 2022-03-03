@@ -1,0 +1,954 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DigitalMente API",
+        "description": "Test",
+        "termsOfService": "https://www.google.com/policies/terms/",
+        "contact": {
+            "email": "miguelpoloac@unimagdalena.edu.co"
+        },
+        "license": {
+            "name": "Cognied"
+        },
+        "version": "v1"
+    },
+    "basePath": "/api",
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "bearerAuth":      {     
+            "type": "http",
+            "scheme": "bearer",
+            "bearerFormat": "JWT"
+            } 
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/escolaridad/": {
+            "get": {
+                "operationId": "escolaridad_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Escolaridad"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "post": {
+                "operationId": "escolaridad_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "parameters": []
+        },
+        "/escolaridad/{id}/": {
+            "get": {
+                "operationId": "escolaridad_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "put": {
+                "operationId": "escolaridad_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "patch": {
+                "operationId": "escolaridad_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Escolaridad"
+                        }
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "delete": {
+                "operationId": "escolaridad_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "escolaridad"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this escolaridad.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/estado_civil/": {
+            "get": {
+                "operationId": "estado_civil_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Estado_Civil"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "post": {
+                "operationId": "estado_civil_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "parameters": []
+        },
+        "/estado_civil/{id}/": {
+            "get": {
+                "operationId": "estado_civil_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "put": {
+                "operationId": "estado_civil_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "patch": {
+                "operationId": "estado_civil_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Estado_Civil"
+                        }
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "delete": {
+                "operationId": "estado_civil_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "estado_civil"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this estado_ civil.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/login/": {
+            "post": {
+                "operationId": "login_create",
+                "description": "",
+                "parameters": [
+                    {
+                    "name": "documento",
+                    "in": "body",
+                    "description": "A unique integer value identifying this document.",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "password",
+                    "in": "body",
+                    "description": "Password for acount",
+                    "required": true,
+                    "type": "string"
+                }
+                ],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "login"
+                ]
+            },
+            "parameters": []
+        },
+        "/personal/": {
+            "get": {
+                "operationId": "personal_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Personal"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "post": {
+                "operationId": "personal_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "parameters": []
+        },
+        "/personal/{id}/": {
+            "get": {
+                "operationId": "personal_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "put": {
+                "operationId": "personal_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "patch": {
+                "operationId": "personal_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Personal"
+                        }
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "delete": {
+                "operationId": "personal_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "personal"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this personal.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/sexo/": {
+            "get": {
+                "operationId": "sexo_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Sexo"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "post": {
+                "operationId": "sexo_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "parameters": []
+        },
+        "/sexo/{id}/": {
+            "get": {
+                "operationId": "sexo_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "put": {
+                "operationId": "sexo_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "patch": {
+                "operationId": "sexo_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Sexo"
+                        }
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "delete": {
+                "operationId": "sexo_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "sexo"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique integer value identifying this sexo.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        },
+        "/usuario/": {
+            "get": {
+                "operationId": "usuario_list",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Usuarios"
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "post": {
+                "operationId": "usuario_create",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "parameters": []
+        },
+        "/usuario/{id}/": {
+            "get": {
+                "operationId": "usuario_read",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "put": {
+                "operationId": "usuario_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "patch": {
+                "operationId": "usuario_partial_update",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Usuarios"
+                        }
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "delete": {
+                "operationId": "usuario_delete",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    }
+                },
+                "tags": [
+                    "usuario"
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "A unique value identifying this usuarios.",
+                    "required": true,
+                    "type": "integer"
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "Escolaridad": {
+            "required": [
+                "escolaridad"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "escolaridad": {
+                    "title": "Escolaridad",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
+            }
+        },
+        "Estado_Civil": {
+            "required": [
+                "estado_civil"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "estado_civil": {
+                    "title": "Estado civil",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
+            }
+        },
+        "Personal": {
+            "required": [
+                "nombre",
+                "funcion",
+                "foto"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "nombre": {
+                    "title": "Nombre",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                },
+                "funcion": {
+                    "title": "Funcion",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "creado": {
+                    "title": "Creado",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "actualizado": {
+                    "title": "Actualizado",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "foto": {
+                    "title": "Image",
+                    "type": "string"
+                }
+            }
+        },
+        "Sexo": {
+            "required": [
+                "sexo"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer",
+                    "readOnly": true
+                },
+                "sexo": {
+                    "title": "Sexo",
+                    "type": "string",
+                    "maxLength": 200,
+                    "minLength": 1
+                }
+            }
+        },
+        "Usuarios": {
+            "required": [
+                "id",
+                "password"
+            ],
+            "type": "object",
+            "properties": {
+                "id": {
+                    "title": "Id",
+                    "type": "integer"
+                },
+                "password": {
+                    "title": "Password",
+                    "type": "string",
+                    "maxLength": 400,
+                    "minLength": 1
+                },
+                "tipo_documento": {
+                    "title": "Tipo documento",
+                    "type": "string",
+                    "enum": [
+                        "PA",
+                        "CE",
+                        "CC",
+                        "TI",
+                        "RC"
+                    ],
+                    "x-nullable": true
+                },
+                "documento": {
+                    "title": "Documento",
+                    "type": "integer",
+                    "x-nullable": true
+                },
+                "lugar_nacimiento": {
+                    "title": "Lugar nacimiento",
+                    "type": "string",
+                    "maxLength": 200,
+                    "x-nullable": true
+                },
+                "ocupacion": {
+                    "title": "Ocupacion",
+                    "type": "string",
+                    "maxLength": 200,
+                    "x-nullable": true
+                },
+                "ciudad_residencia": {
+                    "title": "Ciudad residencia",
+                    "type": "string",
+                    "maxLength": 200,
+                    "x-nullable": true
+                },
+                "correo": {
+                    "title": "Correo",
+                    "type": "string",
+                    "format": "email",
+                    "maxLength": 254,
+                    "x-nullable": true
+                },
+                "estrato": {
+                    "title": "Estrato",
+                    "type": "integer",
+                    "x-nullable": true
+                },
+                "creado": {
+                    "title": "Creado",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "actualizado": {
+                    "title": "Actualizado",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "is_active": {
+                    "title": "Is active",
+                    "type": "boolean"
+                },
+                "is_staff": {
+                    "title": "Is staff",
+                    "type": "boolean"
+                },
+                "sexo": {
+                    "title": "Sexo",
+                    "type": "integer",
+                    "x-nullable": true
+                },
+                "estado_civil": {
+                    "title": "Estado civil",
+                    "type": "integer",
+                    "x-nullable": true
+                },
+                "escolaridad": {
+                    "title": "Escolaridad",
+                    "type": "integer",
+                    "x-nullable": true
+                }
+            }
+        }
+    }
+}
