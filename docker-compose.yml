@@ -1,0 +1,27 @@
+version: "3.8"
+services:
+  cognied_backend:
+    build: ./back
+    command: gunicorn cognied.wsgi --bind 0.0.0.0:8002 --workers 10
+    environment:
+      TZ: America/Bogota
+      CHOKIDAR_USEPOLLING: "true"
+    volumes: 
+      - ./back:/backend
+    ports:
+      - 8002:8002
+
+  cognied_frontend:
+    build: ./front2
+    environment:
+      TZ: America/Bogota
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:   
+      - ./front2:/frontend
+      - ./front2/build:/usr/share/nginx/html
+      - ./back/static:/static
+      - ./front2/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8888:8888
+    depends_on:
+      - cognied_backend

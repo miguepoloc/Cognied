@@ -54,16 +54,23 @@ class RegistrationAPIView(APIView):
     serializer_class = RegistrationSerializer
 
     def post(self, request):
-        user = request.data.get('user', {})
 
+        user = request.data.get('user', {})
         # The create serializer, validate serializer, save serializer pattern
         # below is common and you will see it a lot throughout this course and
         # your own work later on. Get familiar with it.
         serializer = self.serializer_class(data=user, partial=True)
         serializer.is_valid(raise_exception=True)
-        serializer.save()
+        usuario=serializer.save()
+        userInfo = UserSerializer(usuario, partial=True).data
+        userInfo.pop("is_active", None)
+        userInfo.pop("is_staff", None)
+        userInfo.pop("created_at", None)
+        userInfo.pop("updated_at", None)
 
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        response = {"token": serializer.data["token"], "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+
+        return Response(response, status=status.HTTP_201_CREATED)
 
 
 class LoginAPIView(APIView):
