@@ -44,3 +44,82 @@ class Escolaridad(models.Model):
         return self.escolaridad
 
 
+class Encuesta(models.Model):
+    id_encuesta = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=45)
+    descripcion = models.TextField(blank=True, null=True)
+    # Field name made lowercase.
+    colorhex = models.CharField(db_column='colorHex', max_length=30)
+
+    class Meta:
+        managed = False
+        db_table = 'encuesta'
+
+
+class Pregunta(models.Model):
+    id_pregunta = models.AutoField(primary_key=True)
+    id_encuesta = models.ForeignKey(
+        Encuesta, models.DO_NOTHING, db_column='id_encuesta')
+    pregunta = models.TextField()
+    # Field name made lowercase.
+    itemid = models.IntegerField(db_column='itemID', blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pregunta'
+
+
+class PreguntaRespuesta(models.Model):
+    id_respuesta = models.ForeignKey(
+        'Respuesta', models.DO_NOTHING, db_column='id_respuesta')
+    id_pregunta = models.ForeignKey(
+        Pregunta, models.DO_NOTHING, db_column='id_pregunta')
+    id_pregunta_respuesta = models.AutoField(primary_key=True)
+
+    class Meta:
+        managed = False
+        db_table = 'pregunta_respuesta'
+
+
+class Respuesta(models.Model):
+    id_respuesta = models.AutoField(primary_key=True)
+    valor = models.IntegerField(blank=True, null=True)
+    respuesta = models.CharField(max_length=60)
+
+    class Meta:
+        managed = False
+        db_table = 'respuesta'
+
+
+class Usuario(models.Model):
+    id_usuario = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=40, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'usuario'
+
+
+class UsuarioEncuesta(models.Model):
+    id_usuario_encuesta = models.AutoField(primary_key=True)
+    id_usuario = models.ForeignKey(
+        Usuario, models.DO_NOTHING, db_column='id_usuario')
+    id_encuesta = models.ForeignKey(
+        Encuesta, models.DO_NOTHING, db_column='id_encuesta')
+    fecha = models.CharField(max_length=45, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'usuario_encuesta'
+
+
+class UsuarioRespuesta(models.Model):
+    id_usuario_respuesta = models.AutoField(primary_key=True)
+    id_usuario_encuesta = models.ForeignKey(
+        UsuarioEncuesta, models.DO_NOTHING, db_column='id_usuario_encuesta')
+    id_pregunta_respuesta = models.ForeignKey(
+        PreguntaRespuesta, models.DO_NOTHING, db_column='id_pregunta_respuesta')
+
+    class Meta:
+        managed = False
+        db_table = 'usuario_respuesta'

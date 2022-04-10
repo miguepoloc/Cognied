@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-#TODO: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
+# TODO: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
 
 # import django_heroku
 import dj_database_url
@@ -47,10 +47,8 @@ INTERNAL_IPS = [
 ]
 
 
-
-
 SWAGGER_SETTINGS = {
-   'DEFAULT_INFO':  openapi.Info(
+    'DEFAULT_INFO':  openapi.Info(
         title="DigitalMente API",
         default_version='v1',
         description="API para el proyecto de DigitalMente",
@@ -58,10 +56,10 @@ SWAGGER_SETTINGS = {
         contact=openapi.Contact(email="miguelpoloac@unimagdalena.edu.co"),
         license=openapi.License(name="Cognied"),
     ),
-   "DEFAULT_MODEL_RENDERING":"example",
-   "USE_SESSION_AUTH": True,
-   
-    
+    "DEFAULT_MODEL_RENDERING": "example",
+    "USE_SESSION_AUTH": True,
+
+
 }
 # Application definition
 
@@ -74,7 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     "drf_yasg",
     "api",
     "authentication",
@@ -125,17 +123,13 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
-    # 'default1': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'cognied',
-    #     'USER': 'admin',
-    #     'PASSWORD': 'Contrasena1!',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    # }
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'encuesta',
+        'USER': 'admin',
+        'PASSWORD': 'Contrasena1!',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
 
 

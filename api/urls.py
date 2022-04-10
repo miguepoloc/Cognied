@@ -8,6 +8,13 @@ router.register(r'personal', PersonalView, "personal")
 router.register(r'sexo', SexoView, "sexo")
 router.register(r'estado_civil', Estado_CivilView, "estado_civil")
 router.register(r'escolaridad', EscolaridadView, "escolaridad")
+router.register(r'encuesta', EncuestaView, "encuesta")
+router.register(r'pregunta', PreguntaView, "pregunta")
+router.register(r'pregunta_respuesta', PreguntaRespuestaView, "pregunta_respuesta")
+router.register(r'respuesta', RespuestaView, "respuesta")
+router.register(r'usuario', UsuarioView, "usuario")
+router.register(r'usuario_encuesta', UsuarioEncuestaView, "usuario_encuesta")
+router.register(r'usuario_respuesta', UsuarioRespuestaView, "usuario_respuesta")
 
 
 urlpatterns = [
