@@ -61,3 +61,14 @@ class UsuarioRespuestaSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsuarioRespuesta
         fields = "__all__"
+
+
+class ViewPreguntaRespuestaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ViewPreguntaRespuesta
+        fields = "__all__"
+
+class ViewRespuestaEncuestasSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ViewRespuestaEncuestas
+        fields = "__all__"

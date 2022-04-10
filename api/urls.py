@@ -15,6 +15,8 @@ router.register(r'respuesta', RespuestaView, "respuesta")
 router.register(r'usuario', UsuarioView, "usuario")
 router.register(r'usuario_encuesta', UsuarioEncuestaView, "usuario_encuesta")
 router.register(r'usuario_respuesta', UsuarioRespuestaView, "usuario_respuesta")
+router.register(r'vista_pregunta_respuesta', ViewPreguntaRespuestaView, "vista_pregunta_respuesta")
+router.register(r'vista_respuesta_encuestas', ViewRespuestaEncuestasView, "vista_respuesta_encuestas")
 
 
 urlpatterns = [

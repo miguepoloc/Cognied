@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta',
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',

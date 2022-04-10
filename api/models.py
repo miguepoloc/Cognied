@@ -1,8 +1,6 @@
 from enum import unique
 from django.db import models
 from cloudinary.models import CloudinaryField
-from django.utils.text import slugify
-import hashlib
 
 
 class Personal(models.Model):
@@ -55,6 +53,9 @@ class Encuesta(models.Model):
         managed = False
         db_table = 'encuesta'
 
+    def __str__(self):
+        return self.nombre
+
 
 class Pregunta(models.Model):
     id_pregunta = models.AutoField(primary_key=True)
@@ -68,6 +69,9 @@ class Pregunta(models.Model):
         managed = False
         db_table = 'pregunta'
 
+    def __str__(self):
+        return self.pregunta
+
 
 class PreguntaRespuesta(models.Model):
     id_respuesta = models.ForeignKey(
@@ -80,6 +84,9 @@ class PreguntaRespuesta(models.Model):
         managed = False
         db_table = 'pregunta_respuesta'
 
+    def __str__(self):
+        return '%s' % (self.id_pregunta_respuesta)
+
 
 class Respuesta(models.Model):
     id_respuesta = models.AutoField(primary_key=True)
@@ -89,6 +96,9 @@ class Respuesta(models.Model):
     class Meta:
         managed = False
         db_table = 'respuesta'
+    
+    def __str__(self):
+        return '%s' % (self.respuesta)
 
 
 class Usuario(models.Model):
@@ -98,6 +108,9 @@ class Usuario(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario'
+    
+    def __str__(self):
+        return '%s' % (self.nombre)
 
 
 class UsuarioEncuesta(models.Model):
@@ -111,6 +124,9 @@ class UsuarioEncuesta(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario_encuesta'
+    
+    def __str__(self):
+        return '%s' % (self.id_usuario_encuesta)
 
 
 class UsuarioRespuesta(models.Model):
@@ -123,3 +139,42 @@ class UsuarioRespuesta(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario_respuesta'
+    
+    def __str__(self):
+        return '%s' % (self.id_usuario_respuesta)
+
+
+class ViewPreguntaRespuesta(models.Model):
+    id_survey = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=45, db_collation='utf8_general_ci')
+    desc = models.TextField(
+        db_collation='utf8_general_ci', blank=True, null=True)
+    color = models.CharField(max_length=30, db_collation='utf8_general_ci')
+    id_question = models.IntegerField()
+    # Field name made lowercase.
+    itemid_question = models.IntegerField(
+        db_column='itemID_question', blank=True, null=True)
+    question = models.TextField(db_collation='utf8_general_ci')
+    answer = models.CharField(max_length=60, db_collation='utf8_general_ci')
+    id_answer = models.IntegerField()
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'view_pregunta_respuesta'
+
+
+class ViewRespuestaEncuestas(models.Model):
+    id_encuesta = models.IntegerField(primary_key=True)
+    encuesta = models.CharField(max_length=45, db_collation='utf8_general_ci')
+    id_usuario = models.IntegerField()
+    nombre_usuario = models.CharField(
+        max_length=40, db_collation='utf8_general_ci', blank=True, null=True)
+    id_pregunta = models.IntegerField()
+    pregunta = models.TextField(db_collation='utf8_general_ci')
+    id_respuesta = models.IntegerField()
+    respuesta = models.CharField(max_length=60, db_collation='utf8_general_ci')
+    valor = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'view_respuesta_encuestas'

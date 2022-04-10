@@ -55,3 +55,11 @@ class UsuarioEncuestaView(viewsets.ModelViewSet):
 class UsuarioRespuestaView(viewsets.ModelViewSet):
     queryset = UsuarioRespuesta.objects.all()
     serializer_class = UsuarioRespuestaSerializer
+
+class ViewPreguntaRespuestaView(viewsets.ModelViewSet):
+    queryset = ViewPreguntaRespuesta.objects.all().values()
+    serializer_class = ViewPreguntaRespuestaSerializer
+
+class ViewRespuestaEncuestasView(viewsets.ModelViewSet):
+    queryset = ViewRespuestaEncuestas.objects.all()
+    serializer_class = ViewRespuestaEncuestasSerializer
