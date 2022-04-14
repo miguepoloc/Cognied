@@ -74,11 +74,12 @@ class Pregunta(models.Model):
 
 
 class PreguntaRespuesta(models.Model):
+    id_pregunta_respuesta = models.AutoField(primary_key=True)
     id_respuesta = models.ForeignKey(
         'Respuesta', models.DO_NOTHING, db_column='id_respuesta')
     id_pregunta = models.ForeignKey(
         Pregunta, models.DO_NOTHING, db_column='id_pregunta')
-    id_pregunta_respuesta = models.AutoField(primary_key=True)
+    orden = models.IntegerField()
 
     class Meta:
         managed = False
@@ -96,7 +97,7 @@ class Respuesta(models.Model):
     class Meta:
         managed = False
         db_table = 'respuesta'
-    
+
     def __str__(self):
         return '%s' % (self.respuesta)
 
@@ -108,7 +109,7 @@ class Usuario(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario'
-    
+
     def __str__(self):
         return '%s' % (self.nombre)
 
@@ -119,12 +120,12 @@ class UsuarioEncuesta(models.Model):
         Usuario, models.DO_NOTHING, db_column='id_usuario')
     id_encuesta = models.ForeignKey(
         Encuesta, models.DO_NOTHING, db_column='id_encuesta')
-    fecha = models.CharField(max_length=45, blank=True, null=True)
+    fecha = models.DateTimeField()
 
     class Meta:
         managed = False
         db_table = 'usuario_encuesta'
-    
+
     def __str__(self):
         return '%s' % (self.id_usuario_encuesta)
 
@@ -139,7 +140,7 @@ class UsuarioRespuesta(models.Model):
     class Meta:
         managed = False
         db_table = 'usuario_respuesta'
-    
+
     def __str__(self):
         return '%s' % (self.id_usuario_respuesta)
 
@@ -157,6 +158,7 @@ class ViewPreguntaRespuesta(models.Model):
     question = models.TextField(db_collation='utf8_general_ci')
     answer = models.CharField(max_length=60, db_collation='utf8_general_ci')
     id_answer = models.IntegerField()
+    order_answer = models.IntegerField()
 
     class Meta:
         managed = False  # Created from a view. Don't remove.
