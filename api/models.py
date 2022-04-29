@@ -1,6 +1,7 @@
 from enum import unique
 from django.db import models
 from cloudinary.models import CloudinaryField
+from authentication.models import *
 
 
 class Personal(models.Model):
@@ -180,3 +181,26 @@ class ViewRespuestaEncuestas(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'view_respuesta_encuestas'
+
+
+class SeccionEmocional(models.Model):
+    id_seccion = models.AutoField(primary_key=True)
+    # usuario = models.ForeignKey(
+    #     Usuario, on_delete=models.SET_NULL, null=True, blank=True)
+    usuario = models.CharField(
+        max_length=40, db_collation='utf8_general_ci', blank=True, null=True)
+    capsula1 = models.BooleanField(default=False)
+    capsula2 = models.BooleanField(default=True)
+    actividad1 = models.BooleanField(default=True)
+    capsula3 = models.BooleanField(default=True)
+    actividad2 = models.BooleanField(default=True)
+    capsula4 = models.BooleanField(default=True)
+    actividad3 = models.BooleanField(default=True)
+    capsula5 = models.BooleanField(default=True)
+    capsula6 = models.BooleanField(default=True)
+    actividad4 = models.BooleanField(default=True)
+    capsula7 = models.BooleanField(default=True)
+    capsula8 = models.BooleanField(default=True)
+
+    def __str__(self):
+        return '%s' % (self.usuario)

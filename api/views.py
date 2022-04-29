@@ -63,3 +63,7 @@ class ViewPreguntaRespuestaView(viewsets.ModelViewSet):
 class ViewRespuestaEncuestasView(viewsets.ModelViewSet):
     queryset = ViewRespuestaEncuestas.objects.all()
     serializer_class = ViewRespuestaEncuestasSerializer
+
+class SeccionEmocionalView(viewsets.ModelViewSet):
+    queryset = SeccionEmocional.objects.all()
+    serializer_class = SeccionEmocionalSerializer
