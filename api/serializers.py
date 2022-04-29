@@ -72,3 +72,10 @@ class ViewRespuestaEncuestasSerializer(serializers.ModelSerializer):
     class Meta:
         model = ViewRespuestaEncuestas
         fields = "__all__"
+
+
+class SeccionEmocionalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SeccionEmocional
+        fields = "__all__"
+

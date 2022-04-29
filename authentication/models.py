@@ -7,7 +7,7 @@ from django.conf import settings
 
 from django.db import models
 
-from api.models import *
+# from api.models import *
 
 TIPO_DE_DOCUMENTO = [
     ("PA", 'PA'),
@@ -16,6 +16,30 @@ TIPO_DE_DOCUMENTO = [
     ("TI", 'TI'),
     ("RC", 'RC'),
 ]
+
+
+class Sexo(models.Model):
+    id = models.AutoField(primary_key=True)
+    sexo = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.sexo
+
+
+class Estado_Civil(models.Model):
+    id = models.AutoField(primary_key=True)
+    estado_civil = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.estado_civil
+
+
+class Escolaridad(models.Model):
+    id = models.AutoField(primary_key=True)
+    escolaridad = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.escolaridad
 
 
 class Usuarios(models.Model):
