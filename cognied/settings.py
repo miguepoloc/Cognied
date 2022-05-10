@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 # TODO: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
 
 # import django_heroku
-import dj_database_url
+# import dj_database_url
 import cloudinary
 from drf_yasg import openapi
 import os
@@ -48,7 +48,7 @@ INTERNAL_IPS = [
 
 
 SWAGGER_SETTINGS = {
-    'DEFAULT_INFO':  openapi.Info(
+    'DEFAULT_INFO': openapi.Info(
         title="DigitalMente API",
         default_version='v1',
         description="API para el proyecto de DigitalMente",
@@ -180,8 +180,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 LOGIN_REDIRECT_URL = '/'
 
 # Django Rest-Framework
