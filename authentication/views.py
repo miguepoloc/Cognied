@@ -43,7 +43,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         )
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -61,7 +61,7 @@ class RegistrationAPIView(APIView):
         # your own work later on. Get familiar with it.
         serializer = self.serializer_class(data=user, partial=True)
         serializer.is_valid(raise_exception=True)
-        usuario=serializer.save()
+        usuario = serializer.save()
         userInfo = UserSerializer(usuario, partial=True).data
         userInfo.pop("is_active", None)
         userInfo.pop("is_staff", None)
@@ -83,11 +83,10 @@ class LoginAPIView(APIView):
         serializer = self.serializer_class(data=user)
         data = serializer.validate(user)
         userInfo = UserSerializer(data["user"]).data
-        userInfo.pop("is_active",None)
+        userInfo.pop("is_active", None)
         userInfo.pop("is_staff", None)
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
-
 
         response = {"token": data["token"], "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
         return Response(response, status=status.HTTP_200_OK)

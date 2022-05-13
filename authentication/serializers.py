@@ -4,6 +4,7 @@ from .models import Usuarios
 import hashlib
 from api.serializers import *
 
+
 class RegistrationSerializer(serializers.ModelSerializer):
     """Serializers registration requests and creates a new user."""
 
@@ -28,7 +29,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # Use the `create_user` method we wrote earlier to create a new user.
         data = validated_data
-        data['password'] = hashers.make_password( validated_data['password'] )
+        data['password'] = hashers.make_password(validated_data['password'])
         return Usuarios.objects.create(**data)
 
 
@@ -99,7 +100,7 @@ class UserSerializer(serializers.ModelSerializer):
     sexo = SexoSerializer(many=False, read_only=True)
     estado_civil = Estado_CivilSerializer(many=False, read_only=True)
     escolaridad = EscolaridadSerializer(many=False, read_only=True)
-    
+
     class Meta:
         model = Usuarios
         fields = '__all__'

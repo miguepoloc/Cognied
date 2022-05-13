@@ -7,7 +7,7 @@ from django.conf import settings
 
 from django.db import models
 
-# from api.models import *
+from api.models import Sexo, Escolaridad, Estado_Civil
 
 TIPO_DE_DOCUMENTO = [
     ("PA", 'PA'),
@@ -18,42 +18,18 @@ TIPO_DE_DOCUMENTO = [
 ]
 
 
-class Sexo(models.Model):
-    id = models.AutoField(primary_key=True)
-    sexo = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.sexo
-
-
-class Estado_Civil(models.Model):
-    id = models.AutoField(primary_key=True)
-    estado_civil = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.estado_civil
-
-
-class Escolaridad(models.Model):
-    id = models.AutoField(primary_key=True)
-    escolaridad = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.escolaridad
-
-
 class Usuarios(models.Model):
     # Each `User` needs a human-readable unique identifier that we can use to
     # represent the `User` in the UI. We want to index this column in the
     # database to improve lookup performance.
-    document = models.CharField(max_length=20,db_index=True, unique=True)
+    document = models.CharField(max_length=20, db_index=True, unique=True)
     password = models.CharField(max_length=100, blank=False, null=False)
     # We also need a way to contact the user and a way for the user to identify
     # themselves when logging in. Since we need an email address for contacting
     # the user anyways, we will also use the email for logging in because it is
     # the most common form of login credential at the time of writing.
     email = models.EmailField(db_index=True, unique=True)
-    
+
     nombre = models.TextField(max_length=200, null=False, blank=False)
     tipo_documento = models.CharField(
         max_length=2,
@@ -82,12 +58,13 @@ class Usuarios(models.Model):
 
     USERNAME_FIELD = 'document'
     # REQUIRED_FIELDS = ['document',]
+
     def __str__(self):
         """
         Returns a string representation of this `User`.
         This string is used when a `User` is printed in the console.
         """
-        return str(self.tipo_documento +':'+ str(self.document))
+        return str(self.tipo_documento + ':' + str(self.document))
 
     @property
     def token(self):
@@ -98,7 +75,6 @@ class Usuarios(models.Model):
         a "dynamic property".
         """
         return self._generate_jwt_token()
-
 
     def _generate_jwt_token(self):
         """
@@ -113,8 +89,7 @@ class Usuarios(models.Model):
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')
-    
-    
+
     def _generate_jwt_token_recover(self):
         """
         Generates a JSON Web Token that stores this user's ID and has an expiry

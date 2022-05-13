@@ -1,7 +1,7 @@
 from enum import unique
 from django.db import models
 from cloudinary.models import CloudinaryField
-from authentication.models import *
+# from authentication.models import *
 
 
 class Personal(models.Model):
@@ -51,7 +51,6 @@ class Encuesta(models.Model):
     colorhex = models.CharField(db_column='colorHex', max_length=30)
 
     class Meta:
-        managed = False
         db_table = 'encuesta'
 
     def __str__(self):
@@ -67,7 +66,6 @@ class Pregunta(models.Model):
     itemid = models.IntegerField(db_column='itemID', blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'pregunta'
 
     def __str__(self):
@@ -83,7 +81,6 @@ class PreguntaRespuesta(models.Model):
     orden = models.IntegerField()
 
     class Meta:
-        managed = False
         db_table = 'pregunta_respuesta'
 
     def __str__(self):
@@ -96,7 +93,6 @@ class Respuesta(models.Model):
     respuesta = models.CharField(max_length=60)
 
     class Meta:
-        managed = False
         db_table = 'respuesta'
 
     def __str__(self):
@@ -108,7 +104,6 @@ class Usuario(models.Model):
     nombre = models.CharField(max_length=40, blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'usuario'
 
     def __str__(self):
@@ -124,7 +119,6 @@ class UsuarioEncuesta(models.Model):
     fecha = models.DateTimeField()
 
     class Meta:
-        managed = False
         db_table = 'usuario_encuesta'
 
     def __str__(self):
@@ -139,7 +133,6 @@ class UsuarioRespuesta(models.Model):
         PreguntaRespuesta, models.DO_NOTHING, db_column='id_pregunta_respuesta')
 
     class Meta:
-        managed = False
         db_table = 'usuario_respuesta'
 
     def __str__(self):
@@ -148,16 +141,15 @@ class UsuarioRespuesta(models.Model):
 
 class ViewPreguntaRespuesta(models.Model):
     id_survey = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=45, db_collation='utf8_general_ci')
-    desc = models.TextField(
-        db_collation='utf8_general_ci', blank=True, null=True)
-    color = models.CharField(max_length=30, db_collation='utf8_general_ci')
+    name = models.CharField(max_length=45)
+    desc = models.TextField(blank=True, null=True)
+    color = models.CharField(max_length=30)
     id_question = models.IntegerField()
     # Field name made lowercase.
     itemid_question = models.IntegerField(
         db_column='itemID_question', blank=True, null=True)
-    question = models.TextField(db_collation='utf8_general_ci')
-    answer = models.CharField(max_length=60, db_collation='utf8_general_ci')
+    question = models.TextField()
+    answer = models.CharField(max_length=60)
     id_answer = models.IntegerField()
     order_answer = models.IntegerField()
 
@@ -168,14 +160,14 @@ class ViewPreguntaRespuesta(models.Model):
 
 class ViewRespuestaEncuestas(models.Model):
     id_encuesta = models.IntegerField(primary_key=True)
-    encuesta = models.CharField(max_length=45, db_collation='utf8_general_ci')
+    encuesta = models.CharField(max_length=45)
     id_usuario = models.IntegerField()
     nombre_usuario = models.CharField(
-        max_length=40, db_collation='utf8_general_ci', blank=True, null=True)
+        max_length=40, blank=True, null=True)
     id_pregunta = models.IntegerField()
-    pregunta = models.TextField(db_collation='utf8_general_ci')
+    pregunta = models.TextField()
     id_respuesta = models.IntegerField()
-    respuesta = models.CharField(max_length=60, db_collation='utf8_general_ci')
+    respuesta = models.CharField(max_length=60)
     valor = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -188,7 +180,7 @@ class SeccionEmocional(models.Model):
     # usuario = models.ForeignKey(
     #     Usuario, on_delete=models.SET_NULL, null=True, blank=True)
     usuario = models.CharField(
-        max_length=40, db_collation='utf8_general_ci', blank=True, null=True)
+        max_length=40, blank=True, null=True)
     capsula1 = models.BooleanField(default=False)
     capsula2 = models.BooleanField(default=True)
     actividad1 = models.BooleanField(default=True)
@@ -204,3 +196,36 @@ class SeccionEmocional(models.Model):
 
     def __str__(self):
         return '%s' % (self.usuario)
+
+
+class Emocion(models.Model):
+    emocion = models.CharField(max_length=45, null=False, blank=False)
+
+    def __str__(self):
+        return '%s' % (self.emocion)
+
+
+class Clasificacion(models.Model):
+    clasificacion = models.CharField(max_length=45, null=False, blank=False)
+    emociones = models.ManyToManyField(Emocion)
+
+    def __str__(self):
+        return '%s' % (self.clasificacion)
+
+
+class Definiciones(models.Model):
+    definicion = models.TextField(null=False, blank=False)
+    clasificacion = models.ForeignKey(Clasificacion, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '%s' % (self.definicion)
+
+
+class DefinicionesUsuario(models.Model):
+    definicion = models.ForeignKey(Definiciones, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    update = models.DateTimeField(auto_now=True)
+    definicion_usuario = models.TextField(null=False, blank=False)
+
+    def __str__(self):
+        return '%s' % (self.definicion_usuario)
