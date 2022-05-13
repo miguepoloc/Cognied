@@ -92,9 +92,18 @@ class EmocionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+
+
 class ClasificacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clasificacion
+        fields = "__all__"
+
+class EmocionListSerializer(serializers.ModelSerializer):
+    clasificacion = ClasificacionSerializer( many=True, read_only=True)
+
+    class Meta:
+        model = Emocion
         fields = "__all__"
 
 

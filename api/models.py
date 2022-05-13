@@ -198,19 +198,19 @@ class SeccionEmocional(models.Model):
         return '%s' % (self.usuario)
 
 
-class Emocion(models.Model):
-    emocion = models.CharField(max_length=45, null=False, blank=False)
-
-    def __str__(self):
-        return '%s' % (self.emocion)
-
-
 class Clasificacion(models.Model):
     clasificacion = models.CharField(max_length=45, null=False, blank=False)
-    emociones = models.ManyToManyField(Emocion)
 
     def __str__(self):
         return '%s' % (self.clasificacion)
+
+
+class Emocion(models.Model):
+    emocion = models.CharField(max_length=45, null=False, blank=False)
+    clasificacion = models.ManyToManyField(Clasificacion)
+
+    def __str__(self):
+        return '%s' % (self.emocion)
 
 
 class Definiciones(models.Model):
@@ -224,8 +224,8 @@ class Definiciones(models.Model):
 class DefinicionesUsuario(models.Model):
     definicion = models.ForeignKey(Definiciones, on_delete=models.CASCADE)
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    update = models.DateTimeField(auto_now=True)
     definicion_usuario = models.TextField(null=False, blank=False)
+    update = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '%s' % (self.definicion_usuario)

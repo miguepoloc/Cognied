@@ -117,6 +117,12 @@ class EmocionView(viewsets.ModelViewSet):
     queryset = Emocion.objects.all()
     serializer_class = EmocionSerializer
 
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return EmocionListSerializer
+        else:
+            return EmocionSerializer
+
 
 class ClasificacionView(viewsets.ModelViewSet):
     queryset = Clasificacion.objects.all()
@@ -131,3 +137,10 @@ class DefinicionesView(viewsets.ModelViewSet):
 class DefinicionesUsuarioView(viewsets.ModelViewSet):
     queryset = DefinicionesUsuario.objects.all()
     serializer_class = DefinicionesUsuarioSerializer
+
+    def create(self, request):
+        id_usuario = Usuario.objects.get(id=request.data['id_usuario'])
+        respuestas = request.data['respuestas']
+        for respuesta in respuestas:
+            definicion = Definiciones.objects.get(id=respuestas['definicion'])
+            serializer = self.serializer_class(data={'usuario': id_usuario, 'definicion': definicion, 'definicion_usuario': respuesta['definicion_usuario']})
