@@ -16,21 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import permissions
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from authentication.backends import JWTAuthentication
-schema_view = get_schema_view(
 
-    public=True,
-    permission_classes=(permissions.AllowAny,),
-    authentication_classes=[JWTAuthentication]
-)
 
 urlpatterns = [
-    path('', schema_view.with_ui('swagger', cache_timeout=0),
-         name='schema-swagger-ui'),
+    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('schema/', SpectacularAPIView.as_view(), name='schema'),
+    # Optional UI:
+    path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('admin/', admin.site.urls),
     path('api/', include("api.urls")),
     path('accounts/', include("authentication.urls", namespace='authentication')),
-    
+
 ]

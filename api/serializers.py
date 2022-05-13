@@ -37,25 +37,30 @@ class PreguntaSerializer(serializers.ModelSerializer):
         model = Pregunta
         fields = "__all__"
 
+
 class PreguntaRespuestaSerializer(serializers.ModelSerializer):
     class Meta:
         model = PreguntaRespuesta
         fields = "__all__"
+
 
 class RespuestaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Respuesta
         fields = "__all__"
 
+
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = "__all__"
 
+
 class UsuarioEncuestaSerializer(serializers.ModelSerializer):
     class Meta:
         model = UsuarioEncuesta
         fields = "__all__"
+
 
 class UsuarioRespuestaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,6 +73,7 @@ class ViewPreguntaRespuestaSerializer(serializers.ModelSerializer):
         model = ViewPreguntaRespuesta
         fields = "__all__"
 
+
 class ViewRespuestaEncuestasSerializer(serializers.ModelSerializer):
     class Meta:
         model = ViewRespuestaEncuestas
@@ -79,3 +85,26 @@ class SeccionEmocionalSerializer(serializers.ModelSerializer):
         model = SeccionEmocional
         fields = "__all__"
 
+
+class EmocionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emocion
+        fields = "__all__"
+
+
+class ClasificacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Clasificacion
+        fields = "__all__"
+
+
+class DefinicionesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Definiciones
+        fields = "__all__"
+
+
+class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DefinicionesUsuario
+        fields = "__all__"

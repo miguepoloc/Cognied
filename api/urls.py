@@ -18,6 +18,10 @@ router.register(r'usuario_respuesta', UsuarioRespuestaView, "usuario_respuesta")
 router.register(r'vista_pregunta_respuesta', ViewPreguntaRespuestaView, "vista_pregunta_respuesta")
 router.register(r'vista_respuesta_encuestas', ViewRespuestaEncuestasView, "vista_respuesta_encuestas")
 router.register(r'seccion_emocional', SeccionEmocionalView, "seccion_emocional")
+router.register(r'emocion', EmocionView, 'emocion_view')
+router.register(r'clasificacion', ClasificacionView, 'clasificacion_view')
+router.register(r'definiciones', DefinicionesView, 'definiciones_view')
+router.register(r'definiciones_usuario', DefinicionesUsuarioView, 'definiciones_usuario_view')
 
 
 urlpatterns = [

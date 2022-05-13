@@ -9,16 +9,14 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-# TODO: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
+# [x]: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
 
 # import django_heroku
 # import dj_database_url
 import cloudinary
-from drf_yasg import openapi
 import os
 import corsheaders
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -46,21 +44,6 @@ INTERNAL_IPS = [
     '0.0.0.0'
 ]
 
-
-SWAGGER_SETTINGS = {
-    'DEFAULT_INFO': openapi.Info(
-        title="DigitalMente API",
-        default_version='v1',
-        description="API para el proyecto de DigitalMente",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="miguelpoloac@unimagdalena.edu.co"),
-        license=openapi.License(name="Cognied"),
-    ),
-    "DEFAULT_MODEL_RENDERING": "example",
-    "USE_SESSION_AUTH": True,
-
-
-}
 # Application definition
 
 INSTALLED_APPS = [
@@ -73,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "drf_yasg",
+    "drf_spectacular",
     "api",
     "authentication",
     "core"
@@ -128,7 +111,7 @@ DATABASES = {
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '33061',
     }
 }
 
@@ -196,7 +179,24 @@ REST_FRAMEWORK = {
     ),
     'EXCEPTION_HANDLER': 'core.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 # Activate Django-Heroku.
 # django_heroku.settings(locals())
+
+
+SPECTACULAR_SETTINGS = {
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,
+        "persistAuthorization": True,
+        "displayOperationId": True,
+    },
+    'TITLE': "DigitalMente API",
+    'VERSION': 'v1',
+    'DESCRIPTION': "API para el proyecto de DigitalMente",
+    "CONTACT": {"email": "miguelpoloac@unimagdalena.edu.co"},
+    "LICENSE": {"name": "Cognied"},
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
+    "SERVE_AUTHENTICATION": ['authentication.backends.JWTAuthentication']
+}

@@ -88,7 +88,7 @@ class Usuarios(models.Model):
             'exp': int(dt.timestamp())
         }, settings.SECRET_KEY, algorithm='HS256')
 
-        return token.decode('utf-8')
+        return token
 
     def _generate_jwt_token_recover(self):
         """
@@ -100,4 +100,7 @@ class Usuarios(models.Model):
             'id': self.pk,
             'exp': int(dt.timestamp())
         }, settings.SECRET_KEY, algorithm='HS256')
-        return token.decode('utf-8')
+        return token
+
+    def is_authenticated(self):
+        return True

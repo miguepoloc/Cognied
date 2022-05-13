@@ -5,6 +5,7 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import serializers
 
 from rest_framework.decorators import api_view, permission_classes
 
@@ -12,7 +13,7 @@ from rest_framework import viewsets, exceptions, parsers, renderers, status
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from datetime import datetime, timedelta
-from drf_yasg.utils import swagger_auto_schema
+from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, inline_serializer
 
 from .renderers import UserJSONRenderer
 from .serializers import (
@@ -68,7 +69,7 @@ class RegistrationAPIView(APIView):
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
-        response = {"token": serializer.data["token"], "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+        response = {"token": usuario.token, "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
 
         return Response(response, status=status.HTTP_201_CREATED)
 
@@ -78,6 +79,22 @@ class LoginAPIView(APIView):
     renderer_classes = (UserJSONRenderer,)
     serializer_class = LoginSerializer
 
+    @extend_schema(
+        examples=[
+            OpenApiExample(
+                'Ejemplo 1',
+                summary='Modelo de prueba',
+                value={
+                    "user": {
+                        "document": "1234567",
+                                    "password": "admin123",
+                    }
+                },
+                request_only=True,  # signal that example only applies to requests
+                response_only=False,  # signal that example only applies to responses
+            ),
+        ],
+    )
     def post(self, request):
         user = request.data.get('user', {})
         serializer = self.serializer_class(data=user)

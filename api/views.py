@@ -1,8 +1,11 @@
+from os import device_encoding
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from datetime import datetime
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -50,22 +53,43 @@ class UsuarioView(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 
+@permission_classes([AllowAny])
 class UsuarioEncuestaView(viewsets.ModelViewSet):
     queryset = UsuarioEncuesta.objects.all()
     serializer_class = UsuarioEncuestaSerializer
 
-    def create(self, request):
-        id_usuario = request.data['id_usuario'],
-        id_encuesta = request.data['id_encuesta'],
+    # {
+    #     "id_usuario": 1,
+    #     "id_encuesta": 1,
+    #     "respuestas": [
+    #         1,
+    #         2,
+    #         3,
+    #         4,
+    #     ]
 
-        usuario_encuesta = self.get_serializer(data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': datetime.now()})
-        usuario_encuesta.is_valid(raise_exception=True)
-        usuario_encuesta.save()
-        usuario_encuesta = usuario_encuesta.data
-        usuario_respuestas = UsuarioRespuestaSerializer(data=[{'id_usuario_encuesta': usuario_encuesta['id'], 'id_pregunta_respuesta':x['id']} for x in request.data["respuestas"]], many=True)
-        usuario_respuestas.is_valid(raise_exception=True)
-        usuario_respuestas.save()
-        return Response({usuario_encuesta.data, usuario_respuestas.data})
+    # }
+    def create(self, request):
+        id_usuario = request.data['id_usuario']
+        id_encuesta = request.data['id_encuesta']
+
+        usuario_encuesta_serializer = self.get_serializer(data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': datetime.now()})
+        usuario_encuesta_serializer.is_valid(raise_exception=True)
+        usuario_encuesta_serializer.save()
+        usuario_encuesta = usuario_encuesta_serializer.data
+        data = {
+            "usuario_respuestas": [],
+            "errors": []
+        }
+        for respuesta in request.data['respuestas']:
+            usuario_respuesta_serializer = UsuarioRespuestaSerializer(data={'id_usuario_encuesta': usuario_encuesta['id_usuario_encuesta'], 'id_pregunta_respuesta': respuesta})
+            if usuario_respuesta_serializer.is_valid():
+                usuario_respuesta_serializer.save()
+                data["usuario_respuestas"].append(usuario_respuesta_serializer.data)
+            else:
+                data["errors"].append({"id_respuesta": respuesta, "error": usuario_respuesta_serializer.errors})
+
+        return Response({"usuario": usuario_encuesta, "respuestas": data})
 
 
 class UsuarioRespuestaView(viewsets.ModelViewSet):
@@ -73,6 +97,7 @@ class UsuarioRespuestaView(viewsets.ModelViewSet):
     serializer_class = UsuarioRespuestaSerializer
 
 
+@permission_classes([AllowAny])
 class ViewPreguntaRespuestaView(viewsets.ModelViewSet):
     queryset = ViewPreguntaRespuesta.objects.all().values()
     serializer_class = ViewPreguntaRespuestaSerializer
@@ -86,3 +111,23 @@ class ViewRespuestaEncuestasView(viewsets.ModelViewSet):
 class SeccionEmocionalView(viewsets.ModelViewSet):
     queryset = SeccionEmocional.objects.all()
     serializer_class = SeccionEmocionalSerializer
+
+
+class EmocionView(viewsets.ModelViewSet):
+    queryset = Emocion.objects.all()
+    serializer_class = EmocionSerializer
+
+
+class ClasificacionView(viewsets.ModelViewSet):
+    queryset = Clasificacion.objects.all()
+    serializer_class = ClasificacionSerializer
+
+
+class DefinicionesView(viewsets.ModelViewSet):
+    queryset = Definiciones.objects.all()
+    serializer_class = DefinicionesSerializer
+
+
+class DefinicionesUsuarioView(viewsets.ModelViewSet):
+    queryset = DefinicionesUsuario.objects.all()
+    serializer_class = DefinicionesUsuarioSerializer
