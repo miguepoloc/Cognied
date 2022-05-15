@@ -1,0 +1,98 @@
+[
+{
+  "model": "api.definiciones",
+  "pk": 1,
+  "fields": {
+    "definicion": "Falta de gana, interés o deseo",
+    "clasificacion": 1
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 2,
+  "fields": {
+    "definicion": "Propensión a ver y juzgar las cosas en su aspecto más favorable",
+    "clasificacion": 2
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 3,
+  "fields": {
+    "definicion": "Exaltación y fogosidad del ánimo, excitado por algo que lo admire o cautive",
+    "clasificacion": 3
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 4,
+  "fields": {
+    "definicion": "Sentimiento de insatisfacción o fracaso",
+    "clasificacion": 4
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 5,
+  "fields": {
+    "definicion": "Repugnancia frente a alguien o algo",
+    "clasificacion": 5
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 6,
+  "fields": {
+    "definicion": "Rechazar algo, no aceptarlo",
+    "clasificacion": 6
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 7,
+  "fields": {
+    "definicion": "Sensación que proviene de un acontecimiento repentino e imprevisto",
+    "clasificacion": 7
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 8,
+  "fields": {
+    "definicion": "Temor o miedo muy grandes",
+    "clasificacion": 8
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 9,
+  "fields": {
+    "definicion": "Falta de seguridad",
+    "clasificacion": 9
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 10,
+  "fields": {
+    "definicion": "Falta de serenidad",
+    "clasificacion": 10
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 11,
+  "fields": {
+    "definicion": "Estado de ánimo de desorientación y perplejidad",
+    "clasificacion": 11
+  }
+},
+{
+  "model": "api.definiciones",
+  "pk": 12,
+  "fields": {
+    "definicion": "Ira exaltada o elevada",
+    "clasificacion": 12
+  }
+}
+]

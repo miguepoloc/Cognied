@@ -1,0 +1,974 @@
+[
+{
+  "model": "api.pregunta",
+  "pk": 18,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "No pude dejar de estar triste a pesar de la ayuda de amigos y familiares",
+    "itemid": 1
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 19,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Me sentí deprimido (a)",
+    "itemid": 2
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 20,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Pensé que mi vida ha sido un fracaso",
+    "itemid": 3
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 21,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Me sentí nervioso",
+    "itemid": 4
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 22,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Estuve feliz",
+    "itemid": 5
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 23,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Me sentí solo (a)",
+    "itemid": 6
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 24,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Disfruté la vida",
+    "itemid": 7
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 25,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Tuve crisis de llanto",
+    "itemid": 8
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 26,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Me sentí triste",
+    "itemid": 9
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 27,
+  "fields": {
+    "id_encuesta": 4,
+    "pregunta": "Sentí que no podía seguir adelante",
+    "itemid": 10
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 28,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me siento más nervioso y ansioso que de costumbre.",
+    "itemid": 1
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 29,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me da miedo sin razón alguna.",
+    "itemid": 2
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 30,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me enojo fácilmente o siento pánico.",
+    "itemid": 3
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 31,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Siento que me estoy desmoronando.",
+    "itemid": 4
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 32,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Mis brazos y piernas tiemblan.",
+    "itemid": 5
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 33,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me molestan los dolores de cabeza, cuello y dolor de espalda.",
+    "itemid": 6
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 34,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me siento débil y me canso fácilmente.",
+    "itemid": 7
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 35,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Puedo sentir mi corazón latir rápido.",
+    "itemid": 8
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 36,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me molestan los mareos.",
+    "itemid": 9
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 37,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Tengo desmayos o sensación de desmayos.",
+    "itemid": 10
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 38,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Tengo sensación de entumecimiento y hormigueo en mis dedos de manos y pies.",
+    "itemid": 11
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 39,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Me molestan los dolores de estómago o la indigestión.",
+    "itemid": 12
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 40,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Tengo que vaciar mi vejiga con frecuencia.",
+    "itemid": 13
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 41,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Se me calienta la cara y se me pone enrojecida.",
+    "itemid": 14
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 42,
+  "fields": {
+    "id_encuesta": 3,
+    "pregunta": "Tengo pesadillas.",
+    "itemid": 15
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 43,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Presto mucha atención a mis sentimientos. ",
+    "itemid": 1
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 44,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Me preocupan mucho mis sentimientos",
+    "itemid": 2
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 45,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Me resulta útil pensar en mis emociones.",
+    "itemid": 3
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 46,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Vale la pena prestar atención a mis emociones y estados de ánimo.",
+    "itemid": 4
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 47,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Dejo que mis sentimientos se interpongan en mis pensamientos.",
+    "itemid": 5
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 48,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Pienso constantemente en mi estado de ánimo. ",
+    "itemid": 6
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 49,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "A menudo pienso en mis sentimientos.",
+    "itemid": 7
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 50,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Presto mucha atención a lo que siento.  ",
+    "itemid": 8
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 51,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Suelo saber lo que siento",
+    "itemid": 9
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 52,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "A menudo puedo saber lo que siento.",
+    "itemid": 10
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 53,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Casi siempre sé exactamente lo que siento.",
+    "itemid": 11
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 54,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Suelo conocer mis sentimientos sobre las personas o cualquier tema",
+    "itemid": 12
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 55,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "A menudo soy consciente de lo que siento sobre cualquier tema.",
+    "itemid": 13
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 56,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Siempre puedo decir lo que siento.",
+    "itemid": 14
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 57,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "A veces puedo decir lo que siento.",
+    "itemid": 15
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 58,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Puedo entender lo que siento.",
+    "itemid": 16
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 59,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Aunque a veces estoy triste, casi siempre tengo una actitud optimista.",
+    "itemid": 17
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 60,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Aunque me sienta mal, intento pensar en cosas bonitas.",
+    "itemid": 18
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 61,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Cuando me aburro, pienso en las cosas agradables de la vida.",
+    "itemid": 19
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 62,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Intento tener pensamientos positivos aunque me sienta mal.",
+    "itemid": 20
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 63,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Si siento que estoy perdiendo la cabeza, intento calmarme.",
+    "itemid": 21
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 64,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Me preocupo por mantener un buen estado de ánimo.",
+    "itemid": 22
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 65,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Siempre tengo mucha energía cuando soy feliz.",
+    "itemid": 23
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 66,
+  "fields": {
+    "id_encuesta": 5,
+    "pregunta": "Cuando estoy enfadado, intento cambiar mi estado de ánimo.",
+    "itemid": 24
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 67,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha estado afectado por algo que ha ocurrido inesperadamente?",
+    "itemid": 1
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 68,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia se ha sentido incapaz de controlar las cosas importantes en su vida?",
+    "itemid": 2
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 69,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia se ha sentido nervioso o estresado?",
+    "itemid": 3
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 70,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha manejado con éxito los pequeños problemas irritantes de la vida?",
+    "itemid": 4
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 71,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha sentido que ha afrontado con eficacia los cambios importantes que han estado ocurriendo en su vida?",
+    "itemid": 5
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 72,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha estado seguro sobre su capacidad para manejar sus problemas personales?",
+    "itemid": 6
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 73,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha sentido que las cosas le van bien?",
+    "itemid": 7
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 74,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha sentido que no podía afrontar todas las cosas que tenía que hacer?",
+    "itemid": 8
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 75,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha podido controlar las dificultades de su vida?",
+    "itemid": 9
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 76,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia se ha sentido que tenía todo bajo control?",
+    "itemid": 10
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 77,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha estado enfadado porque las cosas que le han ocurrido estaban fuera de su control?",
+    "itemid": 11
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 78,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha pensado sobre las cosas que le quedan por hacer?",
+    "itemid": 12
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 79,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha podido controlar la forma de invertir su tiempo?",
+    "itemid": 13
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 80,
+  "fields": {
+    "id_encuesta": 6,
+    "pregunta": "En el último mes, ¿con qué frecuencia ha sentido que las dificultades se acumulan tanto que no puede superarlas?",
+    "itemid": 14
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 81,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "No puedo soportar ciertas cosas que me pasan",
+    "itemid": 1
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 82,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Solamente me pasan cosas malas",
+    "itemid": 2
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 83,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Todo lo que hago me sale mal",
+    "itemid": 3
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 84,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Sé que piensan mal de mi",
+    "itemid": 4
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 85,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "¿Y si tengo alguna enfermedad grave?",
+    "itemid": 5
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 86,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy inferior a la gente en casi todo",
+    "itemid": 6
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 87,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si otros cambiaran su actitud yo me sentiría mejor",
+    "itemid": 7
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 88,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "¡No hay derecho a que me traten así!",
+    "itemid": 8
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 89,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si me siento triste es porque soy un enfermo mental",
+    "itemid": 9
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 90,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Mis problemas dependen de los que me rodean",
+    "itemid": 10
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 91,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy un desastre como persona",
+    "itemid": 11
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 92,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Yo tengo la culpa de todo lo que me pasa",
+    "itemid": 12
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 93,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Debería de estar bien y no tener estos problemas",
+    "itemid": 13
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 94,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Sé que tengo la razón y no me entienden",
+    "itemid": 14
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 95,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Aunque ahora sufra, algún día tendré mi recompensa",
+    "itemid": 15
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 96,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Es horrible que me pase esto",
+    "itemid": 16
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 97,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Mi vida es un continuo fracaso",
+    "itemid": 17
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 98,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Siempre tendré este problema",
+    "itemid": 18
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 99,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Sé que me están mintiendo y engañando",
+    "itemid": 19
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 100,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "¿Y si me vuelvo loco y pierdo la cabeza?",
+    "itemid": 20
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 101,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy superior a la gente en casi todo",
+    "itemid": 21
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 102,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Yo soy responsable del sufrimiento de los que me rodean",
+    "itemid": 22
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 103,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si me quisieran de verdad no me tratarían así",
+    "itemid": 23
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 104,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Me siento culpable y es porque he hecho algo malo",
+    "itemid": 24
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 105,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si tuviera más apoyo no tendría estos problemas",
+    "itemid": 25
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 106,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Alguien que conozco es un imbécil",
+    "itemid": 26
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 107,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Otros tienen la culpa de lo que me pasa",
+    "itemid": 27
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 108,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "No debería de cometer estos errores",
+    "itemid": 28
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 109,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "No quiere reconocer que estoy en lo cierto",
+    "itemid": 29
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 110,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Ya vendrán mejores tiempos",
+    "itemid": 30
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 111,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Es insoportable no puedo aguantar mas",
+    "itemid": 31
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 112,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy incompetente e inútil",
+    "itemid": 32
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 113,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Nunca podré salir de esta situación",
+    "itemid": 33
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 114,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Quieren hacerme daño",
+    "itemid": 34
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 115,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Y, ¿si les pasa algo malo a las personas que quiero?",
+    "itemid": 35
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 116,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "La gente hace las cosas mejor que yo",
+    "itemid": 36
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 117,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy una víctima de mis circunstancias",
+    "itemid": 37
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 118,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "No me tratan como deberían hacerlo y me lo merezco",
+    "itemid": 38
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 119,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si tengo estos síntomas es porque soy un enfermo",
+    "itemid": 39
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 120,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Si tuviera mejor situación económica no tendría estos problemas",
+    "itemid": 40
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 121,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Soy un neurótico",
+    "itemid": 41
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 122,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Lo que me pasa es un castigo que merezco",
+    "itemid": 42
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 123,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Debería recibir más atención y cariño de otros",
+    "itemid": 43
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 124,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Tengo razón y voy a hacer lo que me da la gana",
+    "itemid": 44
+  }
+},
+{
+  "model": "api.pregunta",
+  "pk": 125,
+  "fields": {
+    "id_encuesta": 7,
+    "pregunta": "Tarde o temprano irán las cosas mejor",
+    "itemid": 45
+  }
+}
+]

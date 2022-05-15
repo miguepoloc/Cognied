@@ -139,8 +139,17 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
     serializer_class = DefinicionesUsuarioSerializer
 
     def create(self, request):
-        id_usuario = Usuario.objects.get(id=request.data['id_usuario'])
+        # id_usuario = Usuario.objects.get(id_usuario=request.data['id_usuario'])
         respuestas = request.data['respuestas']
+        response = {"definiciones": [], "errors": []}
         for respuesta in respuestas:
-            definicion = Definiciones.objects.get(id=respuestas['definicion'])
-            serializer = self.serializer_class(data={'usuario': id_usuario, 'definicion': definicion, 'definicion_usuario': respuesta['definicion_usuario']})
+            # definicion = Definiciones.objects.get(id=respuesta['definicion'])
+            serializer = self.serializer_class(data={'usuario': request.data['id_usuario'], 'definicion': respuesta['definicion'], 'definicion_usuario': respuesta['definicion_usuario']})
+            try:
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+                response["definiciones"].append(serializer.data)
+            except Exception as e:
+                response["errors"].append(str(e))
+
+        return Response(response)

@@ -1,0 +1,47 @@
+[
+{
+  "model": "api.encuesta",
+  "pk": 3,
+  "fields": {
+    "nombre": "Ansiedad",
+    "descripcion": "A continuación, encontrará algunas afirmaciones. Lea atentamente cada frase indique por favor el grado de acuerdo o desacuerdo con respecto a las mismas. Señale con una “X” la respuesta que más se aproxime a sus preferencias. Responda en relación como se ha sentido durante los últimos quince días (dos semanas más recientes)",
+    "colorhex": "#114caf"
+  }
+},
+{
+  "model": "api.encuesta",
+  "pk": 4,
+  "fields": {
+    "nombre": "Depresión",
+    "descripcion": "A continuación, encontrará algunas afirmaciones. Lea atentamente cada frase indique por favor el grado de acuerdo o desacuerdo con respecto a las mismas. Señale con una “X” la respuesta que más se aproxime a sus preferencias.\r\nResponda en relación como se ha sentido durante los últimos quince días (dos semanas más recientes)\r\n",
+    "colorhex": "#156fcc"
+  }
+},
+{
+  "model": "api.encuesta",
+  "pk": 5,
+  "fields": {
+    "nombre": "Escala de Inteligencia Emocional",
+    "descripcion": "En este cuestionario encontrarás algunas afirmaciones sobre tus emociones y sentimientos. Lea atentamente cada afirmación e indique el grado de acuerdo o desacuerdo con cada una de ellas marcando con una X el número que más se acerque a sus preferencias.\r\nTen siempre presente que no hay respuestas correctas o incorrectas, ni buenas o malas. No pase demasiado tiempo pensando en cada respuesta.\r\n",
+    "colorhex": "#475fc8"
+  }
+},
+{
+  "model": "api.encuesta",
+  "pk": 6,
+  "fields": {
+    "nombre": "Escala de Estrés Percibido ",
+    "descripcion": "Las preguntas en esta escala hacen referencia a sus sentimientos y pensamientos durante el último mes. En cada caso, por favor indique con una “X” cómo usted se ha sentido o ha pensado en cada situación.",
+    "colorhex": "#cf45a5"
+  }
+},
+{
+  "model": "api.encuesta",
+  "pk": 7,
+  "fields": {
+    "nombre": "Inventario de Pensamientos Automáticos ",
+    "descripcion": "A continuación, encontraras una lista de pensamientos que suelen presentar las personas ante diversas situaciones. Se trata de que valores la frecuencia con que sueles pensarlos, siguiendo la escala que se te presenta a continuación:",
+    "colorhex": "#1c8caf"
+  }
+}
+]

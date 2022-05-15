@@ -1,0 +1,68 @@
+[
+{
+  "model": "api.emocion",
+  "pk": 1,
+  "fields": {
+    "emocion": "Alegría",
+    "clasificacion": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "api.emocion",
+  "pk": 2,
+  "fields": {
+    "emocion": "Tristeza",
+    "clasificacion": [
+      1,
+      10
+    ]
+  }
+},
+{
+  "model": "api.emocion",
+  "pk": 3,
+  "fields": {
+    "emocion": "Ira",
+    "clasificacion": [
+      4,
+      12
+    ]
+  }
+},
+{
+  "model": "api.emocion",
+  "pk": 4,
+  "fields": {
+    "emocion": "Sorpresa",
+    "clasificacion": [
+      7,
+      11
+    ]
+  }
+},
+{
+  "model": "api.emocion",
+  "pk": 5,
+  "fields": {
+    "emocion": "Miedo",
+    "clasificacion": [
+      8,
+      9
+    ]
+  }
+},
+{
+  "model": "api.emocion",
+  "pk": 6,
+  "fields": {
+    "emocion": "Asco",
+    "clasificacion": [
+      5,
+      6
+    ]
+  }
+}
+]

@@ -92,15 +92,14 @@ class EmocionSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-
-
 class ClasificacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Clasificacion
         fields = "__all__"
 
+
 class EmocionListSerializer(serializers.ModelSerializer):
-    clasificacion = ClasificacionSerializer( many=True, read_only=True)
+    clasificacion = ClasificacionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Emocion
@@ -117,3 +116,8 @@ class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = DefinicionesUsuario
         fields = "__all__"
+
+    def validate(self, attrs):
+        if DefinicionesUsuario.objects.filter(definicion=attrs['definicion'], usuario=attrs['usuario']).exists():
+            raise serializers.ValidationError("Ya existe una definicion para este usuario")
+        return attrs

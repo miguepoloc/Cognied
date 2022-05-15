@@ -1,0 +1,86 @@
+[
+{
+  "model": "api.clasificacion",
+  "pk": 1,
+  "fields": {
+    "clasificacion": "Desgana"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 2,
+  "fields": {
+    "clasificacion": "Optimismo"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 3,
+  "fields": {
+    "clasificacion": "Entusiasmo"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 4,
+  "fields": {
+    "clasificacion": "Frustración"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 5,
+  "fields": {
+    "clasificacion": "Aversión"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 6,
+  "fields": {
+    "clasificacion": "Repudio"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 7,
+  "fields": {
+    "clasificacion": "Sobresalto"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 8,
+  "fields": {
+    "clasificacion": "Pavor"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 9,
+  "fields": {
+    "clasificacion": "Inseguridad"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 10,
+  "fields": {
+    "clasificacion": "Desasosiego"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 11,
+  "fields": {
+    "clasificacion": "Desconcierto"
+  }
+},
+{
+  "model": "api.clasificacion",
+  "pk": 12,
+  "fields": {
+    "clasificacion": "Furia"
+  }
+}
+]
