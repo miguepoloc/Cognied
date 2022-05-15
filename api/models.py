@@ -229,3 +229,6 @@ class DefinicionesUsuario(models.Model):
 
     def __str__(self):
         return '%s' % (self.definicion_usuario)
+
+    class Meta:
+        unique_together = ('definicion', 'usuario')
