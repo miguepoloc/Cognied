@@ -107,3 +107,4 @@ class LoginAPIView(APIView):
 
         response = {"token": data["token"], "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
         return Response(response, status=status.HTTP_200_OK)
+

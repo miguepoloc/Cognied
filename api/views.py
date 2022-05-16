@@ -1,4 +1,4 @@
-from os import device_encoding
+
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
@@ -6,6 +6,7 @@ from rest_framework.decorators import action, api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from datetime import datetime
+from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, OpenApiTypes
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -134,9 +135,22 @@ class DefinicionesView(viewsets.ModelViewSet):
     serializer_class = DefinicionesSerializer
 
 
+@extend_schema_view(
+    list=extend_schema(parameters=[OpenApiParameter("id_usuario", OpenApiTypes.NUMBER, OpenApiParameter.QUERY), ])
+)
 class DefinicionesUsuarioView(viewsets.ModelViewSet):
-    queryset = DefinicionesUsuario.objects.all()
     serializer_class = DefinicionesUsuarioSerializer
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = DefinicionesUsuario.objects.all()
+        id_usuario = self.request.query_params.get('id_usuario', None)
+        if id_usuario is not None:
+            queryset = queryset.filter(usuario=id_usuario)
+        return queryset
 
     def create(self, request):
         # id_usuario = Usuario.objects.get(id_usuario=request.data['id_usuario'])
