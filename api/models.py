@@ -158,6 +158,7 @@ class ViewPreguntaRespuesta(models.Model):
         db_column='itemID_question', blank=True, null=True)
     question = models.TextField(db_collation='utf8_general_ci')
     answer = models.CharField(max_length=60, db_collation='utf8_general_ci')
+    value = models.IntegerField()
     id_answer = models.IntegerField()
     order_answer = models.IntegerField()
 
