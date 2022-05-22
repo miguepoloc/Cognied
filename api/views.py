@@ -1,4 +1,3 @@
-
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
@@ -161,8 +160,24 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
             serializer = self.serializer_class(data={'usuario': request.data['id_usuario'], 'definicion': respuesta['definicion'], 'definicion_usuario': respuesta['definicion_usuario']})
             try:
                 serializer.is_valid(raise_exception=True)
+                data = serializer.save()
+                response["definiciones"].append(DefinicionesUsuarioSerializer(data).data)
+            except Exception as e:
+                response["errors"].append(str(e))
+
+        return Response(response)
+
+    @action(detail=False, methods=['post'])
+    def bulk_update(self, request):
+        respuestas = request.data['respuestas']
+        response = {"definiciones": [], "errors": []}
+        for respuesta in respuestas:
+            instance = DefinicionesUsuario.objects.get(definicion=respuesta['definicion'], usuario=request.data['id_usuario'])
+            serializer = self.serializer_class(instance, data={'definicion_usuario': respuesta['definicion_usuario']}, partial=True)
+            try:
+                serializer.is_valid(raise_exception=True)
                 serializer.save()
-                response["definiciones"].append(serializer.data)
+                response["definiciones"].append(serializer.validated_data)
             except Exception as e:
                 response["errors"].append(str(e))
 
