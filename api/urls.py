@@ -22,6 +22,7 @@ router.register(r'emocion', EmocionView, 'emocion_view')
 router.register(r'clasificacion', ClasificacionView, 'clasificacion_view')
 router.register(r'definiciones', DefinicionesView, 'definiciones_view')
 router.register(r'definiciones_usuario', DefinicionesUsuarioView, 'definiciones_usuario_view')
+router.register(r'avance_modulos', AvanceModulosView, 'avance_modulos')
 
 
 urlpatterns = [

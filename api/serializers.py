@@ -121,3 +121,8 @@ class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
         if DefinicionesUsuario.objects.filter(definicion=validated_data['definicion'], usuario=validated_data['usuario']).exists():
             raise serializers.ValidationError("Ya existe una definicion para este usuario")
         return super().create(validated_data)
+
+class AvanceModulosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AvanceModulos
+        fields = "__all__"

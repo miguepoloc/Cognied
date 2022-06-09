@@ -233,3 +233,10 @@ class DefinicionesUsuario(models.Model):
 
     class Meta:
         unique_together = ('definicion', 'usuario')
+
+
+class AvanceModulos(models.Model):
+    usuario = models.OneToOneField("authentication.Usuarios", on_delete=models.CASCADE, related_name="avances")
+    emocional = models.IntegerField(default=1)
+    estres = models.IntegerField(default=1)
+    diagnostico = models.IntegerField(default=1)

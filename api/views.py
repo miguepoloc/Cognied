@@ -73,7 +73,8 @@ class UsuarioEncuestaView(viewsets.ModelViewSet):
         id_usuario = request.data['id_usuario']
         id_encuesta = request.data['id_encuesta']
 
-        usuario_encuesta_serializer = self.get_serializer(data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': datetime.now()})
+        usuario_encuesta_serializer = self.get_serializer(
+            data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': datetime.now()})
         usuario_encuesta_serializer.is_valid(raise_exception=True)
         usuario_encuesta_serializer.save()
         usuario_encuesta = usuario_encuesta_serializer.data
@@ -82,12 +83,15 @@ class UsuarioEncuestaView(viewsets.ModelViewSet):
             "errors": []
         }
         for respuesta in request.data['respuestas']:
-            usuario_respuesta_serializer = UsuarioRespuestaSerializer(data={'id_usuario_encuesta': usuario_encuesta['id_usuario_encuesta'], 'id_pregunta_respuesta': respuesta})
+            usuario_respuesta_serializer = UsuarioRespuestaSerializer(
+                data={'id_usuario_encuesta': usuario_encuesta['id_usuario_encuesta'], 'id_pregunta_respuesta': respuesta})
             if usuario_respuesta_serializer.is_valid():
                 usuario_respuesta_serializer.save()
-                data["usuario_respuestas"].append(usuario_respuesta_serializer.data)
+                data["usuario_respuestas"].append(
+                    usuario_respuesta_serializer.data)
             else:
-                data["errors"].append({"id_respuesta": respuesta, "error": usuario_respuesta_serializer.errors})
+                data["errors"].append(
+                    {"id_respuesta": respuesta, "error": usuario_respuesta_serializer.errors})
 
         return Response({"usuario": usuario_encuesta, "respuestas": data})
 
@@ -135,7 +139,8 @@ class DefinicionesView(viewsets.ModelViewSet):
 
 
 @extend_schema_view(
-    list=extend_schema(parameters=[OpenApiParameter("id_usuario", OpenApiTypes.NUMBER, OpenApiParameter.QUERY), ])
+    list=extend_schema(parameters=[OpenApiParameter(
+        "id_usuario", OpenApiTypes.NUMBER, OpenApiParameter.QUERY), ])
 )
 class DefinicionesUsuarioView(viewsets.ModelViewSet):
     serializer_class = DefinicionesUsuarioSerializer
@@ -157,7 +162,8 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
         response = {"definiciones": [], "errors": []}
         for respuesta in respuestas:
             # definicion = Definiciones.objects.get(id=respuesta['definicion'])
-            serializer = self.serializer_class(data={'usuario': request.data['id_usuario'], 'definicion': respuesta['definicion'], 'definicion_usuario': respuesta['definicion_usuario']})
+            serializer = self.serializer_class(
+                data={'usuario': request.data['id_usuario'], 'definicion': respuesta['definicion'], 'definicion_usuario': respuesta['definicion_usuario']})
             try:
                 serializer.is_valid(raise_exception=True)
                 data = serializer.save()
@@ -182,3 +188,9 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
                 response["errors"].append(str(e))
 
         return Response(response)
+
+
+class AvanceModulosView(viewsets.ModelViewSet):
+    queryset = AvanceModulos.objects.all()
+    lookup_field = "usuario"
+    serializer_class = AvanceModulosSerializer
