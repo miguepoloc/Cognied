@@ -15,7 +15,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 # import dj_database_url
 import cloudinary
 import os
-import corsheaders
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +31,7 @@ cloudinary.config(
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h82t0qs_s_&fop)=lw8@k$+d)x0i%)4u#a@g216mj@us(#9iuy'
+SECRET_KEY = 'django-insecure-h82t0qs_s_&fop)=lw8@k$+d)x0i%)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,11 +106,11 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'encuesta',
-        'USER': 'admin',
+        'NAME': 'duhxf6ere46wg',
+        'USER': 'admincognied@duhxf6ere46wg',
         'PASSWORD': 'Contrasena1!',
-        'HOST': 'localhost',
-        'PORT': '33061',
+        'HOST': 'duhxf6ere46wg.mysql.database.azure.com',
+        'PORT': '3306',
     }
 }
 
