@@ -106,10 +106,10 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'duhxf6ere46wg',
-        'USER': 'admincognied@duhxf6ere46wg',
+        'NAME': 'yz2k5mkv5dutm',
+        'USER': 'cognied@yz2k5mkv5dutm',
         'PASSWORD': 'Contrasena1!',
-        'HOST': 'duhxf6ere46wg.mysql.database.azure.com',
+        'HOST': 'yz2k5mkv5dutm.mysql.database.azure.com',
         'PORT': '3306',
     }
 }

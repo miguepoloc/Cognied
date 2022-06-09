@@ -236,7 +236,13 @@ class DefinicionesUsuario(models.Model):
 
 
 class AvanceModulos(models.Model):
-    usuario = models.OneToOneField("authentication.Usuarios", on_delete=models.CASCADE, related_name="avances")
-    emocional = models.IntegerField(default=1)
-    estres = models.IntegerField(default=1)
-    diagnostico = models.IntegerField(default=1)
+    usuario = models.OneToOneField(
+        "authentication.Usuarios", on_delete=models.CASCADE, related_name="avances")
+    emocional = models.IntegerField(default=1, null=False, blank=False)
+    estres = models.IntegerField(default=1, null=False, blank=False)
+    diagnostico = models.IntegerField(default=1, null=False, blank=False)
+    cognitivo = models.IntegerField(default=1, null=False, blank=False)
+    habilidades = models.IntegerField(default=1, null=False, blank=False)
+
+    def __str__(self):
+        return '%s' % (self.usuario)
