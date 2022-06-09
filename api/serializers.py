@@ -117,7 +117,7 @@ class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
         model = DefinicionesUsuario
         fields = "__all__"
 
-    def validate(self, attrs):
-        if DefinicionesUsuario.objects.filter(definicion=attrs['definicion'], usuario=attrs['usuario']).exists():
+    def create(self, validated_data):
+        if DefinicionesUsuario.objects.filter(definicion=validated_data['definicion'], usuario=validated_data['usuario']).exists():
             raise serializers.ValidationError("Ya existe una definicion para este usuario")
-        return attrs
+        return super().create(validated_data)
