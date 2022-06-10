@@ -111,6 +111,14 @@ DATABASES = {
         'PASSWORD': 'Contrasena1!',
         'HOST': 'yz2k5mkv5dutm.mysql.database.azure.com',
         'PORT': '3306',
+    },
+    'dev': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'encuesta6',
+        'USER': 'admin',
+        'PASSWORD': 'Contrasena1!',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
