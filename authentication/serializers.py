@@ -95,8 +95,8 @@ class LoginSerializer(serializers.Serializer):
                 if not hashers.check_password(password, user.password):
                     # print("valido contraseña")
                     raise serializers.ValidationError('Contraseña Incorrecta')
-                if not AvanceModulos.objects.filter(usuario=user).exist():
-                    AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+                # if not AvanceModulos.objects.filter(usuario=user).exist():
+                #     AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
             else:
                 raise serializers.ValidationError('Usuario Inactivo')
         else:
