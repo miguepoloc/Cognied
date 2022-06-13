@@ -5,6 +5,8 @@ from django.db import models
 
 from django.conf import settings
 
+from django.db import models
+
 from api.models import Sexo, Estado_Civil
 
 TIPO_DE_DOCUMENTO = [
@@ -23,7 +25,7 @@ TIPO_DE_VACUNA = [
     ("J", 'Janssen'),
 ]
 
-TIPO_DE_DISCAPACIDAD = [
+TIPO_DE_DISCAPACIDAD = [    
     ("A", 'Auditiva'),
     ("V", 'Visual'),
     ("S", 'Sordoceguera'),
@@ -34,7 +36,16 @@ TIPO_DE_DISCAPACIDAD = [
 
 
 class Usuarios(models.Model):
+    # Each `User` needs a human-readable unique identifier that we can use to
+    # represent the `User` in the UI. We want to index this column in the
+    # database to improve lookup performance.
     document = models.CharField(max_length=20, db_index=True, unique=True)
+    password = models.CharField(max_length=100, blank=False, null=False)
+    # We also need a way to contact the user and a way for the user to identify
+    # themselves when logging in. Since we need an email address for contacting
+    # the user anyways, we will also use the email for logging in because it is
+    # the most common form of login credential at the time of writing.
+    email = models.EmailField(db_index=True, unique=True, null=False, blank=False)
     nombre = models.CharField(max_length=200, null=False, blank=False)
     edad = models.IntegerField(null=False, blank=False)
     tipo_documento = models.CharField(
@@ -45,30 +56,28 @@ class Usuarios(models.Model):
     )
     sexo = models.ForeignKey(
         Sexo, on_delete=models.SET_NULL, null=True, blank=False)
-    lugar_nacimiento = models.CharField(max_length=200, null=False, blank=False)
-    fecha_nacimiento = models.DateTimeField(blank=False, null=False)
+    lugar_nacimiento = models.CharField(
+        max_length=200, null=False, blank=False)
+    fecha_nacimiento = models.DateField(blank=False, null=False)
     estado_civil = models.ForeignKey(
         Estado_Civil, on_delete=models.SET_NULL, null=True, blank=False)
-    password = models.CharField(max_length=100, blank=False, null=False)
     programa = models.CharField(max_length=200, blank=False, null=False)
     semestre = models.IntegerField(null=False, blank=False)
-    covid_positivo = models.BooleanField(null=False, blank=False)
-    covid_familiar = models.BooleanField(null=False, blank=False)
-    covid_vacuna = models.BooleanField(null=False, blank=False)
+    covid_positivo = models.BooleanField(default=False)
+    covid_familiar = models.BooleanField(default=False)
+    covid_vacuna = models.BooleanField(default=False)
     covid_tipo_vacuna = models.CharField(
         max_length=1,
         choices=TIPO_DE_VACUNA,
         null=True, blank=True
     )
-    covid_dosis = models.BooleanField(null=True, blank=True)
-    discapacidad = models.BooleanField(null=False, blank=False)
-    covid_tipo_vacuna = models.CharField(
+    covid_dosis = models.BooleanField(default=False)
+    discapacidad = models.BooleanField(default=False)
+    discapacidad_tipo = models.CharField(
         max_length=1,
         choices=TIPO_DE_DISCAPACIDAD,
         null=True, blank=True
     )
-    email = models.EmailField(
-        db_index=True, unique=True, null=False, blank=False)
     telefono = models.BigIntegerField(null=False, blank=False)
     ocupacion = models.CharField(max_length=200, null=False, blank=False)
 
@@ -83,13 +92,14 @@ class Usuarios(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     USERNAME_FIELD = 'document'
+    # REQUIRED_FIELDS = ['document',]
 
     def __str__(self):
         """
         Returns a string representation of this `User`.
         This string is used when a `User` is printed in the console.
         """
-        return str(self.nombre + '-' + str(self.document))
+        return str(self.tipo_documento + ':' + str(self.document))
 
     @property
     def token(self):

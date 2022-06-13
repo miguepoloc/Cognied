@@ -24,13 +24,35 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = Usuarios
         # List all of the fields that could possibly be included in a request
         # or response, including fields specified explicitly above.
-        fields = ['email', 'document', 'password', 'token']
+        fields = ['email', 'document', 'password', 'token',
+                  "nombre",
+                  'edad',
+                  'tipo_documento',
+                  'sexo',
+                  'lugar_nacimiento',
+                  'fecha_nacimiento',
+                  'estado_civil',
+                  'programa',
+                  'semestre',
+                  'covid_positivo',
+                  'covid_familiar',
+                  'covid_vacuna',
+                  'covid_tipo_vacuna',
+                  'covid_dosis',
+                  'discapacidad',
+                  'discapacidad_tipo',
+                  'telefono',
+                  'ocupacion',
+                  ]
 
     def create(self, validated_data):
         # Use the `create_user` method we wrote earlier to create a new user.
         data = validated_data
         data['password'] = hashers.make_password(validated_data['password'])
-        return Usuarios.objects.create(**data)
+        # print(data['password'])
+        user = Usuarios.objects.create(**data)
+        AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+        return user
 
 
 class LoginSerializer(serializers.Serializer):
@@ -73,6 +95,8 @@ class LoginSerializer(serializers.Serializer):
                 if not hashers.check_password(password, user.password):
                     # print("valido contraseña")
                     raise serializers.ValidationError('Contraseña Incorrecta')
+                if not AvanceModulos.objects.filter(usuario=user).exist():
+                    AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
             else:
                 raise serializers.ValidationError('Usuario Inactivo')
         else:

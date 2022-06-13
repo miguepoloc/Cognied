@@ -114,7 +114,7 @@ DATABASES = {
     },
     'dev': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'encuesta6',
+        'NAME': 'encuesta4',
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
         'HOST': 'localhost',

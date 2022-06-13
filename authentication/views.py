@@ -1,4 +1,5 @@
 
+import pdb
 from re import search
 from .models import Usuarios
 from rest_framework.generics import RetrieveUpdateAPIView
@@ -20,7 +21,6 @@ from .serializers import (
     LoginSerializer, RegistrationSerializer, UserSerializer,
 )
 
-
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     # permission_classes = (IsAuthenticated,)
     renderer_classes = (UserJSONRenderer,)
@@ -35,7 +35,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
-        serializer_data = request.data.get('user', {})
+        serializer_data = request.data
 
         # Here is that serialize, validate, save pattern we talked about
         # before.
@@ -55,12 +55,10 @@ class RegistrationAPIView(APIView):
     serializer_class = RegistrationSerializer
 
     def post(self, request):
-
-        user = request.data.get('user', {})
         # The create serializer, validate serializer, save serializer pattern
         # below is common and you will see it a lot throughout this course and
         # your own work later on. Get familiar with it.
-        serializer = self.serializer_class(data=user, partial=True)
+        serializer = self.serializer_class(data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         usuario = serializer.save()
         userInfo = UserSerializer(usuario, partial=True).data
@@ -69,7 +67,8 @@ class RegistrationAPIView(APIView):
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
-        response = {"token": usuario.token, "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+        response = {"token": usuario.token, "expiresAt": int(
+            (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
 
         return Response(response, status=status.HTTP_201_CREATED)
 
@@ -85,10 +84,9 @@ class LoginAPIView(APIView):
                 'Ejemplo 1',
                 summary='Modelo de prueba',
                 value={
-                    "user": {
                         "document": "1234567",
                                     "password": "admin123",
-                    }
+
                 },
                 request_only=True,  # signal that example only applies to requests
                 response_only=False,  # signal that example only applies to responses
@@ -96,7 +94,7 @@ class LoginAPIView(APIView):
         ],
     )
     def post(self, request):
-        user = request.data.get('user', {})
+        user = request.data
         serializer = self.serializer_class(data=user)
         data = serializer.validate(user)
         userInfo = UserSerializer(data["user"]).data
@@ -105,6 +103,6 @@ class LoginAPIView(APIView):
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
-        response = {"token": data["token"], "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+        response = {"token": data["token"], "expiresAt": int(
+            (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
         return Response(response, status=status.HTTP_200_OK)
-
