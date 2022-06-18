@@ -52,7 +52,7 @@ class RespuestaSerializer(serializers.ModelSerializer):
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
+        model = Usuarios
         fields = "__all__"
 
 
@@ -68,16 +68,38 @@ class UsuarioRespuestaSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ViewPreguntaRespuestaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ViewPreguntaRespuesta
-        fields = "__all__"
+class ViewPreguntaRespuestaSerializer(serializers.Serializer):
 
+    def to_representation(self, instance):
+        data={
+            "id_survey": instance.id_pregunta.id_encuesta.id_encuesta,
+            "name":instance.id_pregunta.id_encuesta.nombre,
+            "desc":instance.id_pregunta.id_encuesta.descripcion,
+            "color":instance.id_pregunta.id_encuesta.colorhex,
+            "id_question":instance.id_pregunta.id_pregunta,
+            "itemid_question": instance.id_pregunta.itemid,
+            "question": instance.id_pregunta.pregunta,
+            "answer": instance.id_respuesta.respuesta,
+            "value": instance.id_respuesta.valor,
+            "id_answer": instance.id_pregunta_respuesta,
+            "order_answer": instance.orden
+        }
+        return data
 
-class ViewRespuestaEncuestasSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ViewRespuestaEncuestas
-        fields = "__all__"
+class ViewRespuestaEncuestasSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        data={
+                "id_encuesta":instance.id_usuario_encuesta.id_encuesta.id_encuesta,
+                "encuesta":instance.id_usuario_encuesta.id_encuesta.nombre,
+                "id_usuario":instance.id_usuario_encuesta.id_usuario.id,
+                "nombre_usuario":instance.id_usuario_encuesta.id_usuario.nombre,
+                "id_pregunta":instance.id_pregunta_respuesta.id_pregunta.id_pregunta,
+                "pregunta":instance.id_pregunta_respuesta.id_pregunta.pregunta,
+                "id_respuesta":instance.id_pregunta_respuesta.id_respuesta.id_respuesta,
+                "respuesta":instance.id_pregunta_respuesta.id_respuesta.respuesta,
+                "valor":instance.id_pregunta_respuesta.id_respuesta.valor}
+        return data
 
 
 class SeccionEmocionalSerializer(serializers.ModelSerializer):

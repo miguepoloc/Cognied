@@ -1,7 +1,7 @@
 from enum import unique
 from django.db import models
 from cloudinary.models import CloudinaryField
-# from authentication.models import *
+from authentication.models import Usuarios
 
 
 class Personal(models.Model):
@@ -99,21 +99,21 @@ class Respuesta(models.Model):
         return '%s' % (self.respuesta)
 
 
-class Usuario(models.Model):
-    id_usuario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=40, blank=True, null=True)
+# class Usuario(models.Model):
+#     id_usuario = models.AutoField(primary_key=True)
+#     nombre = models.CharField(max_length=40, blank=True, null=True)
 
-    class Meta:
-        db_table = 'usuario'
+#     class Meta:
+#         db_table = 'usuario'
 
-    def __str__(self):
-        return '%s' % (self.nombre)
+#     def __str__(self):
+#         return '%s' % (self.nombre)
 
 
 class UsuarioEncuesta(models.Model):
     id_usuario_encuesta = models.AutoField(primary_key=True)
     id_usuario = models.ForeignKey(
-        Usuario, models.DO_NOTHING, db_column='id_usuario')
+        Usuarios, models.DO_NOTHING, db_column='id_usuario')
     id_encuesta = models.ForeignKey(
         Encuesta, models.DO_NOTHING, db_column='id_encuesta')
     fecha = models.DateTimeField()
@@ -137,43 +137,6 @@ class UsuarioRespuesta(models.Model):
 
     def __str__(self):
         return '%s' % (self.id_usuario_respuesta)
-
-
-class ViewPreguntaRespuesta(models.Model):
-    id_survey = models.IntegerField(primary_key=True)
-    name = models.CharField(max_length=45)
-    desc = models.TextField(blank=True, null=True)
-    color = models.CharField(max_length=30)
-    id_question = models.IntegerField()
-    # Field name made lowercase.
-    itemid_question = models.IntegerField(
-        db_column='itemID_question', blank=True, null=True)
-    question = models.TextField()
-    answer = models.CharField(max_length=60)
-    value = models.IntegerField()
-    id_answer = models.IntegerField()
-    order_answer = models.IntegerField()
-
-    class Meta:
-        managed = False  # Created from a view. Don't remove.
-        db_table = 'view_pregunta_respuesta'
-
-
-class ViewRespuestaEncuestas(models.Model):
-    id_encuesta = models.IntegerField(primary_key=True)
-    encuesta = models.CharField(max_length=45)
-    id_usuario = models.IntegerField()
-    nombre_usuario = models.CharField(
-        max_length=40, blank=True, null=True)
-    id_pregunta = models.IntegerField()
-    pregunta = models.TextField()
-    id_respuesta = models.IntegerField()
-    respuesta = models.CharField(max_length=60)
-    valor = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False  # Created from a view. Don't remove.
-        db_table = 'view_respuesta_encuestas'
 
 
 class SeccionEmocional(models.Model):
@@ -224,7 +187,7 @@ class Definiciones(models.Model):
 
 class DefinicionesUsuario(models.Model):
     definicion = models.ForeignKey(Definiciones, on_delete=models.CASCADE)
-    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
     definicion_usuario = models.TextField(null=False, blank=False)
     update = models.DateTimeField(auto_now=True)
 

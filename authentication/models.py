@@ -7,7 +7,6 @@ from django.conf import settings
 
 from django.db import models
 
-from api.models import Sexo, Estado_Civil
 
 TIPO_DE_DOCUMENTO = [
     ("PA", 'PA'),
@@ -55,14 +54,14 @@ class Usuarios(models.Model):
         null=False, blank=False
     )
     sexo = models.ForeignKey(
-        Sexo, on_delete=models.SET_NULL, null=True, blank=False)
+        'api.Sexo', on_delete=models.SET_NULL, null=True, blank=False)
     departamento_nacimiento = models.CharField(
         max_length=200, null=False, blank=False)
     ciudad_nacimiento = models.CharField(
         max_length=200, null=False, blank=False)
     fecha_nacimiento = models.DateField(blank=False, null=False)
     estado_civil = models.ForeignKey(
-        Estado_Civil, on_delete=models.SET_NULL, null=True, blank=False)
+        'api.Estado_Civil', on_delete=models.SET_NULL, null=True, blank=False)
     programa = models.CharField(max_length=200, blank=False, null=False)
     semestre = models.IntegerField(null=False, blank=False)
     covid_positivo = models.BooleanField(default=False)

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from datetime import datetime
 from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, OpenApiTypes
+from rest_framework.views import APIView
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -49,7 +50,7 @@ class RespuestaView(viewsets.ModelViewSet):
 
 
 class UsuarioView(viewsets.ModelViewSet):
-    queryset = Usuario.objects.all()
+    queryset = Usuarios.objects.all()
     serializer_class = UsuarioSerializer
 
 
@@ -101,15 +102,26 @@ class UsuarioRespuestaView(viewsets.ModelViewSet):
     serializer_class = UsuarioRespuestaSerializer
 
 
-@permission_classes([AllowAny])
-class ViewPreguntaRespuestaView(viewsets.ModelViewSet):
-    queryset = ViewPreguntaRespuesta.objects.all().values()
-    serializer_class = ViewPreguntaRespuestaSerializer
+
+class ViewPreguntaRespuestaView(APIView): 
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+
+        pregunta_respuesta = PreguntaRespuesta.objects.select_related('id_pregunta', 'id_respuesta', 'id_pregunta__id_encuesta').all()
+        response = ViewPreguntaRespuestaSerializer(pregunta_respuesta, many=True).data
+        return Response(response)
 
 
-class ViewRespuestaEncuestasView(viewsets.ModelViewSet):
-    queryset = ViewRespuestaEncuestas.objects.all()
-    serializer_class = ViewRespuestaEncuestasSerializer
+class ViewRespuestaEncuestasView(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+
+        respuestas_encuestas = UsuarioRespuesta.objects.select_related('id_usuario_encuesta','id_usuario_encuesta__id_usuario',
+        'id_usuario_encuesta__id_encuesta', 'id_pregunta_respuesta','id_pregunta_respuesta__id_respuesta','id_pregunta_respuesta__id_pregunta', ).all()
+        response = ViewRespuestaEncuestasSerializer(respuestas_encuestas, many=True).data
+        return Response(response)
 
 
 class SeccionEmocionalView(viewsets.ModelViewSet):
@@ -167,7 +179,8 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
             try:
                 serializer.is_valid(raise_exception=True)
                 data = serializer.save()
-                response["definiciones"].append(DefinicionesUsuarioSerializer(data).data)
+                response["definiciones"].append(
+                    DefinicionesUsuarioSerializer(data).data)
             except Exception as e:
                 response["errors"].append(str(e))
 
@@ -178,8 +191,10 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
         respuestas = request.data['respuestas']
         response = {"definiciones": [], "errors": []}
         for respuesta in respuestas:
-            instance = DefinicionesUsuario.objects.get(definicion=respuesta['definicion'], usuario=request.data['id_usuario'])
-            serializer = self.serializer_class(instance, data={'definicion_usuario': respuesta['definicion_usuario']}, partial=True)
+            instance = DefinicionesUsuario.objects.get(
+                definicion=respuesta['definicion'], usuario=request.data['id_usuario'])
+            serializer = self.serializer_class(instance, data={
+                                               'definicion_usuario': respuesta['definicion_usuario']}, partial=True)
             try:
                 serializer.is_valid(raise_exception=True)
                 serializer.save()
