@@ -1,6 +1,5 @@
 
-import pdb
-from re import search
+from django.core.mail import send_mail
 from .models import Usuarios
 from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -20,6 +19,10 @@ from .renderers import UserJSONRenderer
 from .serializers import (
     LoginSerializer, RegistrationSerializer, UserSerializer,
 )
+from .models import *
+
+from django.contrib.auth import hashers
+
 
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     # permission_classes = (IsAuthenticated,)
@@ -48,6 +51,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@permission_classes([AllowAny])
 class RegistrationAPIView(APIView):
     # Allow any user (authenticated or not) to hit this endpoint.
     permission_classes = (AllowAny,)
@@ -73,6 +77,7 @@ class RegistrationAPIView(APIView):
         return Response(response, status=status.HTTP_201_CREATED)
 
 
+@permission_classes([AllowAny])
 class LoginAPIView(APIView):
     permission_classes = (AllowAny,)
     renderer_classes = (UserJSONRenderer,)
@@ -106,3 +111,50 @@ class LoginAPIView(APIView):
         response = {"token": data["token"], "expiresAt": int(
             (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
         return Response(response, status=status.HTTP_200_OK)
+
+
+class PasswordRecover(APIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (UserJSONRenderer,)
+
+    def post(self, request):
+        email = request.data["email"]
+        user = Usuarios.objects.filter(email=email)
+
+        if user.exists():
+            user = user.first()
+            recover_url = "http://localhost:8886/reset?token=" + \
+                str(user.token)
+            token = user.token
+            send_mail(
+                subject='Recuperación de contraseña',
+                message='Hola ' + user.nombre + '\n\n' + 'Para recuperar tu contraseña, ingresa al siguiente enlace: ' +
+                recover_url + '\n\n' + 'Este enlace expirará en 15 días.',
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[user.email],
+            )
+            return (Response({"message": "Se ha enviado un correo a " + user.email + " con instrucciones para recuperar la contraseña."}, status=status.HTTP_200_OK))
+        return (Response({"message": "El correo no existe en la base de datos."}, status=status.HTTP_400_BAD_REQUEST))
+
+
+class PasswordReset(APIView):
+    permission_classes = (AllowAny,)
+    renderer_classes = (UserJSONRenderer,)
+
+    def post(self, request):
+        token = request.data["token"]
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
+        user = Usuarios.objects.get(pk=payload['id'])
+        if request.data["password"] and user:
+            user.password = hashers.make_password(request.data["password"])
+            user.save()
+            userInfo = UserSerializer(user).data
+            userInfo.pop("is_active", None)
+            userInfo.pop("is_staff", None)
+            userInfo.pop("created_at", None)
+            userInfo.pop("updated_at", None)
+
+            response = {"message": "Contraseña actualizada correctamente", "token": user.token, "expiresAt": int(
+                (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+            return Response(response, status=status.HTTP_200_OK)
+        return (Response({"message": "No se ha recibido ninguna contraseña."}, status=status.HTTP_400_BAD_REQUEST))

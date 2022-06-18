@@ -56,7 +56,9 @@ class Usuarios(models.Model):
     )
     sexo = models.ForeignKey(
         Sexo, on_delete=models.SET_NULL, null=True, blank=False)
-    lugar_nacimiento = models.CharField(
+    departamento_nacimiento = models.CharField(
+        max_length=200, null=False, blank=False)
+    ciudad_nacimiento = models.CharField(
         max_length=200, null=False, blank=False)
     fecha_nacimiento = models.DateField(blank=False, null=False)
     estado_civil = models.ForeignKey(

@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'dev': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'yz2k5mkv5dutm',
         'USER': 'cognied@yz2k5mkv5dutm',
@@ -112,7 +112,7 @@ DATABASES = {
         'HOST': 'yz2k5mkv5dutm.mysql.database.azure.com',
         'PORT': '3306',
     },
-    'dev': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta4',
         'USER': 'admin',
@@ -207,3 +207,11 @@ SPECTACULAR_SETTINGS = {
     'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
     "SERVE_AUTHENTICATION": ['authentication.backends.JWTAuthentication']
 }
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-mail.outlook.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'no-reply.digitalmente@outlook.com'
+EMAIL_HOST_PASSWORD = 'Contrasena1!'
