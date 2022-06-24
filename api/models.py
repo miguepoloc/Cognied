@@ -124,7 +124,6 @@ class UsuarioEncuesta(models.Model):
     def __str__(self):
         return '%s' % (self.id_usuario_encuesta)
 
-
 class UsuarioRespuesta(models.Model):
     id_usuario_respuesta = models.AutoField(primary_key=True)
     id_usuario_encuesta = models.ForeignKey(

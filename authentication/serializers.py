@@ -44,6 +44,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
                   'discapacidad_tipo',
                   'telefono',
                   'ocupacion',
+                  "is_controlgroup",
+                  "is_active",
+                  "is_staff",
                   ]
 
     def create(self, validated_data):
@@ -52,7 +55,8 @@ class RegistrationSerializer(serializers.ModelSerializer):
         data['password'] = hashers.make_password(validated_data['password'])
         # print(data['password'])
         user = Usuarios.objects.create(**data)
-        AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+        AvanceModulos.objects.create(
+            usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
         return user
 
 
@@ -96,8 +100,9 @@ class LoginSerializer(serializers.Serializer):
                 if not hashers.check_password(password, user.password):
                     # print("valido contraseña")
                     raise serializers.ValidationError('Contraseña Incorrecta')
-                # if not AvanceModulos.objects.filter(usuario=user).exist():
-                #     AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+                if not AvanceModulos.objects.filter(usuario=user).exists():
+                    AvanceModulos.objects.create(
+                        usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
             else:
                 raise serializers.ValidationError('Usuario Inactivo')
         else:

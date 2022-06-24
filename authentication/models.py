@@ -24,7 +24,7 @@ TIPO_DE_VACUNA = [
     ("J", 'Janssen'),
 ]
 
-TIPO_DE_DISCAPACIDAD = [    
+TIPO_DE_DISCAPACIDAD = [
     ("A", 'Auditiva'),
     ("V", 'Visual'),
     ("S", 'Sordoceguera'),
@@ -44,7 +44,8 @@ class Usuarios(models.Model):
     # themselves when logging in. Since we need an email address for contacting
     # the user anyways, we will also use the email for logging in because it is
     # the most common form of login credential at the time of writing.
-    email = models.EmailField(db_index=True, unique=True, null=False, blank=False)
+    email = models.EmailField(
+        db_index=True, unique=True, null=False, blank=False)
     nombre = models.CharField(max_length=200, null=False, blank=False)
     edad = models.IntegerField(null=False, blank=False)
     tipo_documento = models.CharField(
@@ -100,7 +101,7 @@ class Usuarios(models.Model):
         Returns a string representation of this `User`.
         This string is used when a `User` is printed in the console.
         """
-        return str(self.tipo_documento + ':' + str(self.document))
+        return str(self.nombre + '(' + str(self.document) + ')')
 
     @property
     def token(self):

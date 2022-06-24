@@ -67,7 +67,7 @@ class RegistrationAPIView(APIView):
         usuario = serializer.save()
         userInfo = UserSerializer(usuario, partial=True).data
         userInfo.pop("is_active", None)
-        userInfo.pop("is_staff", None)
+        # userInfo.pop("is_staff", None)
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
@@ -104,7 +104,7 @@ class LoginAPIView(APIView):
         data = serializer.validate(user)
         userInfo = UserSerializer(data["user"]).data
         userInfo.pop("is_active", None)
-        userInfo.pop("is_staff", None)
+        # userInfo.pop("is_staff", None)
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
@@ -150,7 +150,7 @@ class PasswordReset(APIView):
             user.save()
             userInfo = UserSerializer(user).data
             userInfo.pop("is_active", None)
-            userInfo.pop("is_staff", None)
+            # userInfo.pop("is_staff", None)
             userInfo.pop("created_at", None)
             userInfo.pop("updated_at", None)
 
