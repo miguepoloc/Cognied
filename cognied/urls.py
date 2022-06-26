@@ -15,13 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from rest_framework import permissions
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from authentication.backends import JWTAuthentication
 
 
 urlpatterns = [
-    path('', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
+    path('schema/swagger', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
     path('schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
@@ -29,4 +31,4 @@ urlpatterns = [
     path('api/', include("api.urls")),
     path('accounts/', include("authentication.urls", namespace='authentication')),
 
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
