@@ -104,15 +104,15 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'dev': {
+    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'yz2k5mkv5dutm',
-        'USER': 'cognied@yz2k5mkv5dutm',
+        'NAME': 'encuesta4',
+        'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
-        'HOST': 'yz2k5mkv5dutm.mysql.database.azure.com',
+        'HOST': '137.184.232.104',
         'PORT': '3306',
     },
-    'default': {
+    'default1': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta4',
         'USER': 'admin',
