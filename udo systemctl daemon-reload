@@ -1,0 +1,18 @@
+[0;1;31m×[0m gunicorn.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/gunicorn.service; disabled; vendor preset: enabled)
+     Active: [0;1;31mfailed[0m (Result: exit-code) since Wed 2022-06-29 03:23:39 UTC; 5s ago
+TriggeredBy: [0;1;31m×[0m gunicorn.socket
+    Process: 2177 ExecStart=/home/digitalmente/Cognied/venv/bin/gunicorn --access-logfile - --workers 2 --bind unix:/run/gunicorn.sock cognied.wsgi:application [0;1;31m(code=exited, status=200/CHDIR)[0m
+   Main PID: 2177 (code=exited, status=200/CHDIR)
+        CPU: 3ms
+
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: Started gunicorn daemon.
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=200/CHDIR[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: Started gunicorn daemon.
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;39m[0;1;31m[0;1;39mgunicorn.service: Main process exited, code=exited, status=200/CHDIR[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Start request repeated too quickly.[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;38;5;185m[0;1;39m[0;1;38;5;185mgunicorn.service: Failed with result 'exit-code'.[0m
+Jun 29 03:23:39 ubuntu-s-1vcpu-1gb-sfo3-01 systemd[1]: [0;1;31m[0;1;39m[0;1;31mFailed to start gunicorn daemon.[0m
