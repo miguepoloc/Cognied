@@ -73,9 +73,9 @@ class UsuarioEncuestaView(viewsets.ModelViewSet):
     def create(self, request):
         id_usuario = request.data['id_usuario']
         id_encuesta = request.data['id_encuesta']
-
+        fecha = request.data['fecha']
         usuario_encuesta_serializer = self.get_serializer(
-            data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': datetime.now()})
+            data={'id_usuario': id_usuario, 'id_encuesta': id_encuesta, 'fecha': fecha})
         usuario_encuesta_serializer.is_valid(raise_exception=True)
         usuario_encuesta_serializer.save()
         usuario_encuesta = usuario_encuesta_serializer.data
