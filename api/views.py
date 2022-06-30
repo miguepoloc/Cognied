@@ -54,7 +54,6 @@ class UsuarioView(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 
-@permission_classes([AllowAny])
 class UsuarioEncuestaView(viewsets.ModelViewSet):
     queryset = UsuarioEncuesta.objects.all()
     serializer_class = UsuarioEncuestaSerializer
@@ -92,7 +91,6 @@ class UsuarioRespuestaView(viewsets.ModelViewSet):
 
 
 class ViewPreguntaRespuestaView(APIView):
-    permission_classes = (AllowAny,)
 
     def get(self, request):
 
@@ -104,7 +102,6 @@ class ViewPreguntaRespuestaView(APIView):
 
 
 class ViewRespuestaEncuestasView(APIView):
-    permission_classes = (AllowAny,)
 
     def get(self, request):
 
@@ -116,15 +113,20 @@ class ViewRespuestaEncuestasView(APIView):
 
 
 class ViewUsuarioRespuestaView(APIView):
-    permission_classes = (AllowAny,)
 
     def get(self, request):
-
-        usuario_respuestas = UsuarioRespuesta.objects.select_related(
-            'id_usuario_encuesta__id_encuesta',).all()
-        response = ViewUsuarioRespuestaSerializer(
-            usuario_respuestas, many=True).data
-        return Response(response)
+        user = request.user
+        u_e = UsuarioEncuesta.objects.filter(id_usuario=user).select_related("id_encuesta", "usuariorespuesta", "usuariorespuesta__id_pregunta_respuesta")
+        u_en = u_e.values("fecha", "id_encuesta", "usuariorespuesta__id_pregunta_respuesta")
+        data = []
+        u_fechas = u_e.order_by("fecha").values("fecha").distinct()
+        for u_fecha in u_fechas:
+            buffer = {"fecha": str(u_fecha["fecha"]), "encuestas": []}
+            u_encuestas = u_e.filter(fecha=u_fecha["fecha"]).order_by("id_encuesta").values("id_encuesta").distinct()
+            for u_encuesta in u_encuestas:
+                buffer["encuestas"].append({"id_encuesta": u_encuesta["id_encuesta"], "respuestas": u_en.filter(id_encuesta=u_encuesta["id_encuesta"], fecha=u_fecha["fecha"]).values_list('usuariorespuesta__id_pregunta_respuesta', flat=True)})
+            data.append(buffer)
+        return Response(data)
 
 
 class EmocionView(viewsets.ModelViewSet):
@@ -148,7 +150,7 @@ class DefinicionesView(viewsets.ModelViewSet):
     serializer_class = DefinicionesSerializer
 
 
-@extend_schema_view(
+@ extend_schema_view(
     list=extend_schema(parameters=[OpenApiParameter(
         "id_usuario", OpenApiTypes.NUMBER, OpenApiParameter.QUERY), ])
 )
@@ -184,7 +186,7 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
 
         return Response(response)
 
-    @action(detail=False, methods=['post'])
+    @ action(detail=False, methods=['post'])
     def bulk_update(self, request):
         respuestas = request.data['respuestas']
         response = {"definiciones": [], "errors": []}
@@ -192,7 +194,7 @@ class DefinicionesUsuarioView(viewsets.ModelViewSet):
             instance = DefinicionesUsuario.objects.get(
                 definicion=respuesta['definicion'], usuario=request.data['id_usuario'])
             serializer = self.serializer_class(instance, data={
-                                               'definicion_usuario': respuesta['definicion_usuario']}, partial=True)
+                'definicion_usuario': respuesta['definicion_usuario']}, partial=True)
             try:
                 serializer.is_valid(raise_exception=True)
                 serializer.save()
