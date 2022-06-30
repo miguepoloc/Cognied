@@ -47,7 +47,6 @@ class Encuesta(models.Model):
     id_encuesta = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=45)
     descripcion = models.TextField(blank=True, null=True)
-    # Field name made lowercase.
     colorhex = models.CharField(db_column='colorHex', max_length=30)
 
     class Meta:
@@ -62,7 +61,6 @@ class Pregunta(models.Model):
     id_encuesta = models.ForeignKey(
         Encuesta, models.DO_NOTHING, db_column='id_encuesta')
     pregunta = models.TextField()
-    # Field name made lowercase.
     itemid = models.IntegerField(db_column='itemID', blank=True, null=True)
 
     class Meta:
@@ -99,30 +97,20 @@ class Respuesta(models.Model):
         return '%s' % (self.respuesta)
 
 
-# class Usuario(models.Model):
-#     id_usuario = models.AutoField(primary_key=True)
-#     nombre = models.CharField(max_length=40, blank=True, null=True)
-
-#     class Meta:
-#         db_table = 'usuario'
-
-#     def __str__(self):
-#         return '%s' % (self.nombre)
-
-
 class UsuarioEncuesta(models.Model):
     id_usuario_encuesta = models.AutoField(primary_key=True)
     id_usuario = models.ForeignKey(
         Usuarios, models.DO_NOTHING, db_column='id_usuario')
     id_encuesta = models.ForeignKey(
         Encuesta, models.DO_NOTHING, db_column='id_encuesta')
-    fecha = models.DateTimeField()
+    fecha = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         db_table = 'usuario_encuesta'
 
     def __str__(self):
         return '%s' % (self.id_usuario_encuesta)
+
 
 class UsuarioRespuesta(models.Model):
     id_usuario_respuesta = models.AutoField(primary_key=True)
@@ -136,29 +124,6 @@ class UsuarioRespuesta(models.Model):
 
     def __str__(self):
         return '%s' % (self.id_usuario_respuesta)
-
-
-class SeccionEmocional(models.Model):
-    id_seccion = models.AutoField(primary_key=True)
-    # usuario = models.ForeignKey(
-    #     Usuario, on_delete=models.SET_NULL, null=True, blank=True)
-    usuario = models.CharField(
-        max_length=40, blank=True, null=True)
-    capsula1 = models.BooleanField(default=False)
-    capsula2 = models.BooleanField(default=True)
-    actividad1 = models.BooleanField(default=True)
-    capsula3 = models.BooleanField(default=True)
-    actividad2 = models.BooleanField(default=True)
-    capsula4 = models.BooleanField(default=True)
-    actividad3 = models.BooleanField(default=True)
-    capsula5 = models.BooleanField(default=True)
-    capsula6 = models.BooleanField(default=True)
-    actividad4 = models.BooleanField(default=True)
-    capsula7 = models.BooleanField(default=True)
-    capsula8 = models.BooleanField(default=True)
-
-    def __str__(self):
-        return '%s' % (self.usuario)
 
 
 class Clasificacion(models.Model):

@@ -59,17 +59,6 @@ class UsuarioEncuestaView(viewsets.ModelViewSet):
     queryset = UsuarioEncuesta.objects.all()
     serializer_class = UsuarioEncuestaSerializer
 
-    # {
-    #     "id_usuario": 1,
-    #     "id_encuesta": 1,
-    #     "respuestas": [
-    #         1,
-    #         2,
-    #         3,
-    #         4,
-    #     ]
-
-    # }
     def create(self, request):
         id_usuario = request.data['id_usuario']
         id_encuesta = request.data['id_encuesta']
@@ -102,14 +91,15 @@ class UsuarioRespuestaView(viewsets.ModelViewSet):
     serializer_class = UsuarioRespuestaSerializer
 
 
-
-class ViewPreguntaRespuestaView(APIView): 
+class ViewPreguntaRespuestaView(APIView):
     permission_classes = (AllowAny,)
 
     def get(self, request):
 
-        pregunta_respuesta = PreguntaRespuesta.objects.select_related('id_pregunta', 'id_respuesta', 'id_pregunta__id_encuesta').all()
-        response = ViewPreguntaRespuestaSerializer(pregunta_respuesta, many=True).data
+        pregunta_respuesta = PreguntaRespuesta.objects.select_related(
+            'id_pregunta', 'id_respuesta', 'id_pregunta__id_encuesta').all()
+        response = ViewPreguntaRespuestaSerializer(
+            pregunta_respuesta, many=True).data
         return Response(response)
 
 
@@ -118,15 +108,23 @@ class ViewRespuestaEncuestasView(APIView):
 
     def get(self, request):
 
-        respuestas_encuestas = UsuarioRespuesta.objects.select_related('id_usuario_encuesta','id_usuario_encuesta__id_usuario',
-        'id_usuario_encuesta__id_encuesta', 'id_pregunta_respuesta','id_pregunta_respuesta__id_respuesta','id_pregunta_respuesta__id_pregunta', ).all()
-        response = ViewRespuestaEncuestasSerializer(respuestas_encuestas, many=True).data
+        respuestas_encuestas = UsuarioRespuesta.objects.select_related('id_usuario_encuesta', 'id_usuario_encuesta__id_usuario',
+                                                                       'id_usuario_encuesta__id_encuesta', 'id_pregunta_respuesta', 'id_pregunta_respuesta__id_respuesta', 'id_pregunta_respuesta__id_pregunta', ).all()
+        response = ViewRespuestaEncuestasSerializer(
+            respuestas_encuestas, many=True).data
         return Response(response)
 
 
-class SeccionEmocionalView(viewsets.ModelViewSet):
-    queryset = SeccionEmocional.objects.all()
-    serializer_class = SeccionEmocionalSerializer
+class ViewUsuarioRespuestaView(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+
+        usuario_respuestas = UsuarioRespuesta.objects.select_related(
+            'id_usuario_encuesta__id_encuesta',).all()
+        response = ViewUsuarioRespuestaSerializer(
+            usuario_respuestas, many=True).data
+        return Response(response)
 
 
 class EmocionView(viewsets.ModelViewSet):

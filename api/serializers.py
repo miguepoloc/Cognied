@@ -71,12 +71,12 @@ class UsuarioRespuestaSerializer(serializers.ModelSerializer):
 class ViewPreguntaRespuestaSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
-        data={
+        data = {
             "id_survey": instance.id_pregunta.id_encuesta.id_encuesta,
-            "name":instance.id_pregunta.id_encuesta.nombre,
-            "desc":instance.id_pregunta.id_encuesta.descripcion,
-            "color":instance.id_pregunta.id_encuesta.colorhex,
-            "id_question":instance.id_pregunta.id_pregunta,
+            "name": instance.id_pregunta.id_encuesta.nombre,
+            "desc": instance.id_pregunta.id_encuesta.descripcion,
+            "color": instance.id_pregunta.id_encuesta.colorhex,
+            "id_question": instance.id_pregunta.id_pregunta,
             "itemid_question": instance.id_pregunta.itemid,
             "question": instance.id_pregunta.pregunta,
             "answer": instance.id_respuesta.respuesta,
@@ -86,26 +86,31 @@ class ViewPreguntaRespuestaSerializer(serializers.Serializer):
         }
         return data
 
+
 class ViewRespuestaEncuestasSerializer(serializers.Serializer):
 
     def to_representation(self, instance):
-        data={
-                "id_encuesta":instance.id_usuario_encuesta.id_encuesta.id_encuesta,
-                "encuesta":instance.id_usuario_encuesta.id_encuesta.nombre,
-                "id_usuario":instance.id_usuario_encuesta.id_usuario.id,
-                "nombre_usuario":instance.id_usuario_encuesta.id_usuario.nombre,
-                "id_pregunta":instance.id_pregunta_respuesta.id_pregunta.id_pregunta,
-                "pregunta":instance.id_pregunta_respuesta.id_pregunta.pregunta,
-                "id_respuesta":instance.id_pregunta_respuesta.id_respuesta.id_respuesta,
-                "respuesta":instance.id_pregunta_respuesta.id_respuesta.respuesta,
-                "valor":instance.id_pregunta_respuesta.id_respuesta.valor}
+        data = {
+            "id_encuesta": instance.id_usuario_encuesta.id_encuesta.id_encuesta,
+            "encuesta": instance.id_usuario_encuesta.id_encuesta.nombre,
+            "id_usuario": instance.id_usuario_encuesta.id_usuario.id,
+            "nombre_usuario": instance.id_usuario_encuesta.id_usuario.nombre,
+            "id_pregunta": instance.id_pregunta_respuesta.id_pregunta.id_pregunta,
+            "pregunta": instance.id_pregunta_respuesta.id_pregunta.pregunta,
+            "id_respuesta": instance.id_pregunta_respuesta.id_respuesta.id_respuesta,
+            "respuesta": instance.id_pregunta_respuesta.id_respuesta.respuesta,
+            "valor": instance.id_pregunta_respuesta.id_respuesta.valor}
         return data
 
 
-class SeccionEmocionalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SeccionEmocional
-        fields = "__all__"
+class ViewUsuarioRespuestaSerializer(serializers.Serializer):
+
+    def to_representation(self, instance):
+        data = {
+            "id_encuesta": instance.id_usuario_encuesta.id_encuesta.id_encuesta,
+            "fecha": instance.id_usuario_encuesta.fecha,
+        }
+        return data
 
 
 class EmocionSerializer(serializers.ModelSerializer):
@@ -141,8 +146,10 @@ class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         if DefinicionesUsuario.objects.filter(definicion=validated_data['definicion'], usuario=validated_data['usuario']).exists():
-            raise serializers.ValidationError("Ya existe una definicion para este usuario")
+            raise serializers.ValidationError(
+                "Ya existe una definicion para este usuario")
         return super().create(validated_data)
+
 
 class AvanceModulosSerializer(serializers.ModelSerializer):
     class Meta:

@@ -9,6 +9,8 @@ __pycache__/
 # Django
 staticfiles/
 staticfiles/*
+/staticfiles/*
+/staticfiles*
 # Distribution / packaging
 .Python
 build/
