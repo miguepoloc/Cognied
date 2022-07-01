@@ -167,7 +167,7 @@ class AvanceModulos(models.Model):
         "authentication.Usuarios", on_delete=models.CASCADE, related_name="avances")
     emocional = models.IntegerField(default=1, null=False, blank=False)
     estres = models.IntegerField(default=1, null=False, blank=False)
-    diagnostico = models.IntegerField(default=1, null=False, blank=False)
+    autoevaluativo = models.IntegerField(default=1, null=False, blank=False)
     cognitivo = models.IntegerField(default=1, null=False, blank=False)
     habilidades = models.IntegerField(default=1, null=False, blank=False)
 

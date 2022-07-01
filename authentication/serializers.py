@@ -56,7 +56,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # print(data['password'])
         user = Usuarios.objects.create(**data)
         AvanceModulos.objects.create(
-            usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+            usuario=user, emocional=1, estres=1, autoevaluativo=1, cognitivo=1, habilidades=1)
         return user
 
 
@@ -102,7 +102,7 @@ class LoginSerializer(serializers.Serializer):
                     raise serializers.ValidationError('Contraseña Incorrecta')
                 if not AvanceModulos.objects.filter(usuario=user).exists():
                     AvanceModulos.objects.create(
-                        usuario=user, emocional=1, estres=1, diagnostico=1, cognitivo=1, habilidades=1)
+                        usuario=user, emocional=1, estres=1, autoevaluativo=1, cognitivo=1, habilidades=1)
             else:
                 raise serializers.ValidationError('Usuario Inactivo')
         else:
