@@ -116,15 +116,19 @@ class ViewUsuarioRespuestaView(APIView):
 
     def get(self, request):
         user = request.user
-        u_e = UsuarioEncuesta.objects.filter(id_usuario=user).select_related("id_encuesta", "usuariorespuesta", "usuariorespuesta__id_pregunta_respuesta")
-        u_en = u_e.values("fecha", "id_encuesta", "usuariorespuesta__id_pregunta_respuesta")
+        u_e = UsuarioEncuesta.objects.filter(id_usuario=user).select_related(
+            "id_encuesta", "usuariorespuesta", "usuariorespuesta__id_pregunta_respuesta")
+        u_en = u_e.values("fecha", "id_encuesta",
+                          "usuariorespuesta__id_pregunta_respuesta")
         data = []
         u_fechas = u_e.order_by("fecha").values("fecha").distinct()
         for u_fecha in u_fechas:
-            buffer = {"fecha": str(u_fecha["fecha"]), "encuestas": []}
-            u_encuestas = u_e.filter(fecha=u_fecha["fecha"]).order_by("id_encuesta").values("id_encuesta").distinct()
+            buffer = {"fecha": str(u_fecha["fecha"]), "respuestas": []}
+            u_encuestas = u_e.filter(fecha=u_fecha["fecha"]).order_by(
+                "id_encuesta").values("id_encuesta").distinct()
             for u_encuesta in u_encuestas:
-                buffer["encuestas"].append({"id_encuesta": u_encuesta["id_encuesta"], "respuestas": u_en.filter(id_encuesta=u_encuesta["id_encuesta"], fecha=u_fecha["fecha"]).values_list('usuariorespuesta__id_pregunta_respuesta', flat=True)})
+                buffer["respuestas"].append({"id_encuesta": u_encuesta["id_encuesta"], "respuestas": u_en.filter(
+                    id_encuesta=u_encuesta["id_encuesta"], fecha=u_fecha["fecha"]).values_list('usuariorespuesta__id_pregunta_respuesta', flat=True)})
             data.append(buffer)
         return Response(data)
 
