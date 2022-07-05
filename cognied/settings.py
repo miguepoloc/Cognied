@@ -214,4 +214,4 @@ EMAIL_HOST = 'smtp-mail.outlook.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'no-reply.digitalmente@outlook.com'
-EMAIL_HOST_PASSWORD = 'Contrasena1!'
+EMAIL_HOST_PASSWORD = 'digitalM3nte'
