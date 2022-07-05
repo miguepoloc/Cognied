@@ -123,7 +123,7 @@ class PasswordRecover(APIView):
 
         if user.exists():
             user = user.first()
-            recover_url = "http://localhost:3000/reset?token=" + \
+            recover_url = "https://digitalmenteunimagdalena.com/reset?token=" + \
                 str(user.token)
             token = user.token
             send_mail(

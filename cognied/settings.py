@@ -104,20 +104,20 @@ WSGI_APPLICATION = 'cognied.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    'default1': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'digitalmente',
+        'USER': 'admin',
+        'PASSWORD': 'Contrasena1!',
+        'HOST': '137.184.232.104',
+        'PORT': '3306',
+    },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta4',
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
         'HOST': '137.184.232.104',
-        'PORT': '3306',
-    },
-    'default1': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'encuesta4',
-        'USER': 'admin',
-        'PASSWORD': 'Contrasena1!',
-        'HOST': 'localhost',
         'PORT': '3306',
     }
 }

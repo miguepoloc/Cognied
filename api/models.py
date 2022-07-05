@@ -173,3 +173,12 @@ class AvanceModulos(models.Model):
 
     def __str__(self):
         return '%s' % (self.usuario)
+
+
+class ProgramaAcademico(models.Model):
+    facultad = models.CharField(max_length=100, null=False, blank=False)
+    nivel = models.CharField(max_length=100, null=False, blank=False)
+    programa = models.CharField(max_length=200, null=False, blank=False)
+
+    def __str__(self):
+        return '%s' % (self.programa)

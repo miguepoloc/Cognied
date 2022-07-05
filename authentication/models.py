@@ -33,6 +33,12 @@ TIPO_DE_DISCAPACIDAD = [
     ("M", 'Múltiple'),
 ]
 
+SEXO = [
+    (1, 'Masculino'),
+    (2, 'Femenino'),
+    (3, 'Intersex'),
+]
+
 
 class Usuarios(models.Model):
     # Each `User` needs a human-readable unique identifier that we can use to
@@ -63,7 +69,9 @@ class Usuarios(models.Model):
     fecha_nacimiento = models.DateField(blank=False, null=False)
     estado_civil = models.ForeignKey(
         'api.Estado_Civil', on_delete=models.SET_NULL, null=True, blank=False)
-    programa = models.CharField(max_length=200, blank=False, null=False)
+    programa = models.CharField(max_length=200, null=False, blank=False)
+    programa_academico = models.ForeignKey(
+        'api.ProgramaAcademico', on_delete=models.SET_NULL, null=True, blank=False)
     semestre = models.IntegerField(null=False, blank=False)
     covid_positivo = models.BooleanField(default=False)
     covid_familiar = models.BooleanField(default=False)

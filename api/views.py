@@ -213,3 +213,8 @@ class AvanceModulosView(viewsets.ModelViewSet):
     queryset = AvanceModulos.objects.all()
     lookup_field = "usuario"
     serializer_class = AvanceModulosSerializer
+
+
+class ProgramaAcademicoView(viewsets.ModelViewSet):
+    queryset = ProgramaAcademico.objects.all()
+    serializer_class = ProgramaAcademicoSerializer

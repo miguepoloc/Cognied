@@ -23,6 +23,7 @@ router.register(r'definiciones', DefinicionesView, 'definiciones_view')
 router.register(r'definiciones_usuario',
                 DefinicionesUsuarioView, 'definiciones_usuario_view')
 router.register(r'avance_modulos', AvanceModulosView, 'avance_modulos')
+router.register(r'programa_academico', ProgramaAcademicoView, 'programa_academico')
 
 
 urlpatterns = [

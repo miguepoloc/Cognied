@@ -155,3 +155,9 @@ class AvanceModulosSerializer(serializers.ModelSerializer):
     class Meta:
         model = AvanceModulos
         fields = "__all__"
+
+
+class ProgramaAcademicoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProgramaAcademico
+        fields = "__all__"
