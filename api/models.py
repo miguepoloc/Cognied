@@ -170,6 +170,7 @@ class AvanceModulos(models.Model):
     autoevaluativo = models.IntegerField(default=1, null=False, blank=False)
     cognitivo = models.IntegerField(default=1, null=False, blank=False)
     habilidades = models.IntegerField(default=1, null=False, blank=False)
+    fecha = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return '%s' % (self.usuario)
