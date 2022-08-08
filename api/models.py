@@ -168,7 +168,7 @@ class AvanceModulos(models.Model):
     emocional = models.IntegerField(default=1, null=False, blank=False)
     estres = models.IntegerField(default=1, null=False, blank=False)
     autoevaluativo = models.IntegerField(default=1, null=False, blank=False)
-    cognitivo = models.IntegerField(default=1, null=False, blank=False)
+    piensalo = models.IntegerField(default=1, null=False, blank=False)
     habilidades = models.IntegerField(default=1, null=False, blank=False)
     fecha = models.DateTimeField(auto_now=True)
 
