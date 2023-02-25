@@ -23,12 +23,14 @@ router.register(r'definiciones', DefinicionesView, 'definiciones_view')
 router.register(r'definiciones_usuario',
                 DefinicionesUsuarioView, 'definiciones_usuario_view')
 router.register(r'avance_modulos', AvanceModulosView, 'avance_modulos')
-router.register(r'programa_academico', ProgramaAcademicoView, 'programa_academico')
+router.register(r'programa_academico',
+                ProgramaAcademicoView, 'programa_academico')
 
 
 urlpatterns = [
     path('', include(router.urls)),
     path('vista_pregunta_respuesta', ViewPreguntaRespuestaView.as_view()),
     path('vista_respuesta_encuestas', ViewRespuestaEncuestasView.as_view()),
-    path('vista_usuario_respuestas', ViewUsuarioRespuestaView.as_view())
+    path('vista_usuario_respuestas', ViewUsuarioRespuestaView.as_view()),
+    path('encuesta_detalle', EncuestaDetalle.as_view(), name='encuesta_detalle'),
 ]

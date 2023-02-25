@@ -112,12 +112,20 @@ DATABASES = {
         'HOST': '137.184.232.104',
         'PORT': '3306',
     },
-    'default': {
+    'default3': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta4',
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
         'HOST': '137.184.232.104',
+        'PORT': '3306',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'encuesta4',
+        'USER': 'admin',
+        'PASSWORD': 'Contrasena1!',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }

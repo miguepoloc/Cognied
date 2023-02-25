@@ -7,6 +7,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from datetime import datetime
 from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, OpenApiTypes
 from rest_framework.views import APIView
+from django.db.models import Subquery, OuterRef
+from django.db.models import FloatField, Case, Value, When, Sum, Avg
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -218,3 +220,34 @@ class AvanceModulosView(viewsets.ModelViewSet):
 class ProgramaAcademicoView(viewsets.ModelViewSet):
     queryset = ProgramaAcademico.objects.all()
     serializer_class = ProgramaAcademicoSerializer
+
+
+class EncuestaDetalle(APIView):
+    def get(self, request):
+        encuesta_id = 4
+        avance_autoevaluativo = 3
+        # subquery = UsuarioEncuesta.objects.filter(id_usuario=OuterRef(
+        #     'id_usuario_encuesta')).order_by('id_usuario_encuesta')[:1]
+        users = AvanceModulos.objects.filter(
+            autoevaluativo=avance_autoevaluativo).values("usuario").distinct()
+        subquery = UsuarioRespuesta.objects.filter(
+            id_usuario_encuesta__id_usuario__in=users).order_by('id_usuario_encuesta')
+        subquery = subquery.values("id_usuario_encuesta__id_usuario__id", "id_usuario_encuesta__id_usuario__nombre", "id_usuario_encuesta__id_encuesta__id_encuesta", "id_usuario_encuesta__id_encuesta__nombre", "id_usuario_encuesta__fecha", "id_usuario_encuesta__id_usuario_encuesta",
+                                   "id_pregunta_respuesta__id_pregunta__id_pregunta", "id_pregunta_respuesta__id_pregunta__pregunta", "id_pregunta_respuesta__id_pregunta__itemid", "id_pregunta_respuesta__id_respuesta__valor", "id_pregunta_respuesta__id_respuesta__respuesta")
+        
+        subquery2 = UsuarioRespuesta.objects.filter(
+            id_usuario_encuesta__id_usuario__in=users)
+        subquery2 = subquery2.values('id_usuario_encuesta__id_encuesta',
+                                     "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario")
+        subquery2 = subquery2.annotate(resultado=Case(
+            When(id_usuario_encuesta__id_encuesta=3,
+                 then=Sum("id_pregunta_respuesta__id_respuesta__valor")),
+            When(id_usuario_encuesta__id_encuesta=4,
+                 then=Avg("id_pregunta_respuesta__id_respuesta__valor")),
+            default=Value(0),
+            output_field=FloatField()
+        ))
+        subquery2 = subquery2.order_by('id_usuario_encuesta__id_encuesta', "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario").values(
+            'id_usuario_encuesta__id_encuesta', "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario", "resultado")
+        print(subquery.query)
+        return Response({"data1": subquery, "data2": subquery2})
