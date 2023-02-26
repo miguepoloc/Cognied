@@ -1,14 +1,13 @@
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
-from rest_framework.decorators import action, api_view, permission_classes
+from rest_framework.decorators import action
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from datetime import datetime
-from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema, extend_schema_view, OpenApiTypes
 from rest_framework.views import APIView
-from django.db.models import Subquery, OuterRef
-from django.db.models import FloatField, Case, Value, When, Sum, Avg
+from django.db.models import FloatField, Case, Value, When, Sum
+from django.db.models.functions import ExtractYear
+from datetime import datetime
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -224,17 +223,21 @@ class ProgramaAcademicoView(viewsets.ModelViewSet):
 
 class EncuestaDetalle(APIView):
     def get(self, request):
-        encuesta_id = 4
         avance_autoevaluativo = 3
-        # subquery = UsuarioEncuesta.objects.filter(id_usuario=OuterRef(
-        #     'id_usuario_encuesta')).order_by('id_usuario_encuesta')[:1]
         users = AvanceModulos.objects.filter(
             autoevaluativo=avance_autoevaluativo).values("usuario").distinct()
         subquery = UsuarioRespuesta.objects.filter(
-            id_usuario_encuesta__id_usuario__in=users).order_by('id_usuario_encuesta')
-        subquery = subquery.values("id_usuario_encuesta__id_usuario__id", "id_usuario_encuesta__id_usuario__nombre", "id_usuario_encuesta__id_encuesta__id_encuesta", "id_usuario_encuesta__id_encuesta__nombre", "id_usuario_encuesta__fecha", "id_usuario_encuesta__id_usuario_encuesta",
-                                   "id_pregunta_respuesta__id_pregunta__id_pregunta", "id_pregunta_respuesta__id_pregunta__pregunta", "id_pregunta_respuesta__id_pregunta__itemid", "id_pregunta_respuesta__id_respuesta__valor", "id_pregunta_respuesta__id_respuesta__respuesta")
-        
+            id_usuario_encuesta__id_usuario__in=users).order_by(
+            "id_usuario_encuesta__id_usuario__id", 'id_usuario_encuesta')
+        subquery = subquery.values(
+            "id_usuario_encuesta__id_usuario__id", "id_usuario_encuesta__id_usuario__nombre",
+            "id_usuario_encuesta__id_encuesta__id_encuesta", "id_usuario_encuesta__id_encuesta__nombre",
+            "id_usuario_encuesta__fecha", "id_usuario_encuesta__id_usuario_encuesta",
+            "id_pregunta_respuesta__id_pregunta__id_pregunta", "id_pregunta_respuesta__id_pregunta__pregunta",
+            "id_pregunta_respuesta__id_pregunta__itemid", "id_pregunta_respuesta__id_respuesta__valor",
+            "id_pregunta_respuesta__id_respuesta__respuesta")
+        subquery = subquery[:500]
+
         subquery2 = UsuarioRespuesta.objects.filter(
             id_usuario_encuesta__id_usuario__in=users)
         subquery2 = subquery2.values('id_usuario_encuesta__id_encuesta',
@@ -243,11 +246,32 @@ class EncuestaDetalle(APIView):
             When(id_usuario_encuesta__id_encuesta=3,
                  then=Sum("id_pregunta_respuesta__id_respuesta__valor")),
             When(id_usuario_encuesta__id_encuesta=4,
-                 then=Avg("id_pregunta_respuesta__id_respuesta__valor")),
+                 then=Sum("id_pregunta_respuesta__id_respuesta__valor")),
             default=Value(0),
             output_field=FloatField()
         ))
-        subquery2 = subquery2.order_by('id_usuario_encuesta__id_encuesta', "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario").values(
-            'id_usuario_encuesta__id_encuesta', "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario", "resultado")
-        print(subquery.query)
+        subquery2 = subquery2.order_by(
+            "id_usuario_encuesta__id_usuario", "id_usuario_encuesta__id_usuario_encuesta"
+        ).values('id_usuario_encuesta__id_encuesta', 'id_usuario_encuesta__id_encuesta__nombre',
+                 "id_usuario_encuesta__id_usuario_encuesta", "id_usuario_encuesta__id_usuario",
+                 "id_usuario_encuesta__id_usuario__nombre", "resultado")
+        subquery2 = subquery2[:20]
+        # print(subquery2.values())
+
         return Response({"data1": subquery, "data2": subquery2})
+
+
+class UsuarioDetalle(APIView):
+    def get(self, request):
+        users = Usuarios.objects.values(
+            "id", "nombre", "tipo_documento", "document", "email", "sexo__sexo",
+            "departamento_nacimiento", "ciudad_nacimiento", "fecha_nacimiento",
+            "estado_civil__estado_civil", "programa_academico__facultad", "programa_academico__programa",
+            "semestre", "covid_positivo", "covid_familiar", "covid_vacuna", "covid_tipo_vacuna",
+            "covid_dosis", "discapacidad", "discapacidad_tipo", "telefono", "ocupacion",
+            "is_controlgroup", "is_active", "is_staff", "created_at", "updated_at"
+        ).annotate(
+            edad=datetime.now().year - ExtractYear('fecha_nacimiento'),
+        ).order_by("id")
+
+        return Response(users)
