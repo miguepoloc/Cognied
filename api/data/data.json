@@ -1,0 +1,162 @@
+[
+  {
+    "id_usuario_encuesta__id_encuesta": 3,
+    "id_usuario_encuesta__id_encuesta__nombre": "Ansiedad",
+    "id_usuario_encuesta__id_usuario_encuesta": 979,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 26.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 5,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Inteligencia Emocional",
+    "id_usuario_encuesta__id_usuario_encuesta": 980,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 4,
+    "id_usuario_encuesta__id_encuesta__nombre": "Depresión",
+    "id_usuario_encuesta__id_usuario_encuesta": 981,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 14.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 6,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Estrés Percibido ",
+    "id_usuario_encuesta__id_usuario_encuesta": 982,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 7,
+    "id_usuario_encuesta__id_encuesta__nombre": "Inventario de Pensamientos Automáticos ",
+    "id_usuario_encuesta__id_usuario_encuesta": 983,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 3,
+    "id_usuario_encuesta__id_encuesta__nombre": "Ansiedad",
+    "id_usuario_encuesta__id_usuario_encuesta": 1249,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 27.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 4,
+    "id_usuario_encuesta__id_encuesta__nombre": "Depresión",
+    "id_usuario_encuesta__id_usuario_encuesta": 1250,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 18.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 5,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Inteligencia Emocional",
+    "id_usuario_encuesta__id_usuario_encuesta": 1251,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 6,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Estrés Percibido ",
+    "id_usuario_encuesta__id_usuario_encuesta": 1252,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 7,
+    "id_usuario_encuesta__id_encuesta__nombre": "Inventario de Pensamientos Automáticos ",
+    "id_usuario_encuesta__id_usuario_encuesta": 1253,
+    "id_usuario_encuesta__id_usuario": 32,
+    "id_usuario_encuesta__id_usuario__nombre": "Aldo Enrique Charris Hernández",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 3,
+    "id_usuario_encuesta__id_encuesta__nombre": "Ansiedad",
+    "id_usuario_encuesta__id_usuario_encuesta": 844,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 20.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 4,
+    "id_usuario_encuesta__id_encuesta__nombre": "Depresión",
+    "id_usuario_encuesta__id_usuario_encuesta": 845,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 14.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 5,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Inteligencia Emocional",
+    "id_usuario_encuesta__id_usuario_encuesta": 846,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 7,
+    "id_usuario_encuesta__id_encuesta__nombre": "Inventario de Pensamientos Automáticos ",
+    "id_usuario_encuesta__id_usuario_encuesta": 847,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 6,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Estrés Percibido ",
+    "id_usuario_encuesta__id_usuario_encuesta": 848,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 3,
+    "id_usuario_encuesta__id_encuesta__nombre": "Ansiedad",
+    "id_usuario_encuesta__id_usuario_encuesta": 1349,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 20.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 4,
+    "id_usuario_encuesta__id_encuesta__nombre": "Depresión",
+    "id_usuario_encuesta__id_usuario_encuesta": 1350,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 13.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 6,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Estrés Percibido ",
+    "id_usuario_encuesta__id_usuario_encuesta": 1351,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 7,
+    "id_usuario_encuesta__id_encuesta__nombre": "Inventario de Pensamientos Automáticos ",
+    "id_usuario_encuesta__id_usuario_encuesta": 1352,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  },
+  {
+    "id_usuario_encuesta__id_encuesta": 5,
+    "id_usuario_encuesta__id_encuesta__nombre": "Escala de Inteligencia Emocional",
+    "id_usuario_encuesta__id_usuario_encuesta": 1353,
+    "id_usuario_encuesta__id_usuario": 37,
+    "id_usuario_encuesta__id_usuario__nombre": "Yarelys Martinez Villalba",
+    "resultado": 0.0
+  }
+]
