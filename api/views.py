@@ -1,3 +1,5 @@
+from django. http import JsonResponse
+from django.core.serializers import serialize
 from .models import *
 from .serializers import *
 from rest_framework import viewsets
@@ -7,10 +9,7 @@ from drf_spectacular.utils import OpenApiParameter, extend_schema, extend_schema
 from rest_framework.views import APIView
 from django.db.models import FloatField, Case, Value, When, Sum
 from django.db.models.functions import ExtractYear
-from datetime import datetime
-import json
-from rest_framework import serializers
-from django.http import JsonResponse
+from .utils.processdata import processdata
 
 
 class PersonalView(viewsets.ModelViewSet):
@@ -225,6 +224,42 @@ class ProgramaAcademicoView(viewsets.ModelViewSet):
 
 
 class EncuestaDetalle(APIView):
+    def get(self, request):
+        avance_autoevaluativo = 3
+        users = AvanceModulos.objects.filter(
+            autoevaluativo=avance_autoevaluativo).values("usuario").distinct()
+        subquery = UsuarioRespuesta.objects.filter(
+            id_usuario_encuesta__id_usuario__in=users).order_by(
+            "id_usuario_encuesta__id_usuario__id", 'id_usuario_encuesta')
+        subquery = subquery.values(
+            "id_usuario_encuesta__id_usuario__id",
+            "id_usuario_encuesta__id_usuario__tipo_documento", "id_usuario_encuesta__id_usuario__sexo__sexo",
+            "id_usuario_encuesta__id_usuario__departamento_nacimiento", "id_usuario_encuesta__id_usuario__ciudad_nacimiento",
+            "id_usuario_encuesta__id_usuario__fecha_nacimiento", "id_usuario_encuesta__id_usuario__estado_civil__estado_civil",
+            "id_usuario_encuesta__id_usuario__programa_academico__facultad", "id_usuario_encuesta__id_usuario__programa_academico__programa",
+            "id_usuario_encuesta__id_usuario__semestre", "id_usuario_encuesta__id_usuario__covid_positivo",
+            "id_usuario_encuesta__id_usuario__covid_familiar", "id_usuario_encuesta__id_usuario__covid_vacuna",
+            "id_usuario_encuesta__id_usuario__covid_tipo_vacuna", "id_usuario_encuesta__id_usuario__covid_dosis",
+            "id_usuario_encuesta__id_usuario__discapacidad", "id_usuario_encuesta__id_usuario__discapacidad_tipo",
+            "id_usuario_encuesta__id_usuario__ocupacion",
+            "id_usuario_encuesta__id_usuario__is_controlgroup", "id_usuario_encuesta__id_usuario__is_active",
+            "id_usuario_encuesta__id_usuario__is_staff",
+            "id_usuario_encuesta__id_encuesta__id_encuesta", "id_usuario_encuesta__id_encuesta__nombre",
+            "id_usuario_encuesta__fecha", "id_usuario_encuesta__id_usuario_encuesta",
+            "id_pregunta_respuesta__id_pregunta__id_pregunta", "id_pregunta_respuesta__id_pregunta__pregunta",
+            "id_pregunta_respuesta__id_pregunta__itemid", "id_pregunta_respuesta__id_respuesta__valor",
+            "id_pregunta_respuesta__id_respuesta__respuesta").annotate(
+            edad=2022 -
+                ExtractYear(
+                    'id_usuario_encuesta__id_usuario__fecha_nacimiento'),
+        )
+
+        detalle = processdata(list(subquery))
+
+        return Response(detalle)
+
+
+class EncuestaDetallex(APIView):
     def get(self, request):
         avance_autoevaluativo = 3
         users = AvanceModulos.objects.filter(
