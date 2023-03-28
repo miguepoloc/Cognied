@@ -9,3 +9,10 @@ db.sqlite3
 .DS_Store
 .vscode/settings.json
 sqlnet.log
+
+# dependencies
+/node_modules
+node_modules/
+
+*/node_modules
+*node_modules/

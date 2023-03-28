@@ -1,6 +1,16 @@
 version: '3.8'
 
 services:
+  frontend:
+    build: ../front_digitalmente
+    ports:
+      - 3000:3000
+    command: npm start
+    # volumes:
+    #   - ../front_digitalmente:/frontend
+    depends_on:
+      - backend
+
   backend:
     build: .
     ports:
