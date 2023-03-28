@@ -137,26 +137,29 @@ def processdata(query):
                 dic_test["semestre"] = df_encuesta['id_usuario_encuesta__id_usuario__semestre'].unique()[
                     0]
                 dic_test["edad"] = df_encuesta['edad'].unique()[0]
-                dic_test["covid_positivo"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_positivo'].unique()[
-                    0]
-                dic_test["covid_familiar"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_familiar'].unique()[
-                    0]
-                dic_test["covid_vacuna"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_vacuna'].unique()[
-                    0]
+                dic_test["covid_positivo"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_positivo'].unique()[
+                    0] else 0
+                dic_test["covid_familiar"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_familiar'].unique()[
+                    0] else 0
+                dic_test["covid_vacunado"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_vacuna'].unique()[
+                    0] else 0
                 dic_test["covid_tipo_vacuna"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_tipo_vacuna'].unique()[
                     0]
-                dic_test["covid_dosis_completa"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_dosis'].unique()[
-                    0]
-                dic_test["discapacidad"] = df_encuesta['id_usuario_encuesta__id_usuario__discapacidad'].unique()[
-                    0]
-                dic_test["tipo_discapacidad"] = df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[
-                    0]
+                dic_test["covid_dosis_completa"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_dosis'].unique()[
+                    0] else 0
+                dic_test["discapacidad"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad'].unique()[
+                    0] else 0
+                if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[0] == None:
+                    dic_test["tipo_discapacidad"] = "No aplica"
+                else:
+                    dic_test["tipo_discapacidad"] = df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[
+                        0]
                 dic_test["ocupacion"] = df_encuesta['id_usuario_encuesta__id_usuario__ocupacion'].unique()[
                     0]
-                dic_test["grupo_control"] = df_encuesta['id_usuario_encuesta__id_usuario__is_controlgroup'].unique()[
-                    0]
-                dic_test["administrador"] = df_encuesta['id_usuario_encuesta__id_usuario__is_staff'].unique()[
-                    0]
+                dic_test["grupo_control"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__is_controlgroup'].unique()[
+                    0] else 0
+                dic_test["administrador"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__is_staff'].unique()[
+                    0] else 0
                 tipo = ""
                 if tipo_test == pretest:
                     tipo = "pre_"

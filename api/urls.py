@@ -33,5 +33,6 @@ urlpatterns = [
     path('vista_respuesta_encuestas', ViewRespuestaEncuestasView.as_view()),
     path('vista_usuario_respuestas', ViewUsuarioRespuestaView.as_view()),
     path('encuesta_detalle', EncuestaDetalle.as_view(), name='encuesta_detalle'),
+    path('encuesta_detallex', EncuestaDetallex.as_view(), name='encuesta_detallex'),
     path('usuario_detalle', UsuarioDetalle.as_view(), name='usuario_detalle'),
 ]

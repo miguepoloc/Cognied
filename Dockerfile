@@ -1,12 +1,19 @@
-FROM python:3.8-slim
-ENV PYTHONUNBUFFERED 1
-RUN apt-get update
-RUN mkdir /backend
-WORKDIR /backend
-COPY . /backend/
-RUN pip install -r requirements.txt
-RUN python manage.py migrate 
-RUN python manage.py loaddata clasificiones definiciones emociones encuesta pregunta sexo
-# EXPOSE 8000
-# CMD ["python","manage.py","runserver","0.0.0.0:8000"]
+# Imagen base de Python 3.9
+FROM python:3.9.13
 
+ENV PYTHONUNBUFFERED=1
+
+RUN pip install --upgrade pip 
+
+# Directorio de trabajo de la aplicación Django
+WORKDIR /backend
+
+# Copia los archivos de la aplicación Django a la imagen
+COPY requirements.txt ./
+
+# Instala las dependencias de la aplicación Django
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]

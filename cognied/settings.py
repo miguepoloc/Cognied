@@ -120,14 +120,24 @@ DATABASES = {
         'HOST': '137.184.232.104',
         'PORT': '3306',
     },
-    'default': {
+    'default_mysql': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'encuesta4',
         'USER': 'admin',
         'PASSWORD': 'Contrasena1!',
         'HOST': '127.0.0.1',
         'PORT': '3306',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'kidsbpep',
+        'USER': 'kidsbpep',
+        'PASSWORD': 'Da_X0HObSCVPd9uHyG9RA--JVubROEar',
+        # 'HOST': 'kashin.db.elephantsql.com',
+        'HOST': 'db',
+        'PORT': '5432',
     }
+
 }
 
 
