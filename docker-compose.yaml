@@ -1,18 +1,21 @@
-version: '3.8'
+version: '3.9'
 
 services:
   frontend:
     build: ../front_digitalmente
     ports:
-      - 3000:3000
-    command: npm start
-    # volumes:
-    #   - ../front_digitalmente:/frontend
+      - 3001:80
+    # command: npm start
+    environment:
+      - REACT_APP_API_URL= backend:8000
+    volumes:
+      - ../front_digitalmente:/frontend
     depends_on:
       - backend
 
   backend:
     build: .
+    restart: always
     ports:
       - 8000:8000
     volumes:

@@ -1,24 +1,30 @@
 {
-    "workbench.colorCustomizations": {
-        "activityBar.activeBackground": "#11573c",
-        "activityBar.activeBorder": "#250a35",
-        "activityBar.background": "#11573c",
-        "activityBar.foreground": "#e7e7e7",
-        "activityBar.inactiveForeground": "#e7e7e799",
-        "activityBarBadge.background": "#250a35",
-        "activityBarBadge.foreground": "#e7e7e7",
-        "sash.hoverBorder": "#11573c",
-        "statusBar.background": "#092d1f",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBarItem.hoverBackground": "#11573c",
-        "statusBarItem.remoteBackground": "#092d1f",
-        "statusBarItem.remoteForeground": "#e7e7e7",
-        "titleBar.activeBackground": "#092d1f",
-        "titleBar.activeForeground": "#e7e7e7",
-        "titleBar.inactiveBackground": "#092d1f99",
-        "titleBar.inactiveForeground": "#e7e7e799",
-        "commandCenter.border": "#e7e7e799"
+    "editor.trimAutoWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.formatOnSave": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.formatting.blackArgs": [
+        "--line-length=120",
+        "--skip-string-normalization",
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.rulers": [
+            120
+        ],
+        "editor.defaultFormatter": "ms-python.black-formatter"
     },
-    "peacock.color": "#092d1f",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.linting.pylamaArgs": [
+        "--ignore=E501"
+    ],
+    "python.linting.pylintArgs": ["--max-line-length=120"],
+    "python.linting.flake8Args": ["--max-line-length=120"],
+    "python.formatting.provider": "none",
+    "python.formatting.autopep8Args": ["--indent-size=4", "--max-line-length=120", "--aggressive", "--aggressive"]
 }

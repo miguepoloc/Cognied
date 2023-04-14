@@ -1,5 +1,19 @@
 from django.contrib import admin
-from .models import *
+
+from .models import (
+    AvanceModulos,
+    Encuesta,
+    Escolaridad,
+    Estado_Civil,
+    Personal,
+    Pregunta,
+    PreguntaRespuesta,
+    ProgramaAcademico,
+    Respuesta,
+    Sexo,
+    UsuarioEncuesta,
+    UsuarioRespuesta,
+)
 
 
 class PersonalModelAdmin(admin.ModelAdmin):
@@ -19,8 +33,7 @@ class UsuarioEncuestaModelAdmin(admin.ModelAdmin):
 
 
 class UsuarioRespuestaModelAdmin(admin.ModelAdmin):
-    list_display = ("id_usuario_respuesta",
-                    "id_usuario_encuesta", "id_pregunta_respuesta")
+    list_display = ("id_usuario_respuesta", "id_usuario_encuesta", "id_pregunta_respuesta")
     list_per_page = 10
 
 

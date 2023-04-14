@@ -1,5 +1,24 @@
 from rest_framework import serializers
-from .models import *
+
+from .models import (
+    AvanceModulos,
+    Clasificacion,
+    Definiciones,
+    DefinicionesUsuario,
+    Emocion,
+    Encuesta,
+    Escolaridad,
+    Estado_Civil,
+    Personal,
+    Pregunta,
+    PreguntaRespuesta,
+    ProgramaAcademico,
+    Respuesta,
+    Sexo,
+    UsuarioEncuesta,
+    UsuarioRespuesta,
+    Usuarios,
+)
 
 
 class PersonalSerializer(serializers.ModelSerializer):
@@ -69,7 +88,6 @@ class UsuarioRespuestaSerializer(serializers.ModelSerializer):
 
 
 class ViewPreguntaRespuestaSerializer(serializers.Serializer):
-
     def to_representation(self, instance):
         data = {
             "id_survey": instance.id_pregunta.id_encuesta.id_encuesta,
@@ -82,13 +100,12 @@ class ViewPreguntaRespuestaSerializer(serializers.Serializer):
             "answer": instance.id_respuesta.respuesta,
             "value": instance.id_respuesta.valor,
             "id_answer": instance.id_pregunta_respuesta,
-            "order_answer": instance.orden
+            "order_answer": instance.orden,
         }
         return data
 
 
 class ViewRespuestaEncuestasSerializer(serializers.Serializer):
-
     def to_representation(self, instance):
         data = {
             "id_encuesta": instance.id_usuario_encuesta.id_encuesta.id_encuesta,
@@ -99,12 +116,12 @@ class ViewRespuestaEncuestasSerializer(serializers.Serializer):
             "pregunta": instance.id_pregunta_respuesta.id_pregunta.pregunta,
             "id_respuesta": instance.id_pregunta_respuesta.id_respuesta.id_respuesta,
             "respuesta": instance.id_pregunta_respuesta.id_respuesta.respuesta,
-            "valor": instance.id_pregunta_respuesta.id_respuesta.valor}
+            "valor": instance.id_pregunta_respuesta.id_respuesta.valor,
+        }
         return data
 
 
 class ViewUsuarioRespuestaSerializer(serializers.Serializer):
-
     def to_representation(self, instance):
         data = {
             "id_encuesta": instance.id_usuario_encuesta.id_encuesta.id_encuesta,
@@ -145,9 +162,10 @@ class DefinicionesUsuarioSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data):
-        if DefinicionesUsuario.objects.filter(definicion=validated_data['definicion'], usuario=validated_data['usuario']).exists():
-            raise serializers.ValidationError(
-                "Ya existe una definicion para este usuario")
+        if DefinicionesUsuario.objects.filter(
+            definicion=validated_data['definicion'], usuario=validated_data['usuario']
+        ).exists():
+            raise serializers.ValidationError("Ya existe una definicion para este usuario")
         return super().create(validated_data)
 
 

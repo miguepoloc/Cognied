@@ -4,7 +4,8 @@
 # %% [markdown]
 # ## **Encuesta de Ansiedad**
 #
-# Para esta encuesta se utilizaron los Baremos De Interpretación – Zung Self-Rating Anxiety Scale-15 (Zung, 1971 Adaptada Por De Ávila, León-Valle Et Al., 2021).
+# Para esta encuesta se utilizaron los Baremos De Interpretación – Zung Self-Rating Anxiety Scale-15 (Zung, 1971
+# Adaptada Por De Ávila, León-Valle Et Al., 2021).
 #
 # - 15-30 = **Ansiedad baja** = 1
 # - 31-45 = **Ansiedad media** = 2
@@ -14,7 +15,8 @@
 # %% [markdown]
 # ## **Encuesta de Depresión**
 #
-# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala del Centro de Estudios Epidemiológicos de La Depresión-10 (Kohout et al., 1993 validada Por Rueda-Jaimes Et Al., 2009)
+# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala del Centro de Estudios Epidemiológicos
+# de La Depresión-10 (Kohout et al., 1993 validada Por Rueda-Jaimes Et Al., 2009)
 #
 # - 0-15 = **Sin síntomas depresivos** = 1
 # - 15-30 = **Síntomas depresivos moderados** = 2
@@ -24,7 +26,8 @@
 # %% [markdown]
 # ## **Encuesta de Inteligencia Emocional**
 #
-# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala de Inteligencia Emocional: TMMS-24 (Salovey y Vols. 1995 adaptado por Queiros et al., 2005)
+# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala de Inteligencia Emocional:
+# TMMS-24 (Salovey y Vols. 1995 adaptado por Queiros et al., 2005)
 #
 # - _Factor I_. **Atención a las emociones** Se suman las preguntas de la 1 a la 8
 # - _Factor II_. **Claridad de sentimientos** Se suman las preguntas de la 9 a la 16
@@ -58,17 +61,19 @@
 # %% [markdown]
 # ## **Encuesta de Estrés Percibido**
 #
-# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala de Estrés Percibido (Cohen et al. 1983 validada por Ruisoto et al., 2020).
+# Para esta encuesta se utilizaron los Baremos De Interpretación – Escala de Estrés Percibido
+# (Cohen et al. 1983 validada por Ruisoto et al., 2020).
 #
 # - 0-19 = **Estrés Bajo** = 1
 # - 20-38 = **Estrés Medio** = 2
 # - Mayor a 38 = **Estrés Alto** = 3
 #
 
-# %% [markdown]
+
 # ## **Encuesta de Pensamientos Automáticos**
 #
-# Para esta encuesta se utilizaron los Baremos De Interpretación – Inventario de Pensamientos Automáticos (Ruiz y Lujan, 1991)
+# Para esta encuesta se utilizaron los Baremos De Interpretación – Inventario de Pensamientos Automáticos
+# (Ruiz y Lujan, 1991)
 #
 # | Escala                           | Sumatoria de items | Bajo | Medio | Alto |
 # | -------------------------------- | ------------------ | ---- | ----- | ---- |
@@ -89,7 +94,59 @@
 # | Falacia de recompensa divina     | 15-30-45           | 0-3  | 4-6   | 7-9  |
 #
 
+# %% [markdown]
 import pandas as pd
+
+
+def calcular_ansiedad(dic_test, df_encuesta, tipo):
+    """
+    Calcula la ansiedad de un test
+    """
+    # Suma todas las respuestas y las guarda en ansiedad
+    ansiedad = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum()
+    # Recorre cada pregunta de la encuesta y guarda en un diccionario
+    # el valor de cada pregunta
+    for i in range(0, len(df_encuesta)):
+        dic_test[tipo + "ansiedad" + str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
+    # Guarda el valor total del test en el diccionario
+    dic_test[tipo + "ansiedad_total"] = ansiedad
+    # Asigna la categoría correspondiente al test en el diccionario
+    if ansiedad in range(15, 31):
+        dic_test[tipo + "ansiedad_cat"] = 1
+        dic_test[tipo + "ansiedad_text"] = "Ansiedad baja"
+    elif ansiedad in range(31, 45):
+        dic_test[tipo + "ansiedad_cat"] = 2
+        dic_test[tipo + "ansiedad_text"] = "Ansiedad media"
+    elif ansiedad in range(45, 60):
+        dic_test[tipo + "ansiedad_cat"] = 3
+        dic_test[tipo + "ansiedad_text"] = "Ansiedad alta"
+    else:
+        raise ValueError(f"El valor de ansiedad: {ansiedad} está fuera del rango")
+
+
+def calcular_depresion(dic_test, df_encuesta, tipo):
+    """
+    Calcula la depresión de un test
+    """
+    # Suma los valores de las respuestas
+    depresion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum()
+    # Guarda los valores de las respuestas en el diccionario
+    for i in range(0, len(df_encuesta)):
+        dic_test[tipo + "depresion" + str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
+    # Guarda el total de la depresion en el diccionario
+    dic_test[tipo + "depresion_total"] = depresion
+    # Categoriza el resultado de la depresion
+    if depresion in range(0, 16):
+        dic_test[tipo + "depresion_cat"] = 1
+        dic_test[tipo + "depresion_text"] = "Sin síntomas depresivos"
+    elif depresion in range(16, 31):
+        dic_test[tipo + "depresion_cat"] = 2
+        dic_test[tipo + "depresion_text"] = "Síntomas depresivos moderados"
+    elif depresion in range(31, 60):
+        dic_test[tipo + "depresion_cat"] = 3
+        dic_test[tipo + "depresion_text"] = "Síntomas depresivos graves"
+    else:
+        raise ValueError(f"El valor de depresión: {depresion} está fuera del rango")
 
 
 def processdata(query):
@@ -108,209 +165,160 @@ def processdata(query):
         dic_test = {}
         for encuesta in encuestas_id:
             df_filtrado_encuesta = df_filtrado_usuario.loc[
-                df['id_usuario_encuesta__id_encuesta__id_encuesta'] == encuesta].sort_values("id_pregunta_respuesta__id_pregunta__itemid")
-            id_encuesta = df_filtrado_encuesta["id_usuario_encuesta__id_usuario_encuesta"].unique(
-            )
+                df['id_usuario_encuesta__id_encuesta__id_encuesta'] == encuesta
+            ].sort_values("id_pregunta_respuesta__id_pregunta__itemid")
+            id_encuesta = df_filtrado_encuesta["id_usuario_encuesta__id_usuario_encuesta"].unique()
             pretest = min(id_encuesta)
             posttest = max(id_encuesta)
             for tipo_test in id_encuesta:
-                df_encuesta = df.loc[(
-                    df['id_usuario_encuesta__id_usuario_encuesta'] == tipo_test)].sort_values("id_pregunta_respuesta__id_pregunta__itemid")
-                dic_test["id_usuario"] = df_encuesta['id_usuario_encuesta__id_usuario__id'].unique()[
-                    0]
-                dic_test["tipo_documento"] = df_encuesta['id_usuario_encuesta__id_usuario__tipo_documento'].unique()[
-                    0]
-                dic_test["sexo"] = df_encuesta['id_usuario_encuesta__id_usuario__sexo__sexo'].unique()[
-                    0]
-                dic_test["departamento"] = df_encuesta['id_usuario_encuesta__id_usuario__departamento_nacimiento'].unique()[
-                    0]
-                dic_test["ciudad"] = df_encuesta['id_usuario_encuesta__id_usuario__ciudad_nacimiento'].unique()[
-                    0]
-                dic_test["fecha_nacimiento"] = df_encuesta['id_usuario_encuesta__id_usuario__fecha_nacimiento'].unique()[
-                    0]
-                dic_test["estado_civil"] = df_encuesta['id_usuario_encuesta__id_usuario__estado_civil__estado_civil'].unique()[
-                    0]
-                dic_test["facultad"] = df_encuesta['id_usuario_encuesta__id_usuario__programa_academico__facultad'].unique()[
-                    0]
-                dic_test["programa_academico"] = df_encuesta['id_usuario_encuesta__id_usuario__programa_academico__programa'].unique()[
-                    0]
-                dic_test["semestre"] = df_encuesta['id_usuario_encuesta__id_usuario__semestre'].unique()[
-                    0]
+                df_encuesta = df.loc[(df['id_usuario_encuesta__id_usuario_encuesta'] == tipo_test)].sort_values(
+                    "id_pregunta_respuesta__id_pregunta__itemid"
+                )
+                dic_test["id_usuario"] = df_encuesta['id_usuario_encuesta__id_usuario__id'].unique()[0]
+                dic_test["tipo_documento"] = df_encuesta['id_usuario_encuesta__id_usuario__tipo_documento'].unique()[0]
+                dic_test["sexo"] = df_encuesta['id_usuario_encuesta__id_usuario__sexo__sexo'].unique()[0]
+                dic_test["departamento"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__departamento_nacimiento'
+                ].unique()[0]
+                dic_test["ciudad"] = df_encuesta['id_usuario_encuesta__id_usuario__ciudad_nacimiento'].unique()[0]
+                dic_test["fecha_nacimiento"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__fecha_nacimiento'
+                ].unique()[0]
+                dic_test["estado_civil"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__estado_civil__estado_civil'
+                ].unique()[0]
+                dic_test["facultad"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__programa_academico__facultad'
+                ].unique()[0]
+                dic_test["programa_academico"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__programa_academico__programa'
+                ].unique()[0]
+                dic_test["semestre"] = df_encuesta['id_usuario_encuesta__id_usuario__semestre'].unique()[0]
                 dic_test["edad"] = df_encuesta['edad'].unique()[0]
-                dic_test["covid_positivo"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_positivo'].unique()[
-                    0] else 0
-                dic_test["covid_familiar"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_familiar'].unique()[
-                    0] else 0
-                dic_test["covid_vacunado"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_vacuna'].unique()[
-                    0] else 0
-                dic_test["covid_tipo_vacuna"] = df_encuesta['id_usuario_encuesta__id_usuario__covid_tipo_vacuna'].unique()[
-                    0]
-                dic_test["covid_dosis_completa"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_dosis'].unique()[
-                    0] else 0
-                dic_test["discapacidad"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad'].unique()[
-                    0] else 0
-                if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[0] == None:
+                dic_test["covid_positivo"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_positivo'].unique()[0] else 0
+                )
+                dic_test["covid_familiar"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_familiar'].unique()[0] else 0
+                )
+                dic_test["covid_vacunado"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_vacuna'].unique()[0] else 0
+                )
+                dic_test["covid_tipo_vacuna"] = df_encuesta[
+                    'id_usuario_encuesta__id_usuario__covid_tipo_vacuna'
+                ].unique()[0]
+                dic_test["covid_dosis_completa"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__covid_dosis'].unique()[0] else 0
+                )
+                dic_test["discapacidad"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad'].unique()[0] else 0
+                )
+                if df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[0] is None:
                     dic_test["tipo_discapacidad"] = "No aplica"
                 else:
-                    dic_test["tipo_discapacidad"] = df_encuesta['id_usuario_encuesta__id_usuario__discapacidad_tipo'].unique()[
-                        0]
-                dic_test["ocupacion"] = df_encuesta['id_usuario_encuesta__id_usuario__ocupacion'].unique()[
-                    0]
-                dic_test["grupo_control"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__is_controlgroup'].unique()[
-                    0] else 0
-                dic_test["administrador"] = 1 if df_encuesta['id_usuario_encuesta__id_usuario__is_staff'].unique()[
-                    0] else 0
+                    dic_test["tipo_discapacidad"] = df_encuesta[
+                        'id_usuario_encuesta__id_usuario__discapacidad_tipo'
+                    ].unique()[0]
+                dic_test["ocupacion"] = df_encuesta['id_usuario_encuesta__id_usuario__ocupacion'].unique()[0]
+                dic_test["grupo_control"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__is_controlgroup'].unique()[0] else 0
+                )
+                dic_test["administrador"] = (
+                    1 if df_encuesta['id_usuario_encuesta__id_usuario__is_staff'].unique()[0] else 0
+                )
                 tipo = ""
                 if tipo_test == pretest:
                     tipo = "pre_"
                 elif tipo_test == posttest:
                     tipo = "post_"
                 if encuesta == 3:
-                    ansiedad = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum(
-                    )
-                    for i in range(0, len(df_encuesta)):
-                        dic_test[tipo + "ansiedad" +
-                                 str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
-                    dic_test[tipo + "ansiedad_total"] = ansiedad
-                    if ansiedad in range(15, 31):
-                        dic_test[tipo + "ansiedad_cat"] = 1
-                        dic_test[tipo + "ansiedad_text"] = "Ansiedad baja"
-                    elif ansiedad in range(31, 45):
-                        dic_test[tipo + "ansiedad_cat"] = 2
-                        dic_test[tipo + "ansiedad_text"] = "Ansiedad media"
-                    elif ansiedad in range(45, 60):
-                        dic_test[tipo + "ansiedad_cat"] = 3
-                        dic_test[tipo + "ansiedad_text"] = "Ansiedad alta"
+                    calcular_ansiedad(dic_test, df_encuesta, tipo)
                 elif encuesta == 4:
-                    depresion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum(
-                    )
-                    for i in range(0, len(df_encuesta)):
-                        dic_test[tipo + "depresion" +
-                                 str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
-                    dic_test[tipo + "depresion_total"] = depresion
-                    if depresion in range(0, 16):
-                        dic_test[tipo + "depresion_cat"] = 1
-                        dic_test[tipo +
-                                 "depresion_text"] = "Sin síntomas depresivos"
-                    elif depresion in range(16, 31):
-                        dic_test[tipo + "depresion_cat"] = 2
-                        dic_test[tipo +
-                                 "depresion_text"] = "Síntomas depresivos moderados"
-                    elif depresion in range(31, 60):
-                        dic_test[tipo + "depresion_cat"] = 3
-                        dic_test[tipo +
-                                 "depresion_text"] = "Síntomas depresivos graves"
+                    calcular_depresion(dic_test, df_encuesta, tipo)
                 elif encuesta == 5:
-                    inteligencia_emocional = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum(
-                    )
-                    atencion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][:8].sum(
-                    )
-                    claridad = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][9:16].sum(
-                    )
-                    reparacion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][17:24].sum(
-                    )
+                    inteligencia_emocional = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum()
+                    atencion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][:8].sum()
+                    claridad = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][9:16].sum()
+                    reparacion = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"][17:24].sum()
                     for i in range(0, len(df_encuesta)):
-                        dic_test[tipo + "inteligencia_emocional" +
-                                 str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
+                        dic_test[tipo + "inteligencia_emocional" + str(i)] = df_encuesta.iloc[i][
+                            "id_pregunta_respuesta__id_respuesta__valor"
+                        ]
 
                     dic_test[tipo + "inteligencia_emocional_total"] = inteligencia_emocional
 
                     if df_encuesta['id_usuario_encuesta__id_usuario__sexo__sexo'].unique()[0] == "Masculino":
-                        dic_test[tipo +
-                                 "inteligencia_emocional_atencion"] = atencion
+                        dic_test[tipo + "inteligencia_emocional_atencion"] = atencion
                         if atencion in range(0, 22):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Presta poca atención"
                         elif atencion in range(22, 33):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Adecuada atención"
                         elif atencion in range(33, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Presta demasiada atención"
 
-                        dic_test[tipo +
-                                 "inteligencia_emocional_claridad"] = claridad
+                        dic_test[tipo + "inteligencia_emocional_claridad"] = claridad
                         if claridad in range(0, 26):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Debe mejorar su comprensión"
                         elif claridad in range(26, 36):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Adecuada comprensión"
                         elif claridad in range(36, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Excelente comprensión"
 
-                        dic_test[tipo +
-                                 "inteligencia_emocional_reparacion"] = reparacion
+                        dic_test[tipo + "inteligencia_emocional_reparacion"] = reparacion
                         if reparacion in range(0, 24):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Debe mejorar su regulación"
                         elif reparacion in range(24, 36):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Adecuada regulación"
                         elif reparacion in range(36, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Excelente regulación"
                     else:
-                        dic_test[tipo +
-                                 "inteligencia_emocional_atencion"] = atencion
+                        dic_test[tipo + "inteligencia_emocional_atencion"] = atencion
                         if atencion in range(0, 25):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Presta poca atención"
                         elif atencion in range(25, 36):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Adecuada atención"
                         elif atencion in range(36, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_atencion_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_atencion_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_atencion_text"] = "Presta demasiada atención"
 
-                        dic_test[tipo +
-                                 "inteligencia_emocional_claridad"] = claridad
+                        dic_test[tipo + "inteligencia_emocional_claridad"] = claridad
                         if claridad in range(0, 24):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Debe mejorar su comprensión"
                         elif claridad in range(24, 35):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Adecuada comprensión"
                         elif claridad in range(35, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_claridad_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_claridad_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_claridad_text"] = "Excelente comprensión"
 
-                        dic_test[tipo +
-                                 "inteligencia_emocional_reparacion"] = reparacion
+                        dic_test[tipo + "inteligencia_emocional_reparacion"] = reparacion
                         if reparacion in range(0, 24):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 1
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 1
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Debe mejorar su regulación"
                         elif reparacion in range(24, 35):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 2
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 2
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Adecuada regulación"
                         elif reparacion in range(35, 60):
-                            dic_test[tipo +
-                                     "inteligencia_emocional_reparacion_cat"] = 3
+                            dic_test[tipo + "inteligencia_emocional_reparacion_cat"] = 3
                             dic_test[tipo + "inteligencia_emocional_reparacion_text"] = "Excelente regulación"
                 elif encuesta == 6:
-                    estres = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum(
-                    )
+                    estres = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].sum()
                     for i in range(0, len(df_encuesta)):
-                        dic_test[tipo + "estres" +
-                                 str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
+                        dic_test[tipo + "estres" + str(i)] = df_encuesta.iloc[i][
+                            "id_pregunta_respuesta__id_respuesta__valor"
+                        ]
                     dic_test[tipo + "estres_total"] = estres
                     if estres in range(0, 20):
                         dic_test[tipo + "estres_cat"] = 1
@@ -322,12 +330,12 @@ def processdata(query):
                         dic_test[tipo + "estres_cat"] = 3
                         dic_test[tipo + "estres_text"] = "Estrés alto"
                 elif encuesta == 7:
-                    valor = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].tolist(
-                    )
+                    valor = df_encuesta["id_pregunta_respuesta__id_respuesta__valor"].tolist()
 
                     for i in range(0, len(df_encuesta)):
-                        dic_test[tipo + "pensamientos_automaticos" +
-                                 str(i)] = df_encuesta.iloc[i]["id_pregunta_respuesta__id_respuesta__valor"]
+                        dic_test[tipo + "pensamientos_automaticos" + str(i)] = df_encuesta.iloc[i][
+                            "id_pregunta_respuesta__id_respuesta__valor"
+                        ]
 
                     filtraje = valor[0] + valor[15] + valor[30]
                     dic_test[tipo + "filtraje"] = filtraje
@@ -345,16 +353,13 @@ def processdata(query):
                     dic_test[tipo + "polarizado"] = polarizado
                     if polarizado in range(0, 4):
                         dic_test[tipo + "polarizado_cat"] = 1
-                        dic_test[tipo +
-                                 "polarizado_text"] = "Pensamiento polarizado bajo"
+                        dic_test[tipo + "polarizado_text"] = "Pensamiento polarizado bajo"
                     elif polarizado in range(4, 7):
                         dic_test[tipo + "polarizado_cat"] = 2
-                        dic_test[tipo +
-                                 "polarizado_text"] = "Pensamiento polarizado medio"
+                        dic_test[tipo + "polarizado_text"] = "Pensamiento polarizado medio"
                     elif polarizado in range(7, 10):
                         dic_test[tipo + "polarizado_cat"] = 3
-                        dic_test[tipo +
-                                 "polarizado_text"] = "Pensamiento polarizado alto"
+                        dic_test[tipo + "polarizado_text"] = "Pensamiento polarizado alto"
 
                     sobregeneralizacion = valor[2] + valor[17] + valor[32]
                     dic_test[tipo + "sobregeneralizacion"] = sobregeneralizacion
@@ -387,8 +392,7 @@ def processdata(query):
                         dic_test[tipo + "vision_text"] = "Visión catastrófica bajo"
                     elif vision in range(4, 7):
                         dic_test[tipo + "vision_cat"] = 2
-                        dic_test[tipo +
-                                 "vision_text"] = "Visión catastrófica medio"
+                        dic_test[tipo + "vision_text"] = "Visión catastrófica medio"
                     elif vision in range(7, 10):
                         dic_test[tipo + "vision_cat"] = 3
                         dic_test[tipo + "vision_text"] = "Visión catastrófica alto"
@@ -397,16 +401,13 @@ def processdata(query):
                     dic_test[tipo + "personalizacion"] = personalizacion
                     if personalizacion in range(0, 4):
                         dic_test[tipo + "personalizacion_cat"] = 1
-                        dic_test[tipo +
-                                 "personalizacion_text"] = "Personalización bajo"
+                        dic_test[tipo + "personalizacion_text"] = "Personalización bajo"
                     elif personalizacion in range(4, 7):
                         dic_test[tipo + "personalizacion_cat"] = 2
-                        dic_test[tipo +
-                                 "personalizacion_text"] = "Personalización medio"
+                        dic_test[tipo + "personalizacion_text"] = "Personalización medio"
                     elif personalizacion in range(7, 10):
                         dic_test[tipo + "personalizacion_cat"] = 3
-                        dic_test[tipo +
-                                 "personalizacion_text"] = "Personalización alto"
+                        dic_test[tipo + "personalizacion_text"] = "Personalización alto"
 
                     control = valor[6] + valor[21] + valor[36]
                     dic_test[tipo + "control"] = control
@@ -415,8 +416,7 @@ def processdata(query):
                         dic_test[tipo + "control_text"] = "Falacia de control bajo"
                     elif control in range(4, 7):
                         dic_test[tipo + "control_cat"] = 2
-                        dic_test[tipo +
-                                 "control_text"] = "Falacia de control medio"
+                        dic_test[tipo + "control_text"] = "Falacia de control medio"
                     elif control in range(7, 10):
                         dic_test[tipo + "control_cat"] = 3
                         dic_test[tipo + "control_text"] = "Falacia de control alto"
@@ -425,31 +425,25 @@ def processdata(query):
                     dic_test[tipo + "justicia"] = justicia
                     if justicia in range(0, 4):
                         dic_test[tipo + "justicia_cat"] = 1
-                        dic_test[tipo +
-                                 "justicia_text"] = "Falacia de justicia bajo"
+                        dic_test[tipo + "justicia_text"] = "Falacia de justicia bajo"
                     elif justicia in range(4, 7):
                         dic_test[tipo + "justicia_cat"] = 2
-                        dic_test[tipo +
-                                 "justicia_text"] = "Falacia de justicia medio"
+                        dic_test[tipo + "justicia_text"] = "Falacia de justicia medio"
                     elif justicia in range(7, 10):
                         dic_test[tipo + "justicia_cat"] = 3
-                        dic_test[tipo +
-                                 "justicia_text"] = "Falacia de justicia alto"
+                        dic_test[tipo + "justicia_text"] = "Falacia de justicia alto"
 
                     razonamiento = valor[8] + valor[23] + valor[38]
                     dic_test[tipo + "razonamiento"] = razonamiento
                     if razonamiento in range(0, 4):
                         dic_test[tipo + "razonamiento_cat"] = 1
-                        dic_test[tipo +
-                                 "razonamiento_text"] = "Razonamiento emocional bajo"
+                        dic_test[tipo + "razonamiento_text"] = "Razonamiento emocional bajo"
                     elif razonamiento in range(4, 7):
                         dic_test[tipo + "razonamiento_cat"] = 2
-                        dic_test[tipo +
-                                 "razonamiento_text"] = "Razonamiento emocional medio"
+                        dic_test[tipo + "razonamiento_text"] = "Razonamiento emocional medio"
                     elif razonamiento in range(7, 10):
                         dic_test[tipo + "razonamiento_cat"] = 3
-                        dic_test[tipo +
-                                 "razonamiento_text"] = "Razonamiento emocional alto"
+                        dic_test[tipo + "razonamiento_text"] = "Razonamiento emocional alto"
 
                     cambio = valor[9] + valor[24] + valor[39]
                     dic_test[tipo + "cambio"] = cambio
@@ -467,16 +461,13 @@ def processdata(query):
                     dic_test[tipo + "etiquetas"] = etiquetas
                     if etiquetas in range(0, 4):
                         dic_test[tipo + "etiquetas_cat"] = 1
-                        dic_test[tipo +
-                                 "etiquetas_text"] = "Falacia de etiquetas bajo"
+                        dic_test[tipo + "etiquetas_text"] = "Falacia de etiquetas bajo"
                     elif etiquetas in range(4, 7):
                         dic_test[tipo + "etiquetas_cat"] = 2
-                        dic_test[tipo +
-                                 "etiquetas_text"] = "Falacia de etiquetas medio"
+                        dic_test[tipo + "etiquetas_text"] = "Falacia de etiquetas medio"
                     elif etiquetas in range(7, 10):
                         dic_test[tipo + "etiquetas_cat"] = 3
-                        dic_test[tipo +
-                                 "etiquetas_text"] = "Falacia de etiquetas alto"
+                        dic_test[tipo + "etiquetas_text"] = "Falacia de etiquetas alto"
 
                     culpabilidad = valor[11] + valor[26] + valor[41]
                     dic_test[tipo + "culpabilidad"] = culpabilidad

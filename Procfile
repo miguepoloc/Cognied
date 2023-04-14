@@ -1,1 +1,0 @@
-web: gunicorn cognied.wsgi --log-file -

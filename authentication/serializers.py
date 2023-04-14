@@ -1,8 +1,9 @@
+from django.contrib.auth import hashers
 from rest_framework import serializers
-from django.contrib.auth import authenticate, hashers
+
+from api.serializers import AvanceModulos, EscolaridadSerializer, Estado_CivilSerializer, SexoSerializer
+
 from .models import Usuarios
-import hashlib
-from api.serializers import *
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -10,11 +11,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     # Ensure passwords are at least 8 characters long, no longer than 128
     # characters, and can not be read by the client.
-    password = serializers.CharField(
-        max_length=128,
-        min_length=8,
-        write_only=True
-    )
+    password = serializers.CharField(max_length=128, min_length=8, write_only=True)
 
     # The client should not be able to send a token along with a registration
     # request. Making `token` read-only handles that for us.
@@ -24,30 +21,34 @@ class RegistrationSerializer(serializers.ModelSerializer):
         model = Usuarios
         # List all of the fields that could possibly be included in a request
         # or response, including fields specified explicitly above.
-        fields = ['email', 'document', 'password', 'token',
-                  "nombre",
-                  'edad',
-                  'tipo_documento',
-                  'sexo',
-                  'departamento_nacimiento',
-                  'ciudad_nacimiento',
-                  'fecha_nacimiento',
-                  'estado_civil',
-                  'programa',
-                  'semestre',
-                  'covid_positivo',
-                  'covid_familiar',
-                  'covid_vacuna',
-                  'covid_tipo_vacuna',
-                  'covid_dosis',
-                  'discapacidad',
-                  'discapacidad_tipo',
-                  'telefono',
-                  'ocupacion',
-                  "is_controlgroup",
-                  "is_active",
-                  "is_staff",
-                  ]
+        fields = [
+            'email',
+            'document',
+            'password',
+            'token',
+            "nombre",
+            'edad',
+            'tipo_documento',
+            'sexo',
+            'departamento_nacimiento',
+            'ciudad_nacimiento',
+            'fecha_nacimiento',
+            'estado_civil',
+            'programa',
+            'semestre',
+            'covid_positivo',
+            'covid_familiar',
+            'covid_vacuna',
+            'covid_tipo_vacuna',
+            'covid_dosis',
+            'discapacidad',
+            'discapacidad_tipo',
+            'telefono',
+            'ocupacion',
+            "is_controlgroup",
+            "is_active",
+            "is_staff",
+        ]
 
     def create(self, validated_data):
         # Use the `create_user` method we wrote earlier to create a new user.
@@ -55,8 +56,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         data['password'] = hashers.make_password(validated_data['password'])
         # print(data['password'])
         user = Usuarios.objects.create(**data)
-        AvanceModulos.objects.create(
-            usuario=user, emocional=1, estres=1, autoevaluativo=1, piensalo=1, habilidades=1)
+        AvanceModulos.objects.create(usuario=user, emocional=1, estres=1, autoevaluativo=1, piensalo=1, habilidades=1)
         return user
 
 
@@ -77,16 +77,12 @@ class LoginSerializer(serializers.Serializer):
         # Raise an exception if an
         # document is not provided.
         if document is None:
-            raise serializers.ValidationError(
-                'An document is required to log in.'
-            )
+            raise serializers.ValidationError('An document is required to log in.')
 
         # Raise an exception if a
         # password is not provided.
         if password is None:
-            raise serializers.ValidationError(
-                'A password is required to log in.'
-            )
+            raise serializers.ValidationError('A password is required to log in.')
 
         try:
             user = Usuarios.objects.filter(document=document).first()
@@ -102,16 +98,14 @@ class LoginSerializer(serializers.Serializer):
                     raise serializers.ValidationError('Contraseña Incorrecta')
                 if not AvanceModulos.objects.filter(usuario=user).exists():
                     AvanceModulos.objects.create(
-                        usuario=user, emocional=1, estres=1, autoevaluativo=1, piensalo=1, habilidades=1)
+                        usuario=user, emocional=1, estres=1, autoevaluativo=1, piensalo=1, habilidades=1
+                    )
             else:
                 raise serializers.ValidationError('Usuario Inactivo')
         else:
             raise serializers.ValidationError('Usuario no existe')
 
-        return {
-            'token': user.token,
-            'user': user
-        }
+        return {'token': user.token, 'user': user}
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -121,11 +115,7 @@ class UserSerializer(serializers.ModelSerializer):
     # characters. These values are the default provided by Django. We could
     # change them, but that would create extra work while introducing no real
     # benefit, so lets just stick with the defaults.
-    password = serializers.CharField(
-        max_length=128,
-        min_length=8,
-        write_only=True
-    )
+    password = serializers.CharField(max_length=128, min_length=8, write_only=True)
 
     sexo = SexoSerializer(many=False, read_only=True)
     estado_civil = Estado_CivilSerializer(many=False, read_only=True)
@@ -147,7 +137,7 @@ class UserSerializer(serializers.ModelSerializer):
         # `validated_data` dictionary before iterating over it.
         password = validated_data.pop('password', None)
 
-        for (key, value) in validated_data.items():
+        for key, value in validated_data.items():
             # For the keys remaining in `validated_data`, we will set them on
             # the current `Usuario` instance one at a time.
             setattr(instance, key, value)

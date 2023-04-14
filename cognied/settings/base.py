@@ -12,24 +12,6 @@ cloudinary.config(
     secure=True
 )
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h82t0qs_s_&fop)=lw8@k$+d)x0i%)'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '0.0.0.0']
-INTERNAL_IPS = [
-    '127.0.0.1',
-    'localhost',
-    '0.0.0.0'
-]
-
-# Application definition
-
 INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
@@ -84,48 +66,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cognied.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default1': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'digitalmente',
-        'USER': 'admin',
-        'PASSWORD': 'Contrasena1!',
-        'HOST': '137.184.232.104',
-        'PORT': '3306',
-    },
-    'default3': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'encuesta4',
-        'USER': 'admin',
-        'PASSWORD': 'Contrasena1!',
-        'HOST': '137.184.232.104',
-        'PORT': '3306',
-    },
-    'default_mysql': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'encuesta4',
-        'USER': 'admin',
-        'PASSWORD': 'Contrasena1!',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kidsbpep',
-        'USER': 'kidsbpep',
-        'PASSWORD': 'Da_X0HObSCVPd9uHyG9RA--JVubROEar',
-        # 'HOST': 'kashin.db.elephantsql.com',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
-
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -161,11 +101,7 @@ USE_L10N = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

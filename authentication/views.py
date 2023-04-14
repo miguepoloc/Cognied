@@ -1,27 +1,20 @@
+from datetime import datetime, timedelta
 
+import jwt
+from django.conf import settings
+from django.contrib.auth import hashers
 from django.core.mail import send_mail
-from .models import Usuarios
+from drf_spectacular.utils import OpenApiExample, extend_schema
+from rest_framework import status
+from rest_framework.decorators import permission_classes
 from rest_framework.generics import RetrieveUpdateAPIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import serializers
 
-from rest_framework.decorators import api_view, permission_classes
-
-from rest_framework import viewsets, exceptions, parsers, renderers, status
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-from datetime import datetime, timedelta
-from drf_spectacular.utils import OpenApiExample, OpenApiParameter, extend_schema, extend_schema_view, inline_serializer
-
+from .models import Usuarios
 from .renderers import UserJSONRenderer
-from .serializers import (
-    LoginSerializer, RegistrationSerializer, UserSerializer,
-)
-from .models import *
-
-from django.contrib.auth import hashers
+from .serializers import LoginSerializer, RegistrationSerializer, UserSerializer
 
 
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
@@ -42,9 +35,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
 
         # Here is that serialize, validate, save pattern we talked about
         # before.
-        serializer = self.serializer_class(
-            request.user, data=serializer_data, partial=True
-        )
+        serializer = self.serializer_class(request.user, data=serializer_data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
@@ -71,8 +62,11 @@ class RegistrationAPIView(APIView):
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
-        response = {"token": usuario.token, "expiresAt": int(
-            (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+        response = {
+            "token": usuario.token,
+            "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()),
+            "userInfo": userInfo,
+        }
 
         return Response(response, status=status.HTTP_201_CREATED)
 
@@ -89,9 +83,8 @@ class LoginAPIView(APIView):
                 'Ejemplo 1',
                 summary='Modelo de prueba',
                 value={
-                        "document": "1234567",
-                                    "password": "admin123",
-
+                    "document": "1234567",
+                    "password": "admin123",
                 },
                 request_only=True,  # signal that example only applies to requests
                 response_only=False,  # signal that example only applies to responses
@@ -108,8 +101,11 @@ class LoginAPIView(APIView):
         userInfo.pop("created_at", None)
         userInfo.pop("updated_at", None)
 
-        response = {"token": data["token"], "expiresAt": int(
-            (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+        response = {
+            "token": data["token"],
+            "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()),
+            "userInfo": userInfo,
+        }
         return Response(response, status=status.HTTP_200_OK)
 
 
@@ -123,18 +119,29 @@ class PasswordRecover(APIView):
 
         if user.exists():
             user = user.first()
-            recover_url = "https://digitalmenteunimagdalena.com/reset?token=" + \
-                str(user.token)
-            token = user.token
+            recover_url = "https://digitalmenteunimagdalena.com/reset?token=" + str(user.token)
+            # token = user.token
             send_mail(
                 subject='Recuperación de contraseña',
-                message='Hola ' + user.nombre + '\n\n' + 'Para recuperar tu contraseña, ingresa al siguiente enlace: ' +
-                recover_url + '\n\n' + 'Este enlace expirará en 15 días.',
+                message='Hola '
+                + user.nombre
+                + '\n\n'
+                + 'Para recuperar tu contraseña, ingresa al siguiente enlace: '
+                + recover_url
+                + '\n\n'
+                + 'Este enlace expirará en 15 días.',
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[user.email],
             )
-            return (Response({"message": "Se ha enviado un correo a " + user.email + " con instrucciones para recuperar la contraseña."}, status=status.HTTP_200_OK))
-        return (Response({"message": "El correo no existe en la base de datos."}, status=status.HTTP_400_BAD_REQUEST))
+            return Response(
+                {
+                    "message": "Se ha enviado un correo a "
+                    + user.email
+                    + " con instrucciones para recuperar la contraseña."
+                },
+                status=status.HTTP_200_OK,
+            )
+        return Response({"message": "El correo no existe en la base de datos."}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordReset(APIView):
@@ -154,7 +161,11 @@ class PasswordReset(APIView):
             userInfo.pop("created_at", None)
             userInfo.pop("updated_at", None)
 
-            response = {"message": "Contraseña actualizada correctamente", "token": user.token, "expiresAt": int(
-                (datetime.now() + timedelta(days=15)).timestamp()), "userInfo": userInfo}
+            response = {
+                "message": "Contraseña actualizada correctamente",
+                "token": user.token,
+                "expiresAt": int((datetime.now() + timedelta(days=15)).timestamp()),
+                "userInfo": userInfo,
+            }
             return Response(response, status=status.HTTP_200_OK)
-        return (Response({"message": "No se ha recibido ninguna contraseña."}, status=status.HTTP_400_BAD_REQUEST))
+        return Response({"message": "No se ha recibido ninguna contraseña."}, status=status.HTTP_400_BAD_REQUEST)

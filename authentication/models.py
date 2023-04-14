@@ -1,12 +1,8 @@
-import jwt
-
 from datetime import datetime, timedelta
-from django.db import models
 
+import jwt
 from django.conf import settings
-
 from django.db import models
-
 
 TIPO_DE_DOCUMENTO = [
     ("PA", 'PA'),
@@ -50,44 +46,25 @@ class Usuarios(models.Model):
     # themselves when logging in. Since we need an email address for contacting
     # the user anyways, we will also use the email for logging in because it is
     # the most common form of login credential at the time of writing.
-    email = models.EmailField(
-        db_index=True, unique=True, null=False, blank=False)
+    email = models.EmailField(db_index=True, unique=True, null=False, blank=False)
     nombre = models.CharField(max_length=200, null=False, blank=False)
     edad = models.IntegerField(null=False, blank=False)
-    tipo_documento = models.CharField(
-        max_length=2,
-        choices=TIPO_DE_DOCUMENTO,
-        default="CC",
-        null=False, blank=False
-    )
-    sexo = models.ForeignKey(
-        'api.Sexo', on_delete=models.SET_NULL, null=True, blank=False)
-    departamento_nacimiento = models.CharField(
-        max_length=200, null=False, blank=False)
-    ciudad_nacimiento = models.CharField(
-        max_length=200, null=False, blank=False)
+    tipo_documento = models.CharField(max_length=2, choices=TIPO_DE_DOCUMENTO, default="CC", null=False, blank=False)
+    sexo = models.ForeignKey('api.Sexo', on_delete=models.SET_NULL, null=True, blank=False)
+    departamento_nacimiento = models.CharField(max_length=200, null=False, blank=False)
+    ciudad_nacimiento = models.CharField(max_length=200, null=False, blank=False)
     fecha_nacimiento = models.DateField(blank=False, null=False)
-    estado_civil = models.ForeignKey(
-        'api.Estado_Civil', on_delete=models.SET_NULL, null=True, blank=False)
+    estado_civil = models.ForeignKey('api.Estado_Civil', on_delete=models.SET_NULL, null=True, blank=False)
     programa = models.CharField(max_length=200, null=False, blank=False)
-    programa_academico = models.ForeignKey(
-        'api.ProgramaAcademico', on_delete=models.SET_NULL, null=True, blank=False)
+    programa_academico = models.ForeignKey('api.ProgramaAcademico', on_delete=models.SET_NULL, null=True, blank=False)
     semestre = models.IntegerField(null=False, blank=False)
     covid_positivo = models.BooleanField(default=False)
     covid_familiar = models.BooleanField(default=False)
     covid_vacuna = models.BooleanField(default=False)
-    covid_tipo_vacuna = models.CharField(
-        max_length=1,
-        choices=TIPO_DE_VACUNA,
-        null=True, blank=True
-    )
+    covid_tipo_vacuna = models.CharField(max_length=1, choices=TIPO_DE_VACUNA, null=True, blank=True)
     covid_dosis = models.BooleanField(default=False)
     discapacidad = models.BooleanField(default=False)
-    discapacidad_tipo = models.CharField(
-        max_length=1,
-        choices=TIPO_DE_DISCAPACIDAD,
-        null=True, blank=True
-    )
+    discapacidad_tipo = models.CharField(max_length=1, choices=TIPO_DE_DISCAPACIDAD, null=True, blank=True)
     telefono = models.BigIntegerField(null=False, blank=False)
     ocupacion = models.CharField(max_length=200, null=False, blank=False)
 
@@ -128,10 +105,7 @@ class Usuarios(models.Model):
         """
         dt = datetime.now() + timedelta(days=15)
 
-        token = jwt.encode({
-            'id': self.pk,
-            'exp': int(dt.timestamp())
-        }, settings.SECRET_KEY, algorithm='HS256')
+        token = jwt.encode({'id': self.pk, 'exp': int(dt.timestamp())}, settings.SECRET_KEY, algorithm='HS256')
 
         return token
 
@@ -141,10 +115,7 @@ class Usuarios(models.Model):
         date set to 60 days into the future.
         """
         dt = datetime.now() + timedelta(minutes=15)
-        token = jwt.encode({
-            'id': self.pk,
-            'exp': int(dt.timestamp())
-        }, settings.SECRET_KEY, algorithm='HS256')
+        token = jwt.encode({'id': self.pk, 'exp': int(dt.timestamp())}, settings.SECRET_KEY, algorithm='HS256')
         return token
 
     def is_authenticated(self):
