@@ -7,6 +7,7 @@ __pycache__/
 /pupo
 pupo*
 *.pupo
+migue
 
 # C extensions
 *.so
