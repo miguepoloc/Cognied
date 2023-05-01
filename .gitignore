@@ -4,6 +4,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+/pupo
+pupo*
+*.pupo
+migue
 
 # C extensions
 *.so
