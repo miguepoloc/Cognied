@@ -1,29 +1,52 @@
 from django.db.models import Case, FloatField, Sum, Value, When
 from django.db.models.functions import ExtractYear
-from drf_spectacular.utils import (OpenApiParameter, OpenApiTypes,
-                                   extend_schema, extend_schema_view)
+from drf_spectacular.utils import OpenApiParameter, OpenApiTypes, extend_schema, extend_schema_view
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import (AvanceModulos, Clasificacion, Definiciones,
-                     DefinicionesUsuario, Emocion, Encuesta, Escolaridad,
-                     Estado_Civil, Personal, Pregunta, PreguntaRespuesta,
-                     ProgramaAcademico, Respuesta, Sexo, UsuarioEncuesta,
-                     UsuarioRespuesta, Usuarios)
-from .serializers import (AvanceModulosSerializer, ClasificacionSerializer,
-                          DefinicionesSerializer,
-                          DefinicionesUsuarioSerializer, EmocionListSerializer,
-                          EmocionSerializer, EncuestaSerializer,
-                          EscolaridadSerializer, Estado_CivilSerializer,
-                          PersonalSerializer, PreguntaRespuestaSerializer,
-                          PreguntaSerializer, ProgramaAcademicoSerializer,
-                          RespuestaSerializer, SexoSerializer,
-                          UsuarioEncuestaSerializer,
-                          UsuarioRespuestaSerializer, UsuarioSerializer,
-                          ViewPreguntaRespuestaSerializer,
-                          ViewRespuestaEncuestasSerializer)
+from .models import (
+    AvanceModulos,
+    Clasificacion,
+    Definiciones,
+    DefinicionesUsuario,
+    Emocion,
+    Encuesta,
+    Escolaridad,
+    Estado_Civil,
+    Personal,
+    Pregunta,
+    PreguntaRespuesta,
+    ProgramaAcademico,
+    Respuesta,
+    Sexo,
+    UsuarioEncuesta,
+    UsuarioRespuesta,
+    Usuarios,
+)
+from .serializers import (
+    AvanceModulosSerializer,
+    ClasificacionSerializer,
+    DefinicionesSerializer,
+    DefinicionesUsuarioSerializer,
+    EmocionListSerializer,
+    EmocionSerializer,
+    EncuestaSerializer,
+    EscolaridadSerializer,
+    Estado_CivilSerializer,
+    PersonalSerializer,
+    PreguntaRespuestaSerializer,
+    PreguntaSerializer,
+    ProgramaAcademicoSerializer,
+    RespuestaSerializer,
+    SexoSerializer,
+    UsuarioEncuestaSerializer,
+    UsuarioRespuestaSerializer,
+    UsuarioSerializer,
+    ViewPreguntaRespuestaSerializer,
+    ViewRespuestaEncuestasSerializer,
+)
 from .utils.processdata import processdata
 
 
@@ -35,6 +58,8 @@ class PersonalView(viewsets.ModelViewSet):
 
 
 class SexoView(viewsets.ModelViewSet):
+    """ViewSet for viewing and editing Sexo objects"""
+
     queryset = Sexo.objects.all().order_by('id')
     serializer_class = SexoSerializer
 
