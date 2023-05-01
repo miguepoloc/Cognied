@@ -51,11 +51,15 @@ from .utils.processdata import processdata
 
 
 class PersonalView(viewsets.ModelViewSet):
+    """ViewSet for viewing and editing Personal objects"""
+
     queryset = Personal.objects.all().order_by('id')
     serializer_class = PersonalSerializer
 
 
 class SexoView(viewsets.ModelViewSet):
+    """ViewSet for viewing and editing Sexo objects"""
+
     queryset = Sexo.objects.all().order_by('id')
     serializer_class = SexoSerializer
 
