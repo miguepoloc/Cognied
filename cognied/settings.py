@@ -11,20 +11,19 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 # [x]: ADD DRF_ESPECTACULAR FOR API DOCUMENTATION
 
+import os
+from pathlib import Path
+
 # import django_heroku
 # import dj_database_url
 import cloudinary
-import os
-from pathlib import Path
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Cloudinary para configuración de fotos
 cloudinary.config(
-    cloud_name="djw2ks8ek",
-    api_key="245669729881259",
-    api_secret="FUcSyfHSnr39Rv8zSiQ2VzEUOyo",
-    secure=True
+    cloud_name="djw2ks8ek", api_key="245669729881259", api_secret="FUcSyfHSnr39Rv8zSiQ2VzEUOyo", secure=True
 )
 
 # Quick-start development settings - unsuitable for production
@@ -37,11 +36,7 @@ SECRET_KEY = 'django-insecure-h82t0qs_s_&fop)=lw8@k$+d)x0i%)'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1', '0.0.0.0']
-INTERNAL_IPS = [
-    '127.0.0.1',
-    'localhost',
-    '0.0.0.0'
-]
+INTERNAL_IPS = ['127.0.0.1', 'localhost', '0.0.0.0']
 
 # Application definition
 
@@ -54,11 +49,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     "drf_spectacular",
     "api",
     "authentication",
-    "core"
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -133,12 +127,11 @@ DATABASES = {
         'NAME': 'kidsbpep',
         'USER': 'kidsbpep',
         'PASSWORD': 'Da_X0HObSCVPd9uHyG9RA--JVubROEar',
-        # 'HOST': 'kashin.db.elephantsql.com',
-        'HOST': 'db',
+        'HOST': 'kashin.db.elephantsql.com',
+        # 'HOST': 'db',
         # 'HOST': '127.0.0.1',
         'PORT': '5432',
-    }
-
+    },
 }
 
 
@@ -196,13 +189,8 @@ LOGIN_REDIRECT_URL = '/'
 # Django Rest-Framework
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'authentication.backends.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': ('authentication.backends.JWTAuthentication',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
     'EXCEPTION_HANDLER': 'core.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
@@ -224,7 +212,7 @@ SPECTACULAR_SETTINGS = {
     "CONTACT": {"email": "miguelpoloac@unimagdalena.edu.co"},
     "LICENSE": {"name": "Cognied"},
     'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
-    "SERVE_AUTHENTICATION": ['authentication.backends.JWTAuthentication']
+    "SERVE_AUTHENTICATION": ['authentication.backends.JWTAuthentication'],
 }
 
 
